@@ -5,19 +5,26 @@
             [lepo.rss :as rss]
             [lepo.page :as page]
             [ring.middleware.content-type :refer [wrap-content-type]]
+            [clojure.tools.logging :as log]
+            [clojure.java.io :as io]
             [clojure.edn :as edn]
             [stasis.core :as stasis]))
 
-(def default-export-target-dir "target/website/")
+(def default-export-target-dir
+  (or (System/getenv "TARGET_DIR") "target/website/"))
 
 (defn- load-config []
-  (edn/read-string (slurp "resources/config.edn")))
+  (-> "config.edn"
+      io/resource
+      io/file
+      slurp
+      edn/read-string))
 
 (defn- raw-post-source []
-  (stasis/slurp-directory "resources/posts/" #"\.html$"))
+  (stasis/slurp-resources "posts" #"\.html$"))
 
 (defn- raw-page-source []
-  (stasis/slurp-directory "resources/pages/" #"\.html$"))
+  (stasis/slurp-resources "pages" #"\.html$"))
 
 (defn- render-kv
   [renderer site m]
@@ -55,8 +62,11 @@
   [site]
   {(:atom-uri site) (fn [_] (rss/atom-xml site))})
 
+(defn- parse-site []
+  (parse/site (load-config) (raw-page-source) (raw-post-source)))
+
 (defn site []
-  (let [s (parse/site (load-config) (raw-page-source) (raw-post-source))]
+  (let [s (parse-site)]
     (stasis/merge-page-sources
       {:pages (pages s)
        :posts (posts s)
@@ -69,13 +79,18 @@
 
 (def app
   (-> (stasis/serve-pages site)
-       assets/server
-       wrap-content-type))
+      assets/server 
+      wrap-content-type))
 
 (defn export
-  ([directory]
-    (stasis/empty-directory! directory)
-    (assets/save directory)
-    (stasis/export-pages (site) directory))
+  ([target-dir]
+   (log/info "exporting site to" target-dir)
+   (log/info "emptying...")
+   (stasis/empty-directory! target-dir)
+   (log/info "saving assets...")
+   (assets/save target-dir)
+   (log/info "exporting pages...")
+   (stasis/export-pages (site) target-dir)
+   (log/info "exporting site to" target-dir "done"))
   ([] (export default-export-target-dir)))
 
