@@ -1,6 +1,6 @@
-# jkpl
+# lepo
 
-Static website generator for [my homepage](http://jkpl.lepovirta.org/).
+Static website generator for [Lepo.IO](https://lepo.io/).
 
 ## License
 

@@ -1,7 +1,7 @@
-(ns jkpl.render
+(ns lepo.render
   (:require [selmer.parser :as selmer]
             [selmer.filters :refer [add-filter!]]
-            [jkpl.page :as page]
+            [lepo.page :as page]
             [clj-time.core :as t]
             [clojure.java.io :as io]))
 

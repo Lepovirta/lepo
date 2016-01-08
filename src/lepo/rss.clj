@@ -1,4 +1,4 @@
-(ns jkpl.rss
+(ns lepo.rss
   (:require [clojure.data.xml :as xml]))
 
 (defn- post

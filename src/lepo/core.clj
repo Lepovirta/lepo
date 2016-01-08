@@ -1,9 +1,9 @@
-(ns jkpl.core
-  (:require [jkpl.parse :as parse]
-            [jkpl.render :as render]
-            [jkpl.assets :as assets]
-            [jkpl.rss :as rss]
-            [jkpl.page :as page]
+(ns lepo.core
+  (:require [lepo.parse :as parse]
+            [lepo.render :as render]
+            [lepo.assets :as assets]
+            [lepo.rss :as rss]
+            [lepo.page :as page]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [clojure.edn :as edn]
             [stasis.core :as stasis]))

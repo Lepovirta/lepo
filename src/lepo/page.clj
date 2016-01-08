@@ -1,5 +1,5 @@
-(ns jkpl.page
-  (:require [jkpl.utils :as utils]))
+(ns lepo.page
+  (:require [lepo.utils :as utils]))
 
 (defn tag-uri
   [tag]

@@ -1,4 +1,4 @@
-(ns jkpl.utils
+(ns lepo.utils
   (:require [clojure.string :as string]))
 
 (def slash-pattern #"^[/]*([^/]*)[/]*$")

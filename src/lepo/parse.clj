@@ -1,7 +1,7 @@
-(ns jkpl.parse
+(ns lepo.parse
   (:require [clojure.string :as string]
             [clojure.edn :as edn]
-            [jkpl.utils :as utils]
+            [lepo.utils :as utils]
             [clj-time.core :as t]
             [clj-time.format :as tf]))
 

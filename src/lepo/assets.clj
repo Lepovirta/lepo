@@ -1,4 +1,4 @@
-(ns jkpl.assets
+(ns lepo.assets
   (:require [optimus.prime :as optimus]
             [optimus.assets :as assets]
             [optimus.optimizations :as optimizations]
