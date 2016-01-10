@@ -23,3 +23,6 @@
        (string/join "/")
        (str "/")))
 
+(defn uri-dir
+  [& args]
+  (str (apply uri args) "/"))

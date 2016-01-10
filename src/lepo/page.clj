@@ -4,6 +4,7 @@
 
 (def posts-path "posts")
 (def tags-path "tags")
+(def author-path "team")
 
 (defn tag-uri
   [tag]
@@ -11,6 +12,11 @@
 
 (def archive-uri
   (utils/uri posts-path "index.html"))
+
+(defn author-uri
+  [post]
+  (utils/uri-dir author-path
+                 (-> post :author name)))
 
 (defn has-tag?
   [tag post]

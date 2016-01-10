@@ -7,6 +7,7 @@
 
 (add-filter! :tag-uri page/tag-uri)
 (add-filter! :author-fullname page/author-fullname)
+(add-filter! :author-uri page/author-uri)
 
 (defn- template-path
   [template-name]
