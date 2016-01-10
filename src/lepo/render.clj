@@ -6,6 +6,7 @@
             [clojure.java.io :as io]))
 
 (add-filter! :tag-uri page/tag-uri)
+(add-filter! :author-fullname page/author-fullname)
 
 (defn- template-path
   [template-name]

@@ -2,6 +2,7 @@
   (:require [clojure.string :as string]
             [clojure.edn :as edn]
             [lepo.utils :as utils]
+            [lepo.page :as page]
             [clj-time.core :as t]
             [clj-time.format :as tf]))
 
@@ -47,15 +48,20 @@
   (-> filename utils/trim-slashes utils/remove-file-extension))
 
 (defn- parse-page
-  [conf filename content & {:keys [page-type] :or {page-type ""}}]
+  [conf filename content & {:keys [uri-prefix] :or {uri-prefix ""}}]
   (assoc (parse-content content)
          :id (filename->page-id filename)
-         :uri (utils/uri page-type filename)))
+         :uri (utils/uri uri-prefix filename)))
 
 (defn- parse-post
   [conf filename content]
-  (assoc (parse-page conf filename content :page-type "post")
-         :date (parse-date filename)))
+  (let [page (parse-page conf filename content :uri-prefix page/posts-path)
+        author-id (:author page)
+        author-details (get-in conf [:authors author-id])
+        date (parse-date filename)]
+    (assoc page
+           :date date
+           :author-details author-details)))
 
 (defn- reverse-compare [a b] (compare b a))
 
@@ -81,3 +87,4 @@
            :all-posts posts
            :latest-posts (latest-posts conf posts)
            :tags (posts->tags posts))))
+

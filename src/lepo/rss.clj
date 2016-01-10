@@ -1,12 +1,13 @@
 (ns lepo.rss
-  (:require [clojure.data.xml :as xml]))
+  (:require [clojure.data.xml :as xml]
+            [lepo.page :as page]))
 
 (defn- post
   [conf post]
   [:entry
    [:title (:title post)]
    [:updated (:date post)]
-   [:author [:name (:author conf)]]
+   [:author [:name (page/author-fullname post)]]
    [:link {:href (str (:site-url conf) (:uri post))}]
    [:id (str (:site-urn conf) ":post:" (:id post))]
    [:content {:type "html"} (:content post)]])

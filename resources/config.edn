@@ -1,6 +1,6 @@
-{:site-title       "jkpl"
- :author           "Jaakko Pallari"
- :site-url         "https://jkpl.lepovirta.org"
- :site-urn         "urn:jkpl-lepovirta-org:feed"
- :archive-uri      "/archive.html"
- :atom-uri         "/atom.xml"}
+{:site-title       "Lepo.IO"
+ :site-url         "https://lepo.io/"
+ :site-urn         "urn:lepo-io:feed"
+ :atom-uri         "/atom.xml"
+ :authors {:jkpl {:firstname "Jaakko"
+                  :lastname "Pallari"}}}

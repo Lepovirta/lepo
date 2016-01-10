@@ -56,7 +56,7 @@
 
 (defn- archive
   [site]
-  {(:archive-uri site) (fn [_] (render/archives site))})
+  {page/archive-uri (fn [_] (render/archives site))})
 
 (defn- rss
   [site]
