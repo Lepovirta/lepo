@@ -3,10 +3,11 @@
             [clojure.string :as string]))
 
 (def posts-path "posts")
+(def tags-path "tags")
 
 (defn tag-uri
   [tag]
-  (utils/uri "tag" (str tag ".html")))
+  (utils/uri tags-path (str tag ".html")))
 
 (def archive-uri
   (utils/uri posts-path "index.html"))
