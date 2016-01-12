@@ -47,44 +47,61 @@
   [filename]
   (-> filename utils/trim-slashes utils/remove-file-extension))
 
-(defn- parse-page
-  [conf filename content & {:keys [uri-prefix] :or {uri-prefix ""}}]
+(defn- parse-normal-page
+  [conf filename content]
   (assoc (parse-content content)
+         :page-type :normal
          :id (filename->page-id filename)
-         :uri (utils/uri uri-prefix filename)))
+         :uri filename))
 
 (defn- parse-post
   [conf filename content]
-  (let [page (parse-page conf filename content :uri-prefix page/posts-path)
+  (let [page (parse-normal-page conf filename content)
         author-id (:author page)
         author-details (get-in conf [:authors author-id])
         date (parse-date filename)]
     (assoc page
+           :page-type :post
            :date date
            :author-details author-details)))
 
-(defn- reverse-compare [a b] (compare b a))
+(def page-parsers
+  {page/posts-path parse-post})
 
-(defn- parse-pages
+(defn- parser-for-file
+  [filename]
+  (or (get page-parsers (page/main-dir filename))
+      parse-normal-page))
+
+(defn- parse-page
+  [conf filename content]
+  ((parser-for-file filename) conf filename content))
+
+(defn parse-pages
   [conf coll]
   (->> coll
        (map (partial apply parse-page conf))
        (sort-by :title)))
 
-(defn- parse-posts
-  [conf coll]
-  (->> coll
-       (map (partial apply parse-post conf))
-       (sort-by :date reverse-compare)
+(defn- filter-pages
+  [pages]
+  (remove page/post? pages))
+
+(defn- filter-posts
+  [pages]
+  (->> pages
+       (filter page/post?)
+       (utils/reverse-sort-by :date)
        link-posts))
 
 (defn site
-  [conf pages-source posts-source]
-  (let [pages (parse-pages conf pages-source)
-        posts (parse-posts conf posts-source)]
+  [conf pages-source]
+  (let [all-pages (parse-pages conf pages-source)
+        pages (filter-pages all-pages)
+        posts (filter-posts all-pages)]
     (assoc conf
-           :all-pages pages
-           :all-posts posts
+           :pages pages
+           :posts posts
            :latest-posts (latest-posts conf posts)
            :tags (posts->tags posts))))
 

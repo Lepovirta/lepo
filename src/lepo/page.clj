@@ -22,6 +22,10 @@
   [tag post]
   (some #{tag} (:tags post)))
 
+(defn post?
+  [page]
+  (= (:page-type page) :post))
+
 (defn author-fullname
   [post]
   (let [details (:author-details post)
@@ -30,3 +34,8 @@
         fullname (str firstname " " lastname)]
     (string/trim fullname)))
 
+(defn main-dir
+  [path]
+  (->> (string/split path #"/")
+       (remove empty?)
+       first))

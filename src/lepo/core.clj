@@ -20,9 +20,6 @@
       slurp
       edn/read-string))
 
-(defn- raw-post-source []
-  (stasis/slurp-resources "posts" #"\.html$"))
-
 (defn- raw-page-source []
   (stasis/slurp-resources "pages" #"\.html$"))
 
@@ -37,12 +34,8 @@
        (into {})))
 
 (defn- pages
-  [site]
-  (render-key site render/page :all-pages))
-
-(defn- posts
-  [site]
-  (render-key site render/post :all-posts))
+  [site k]
+  (render-key site render/page k))
 
 (defn- tag-pair
   [site tag]
@@ -63,18 +56,19 @@
   {(:atom-uri site) (fn [_] (rss/atom-xml site))})
 
 (defn- parse-site []
-  (parse/site (load-config) (raw-page-source) (raw-post-source)))
+  (parse/site (load-config) (raw-page-source)))
 
 (defn site []
   (let [s (parse-site)]
     (stasis/merge-page-sources
-      {:pages (pages s)
-       :posts (posts s)
+      {:pages (pages s :pages)
+       :posts (pages s :posts)
        :tags (tags s)
        :archive (archive s)
        :rss (rss s)})))
 
 (defn app-init []
+  (render/init-filters!)
   (selmer.parser/cache-off!))
 
 (def app
@@ -90,6 +84,7 @@
    (log/info "saving assets...")
    (assets/save target-dir)
    (log/info "exporting pages...")
+   (render/init-filters!)
    (stasis/export-pages (site) target-dir)
    (log/info "exporting site to" target-dir "done"))
   ([] (export default-export-target-dir)))

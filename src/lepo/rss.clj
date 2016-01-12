@@ -14,7 +14,7 @@
 
 (defn- feed
   [conf]
-  (let [posts (:all-posts conf)
+  (let [posts (:posts conf)
         atom-url (str (:site-url conf) (:atom-uri conf))]
     [:feed {:xmlns "http://www.w3.org/2005/Atom"}
       [:id (:site-urn conf)]

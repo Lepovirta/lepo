@@ -2,16 +2,22 @@
   (:require [selmer.parser :as selmer]
             [selmer.filters :refer [add-filter!]]
             [lepo.page :as page]
+            [lepo.utils :as utils]
             [clj-time.core :as t]
             [clojure.java.io :as io]))
 
-(add-filter! :tag-uri page/tag-uri)
-(add-filter! :author-fullname page/author-fullname)
-(add-filter! :author-uri page/author-uri)
+(defn init-filters! []
+  (add-filter! :tag-uri page/tag-uri)
+  (add-filter! :author-fullname page/author-fullname)
+  (add-filter! :author-uri page/author-uri))
 
 (defn- template-path
   [template-name]
   (.getPath (io/file "templates" (str template-name ".html"))))
+
+(defn- template-from-page
+  [page]
+  (or (:template page) (-> page :page-type name)))
 
 (defn- render
   [template-name conf]
@@ -19,12 +25,7 @@
 
 (defn page
   [conf page]
-  (render (or (:template page) "page")
-          (assoc conf :page page)))
-
-(defn post
-  [conf post]
-  (render "post" (assoc conf :post post)))
+  (render (template-from-page page) (assoc conf :page page)))
 
 (defn- filter-by-tag
   [posts tag]
@@ -43,13 +44,11 @@
   [[group posts]]
   {:group group :posts posts})
 
-(defn- reverse-compare [a b] (compare b a))
-
 (defn- group-posts
   [posts]
   (->> posts
        (group-by post-year)
-       (sort-by first reverse-compare)
+       (utils/reverse-sort-by first)
        (map to-group)))
 
 (defn archives
