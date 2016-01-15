@@ -1,9 +1,10 @@
 (ns lepo.core
-  (:require [lepo.parse :as parse]
+  (:require [lepo.parse :refer [parse-pages]]
             [lepo.render :as render]
             [lepo.assets :as assets]
             [lepo.rss :as rss]
             [lepo.page :as page]
+            [lepo.site :as site]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [clojure.tools.logging :as log]
             [clojure.java.io :as io]
@@ -23,56 +24,61 @@
 (defn- raw-page-source []
   (stasis/slurp-resources "pages" #"\.html$"))
 
-(defn- render-kv
-  [renderer site m]
-  [(:uri m) (fn [_] (renderer site m))])
+(defn- render-page
+  [conf page]
+  [(:uri page) (fn [_] (render/page conf page))])
 
-(defn- render-key
-  [site renderer k]
-  (->> (get site k)
-       (map (partial render-kv renderer site))
+(defn- render-pages
+  [conf pages]
+  (->> pages
+       (map (partial render-page conf))
        (into {})))
 
-(defn- pages
-  [site k]
-  (render-key site render/page k))
+(defn- all-pages
+  [conf]
+  (->> (:pages conf)
+       (map (fn [[k v]] [k (render-pages conf v)]))
+       (into {})))
 
 (defn- tag-pair
-  [site tag]
-  [(page/tag-uri tag) (fn [_] (render/tag site tag))])
+  [conf tag]
+  [(page/tag-uri tag) (fn [_] (render/tag conf tag))])
 
 (defn- tags
-  [site]
-  (->> (:tags site)
-       (map (partial tag-pair site))
+  [conf]
+  (->> (:tags conf)
+       (map (partial tag-pair conf))
        (into {})))
 
 (defn- archive
-  [site]
-  {page/archive-uri (fn [_] (render/archives site))})
+  [conf]
+  {page/archive-uri (fn [_] (render/archives conf))})
 
 (defn- rss
-  [site]
-  {(:atom-uri site) (fn [_] (rss/atom-xml site))})
+  [conf]
+  {(:atom-uri conf) (fn [_] (rss/atom-xml conf))})
 
-(defn- parse-site []
-  (parse/site (load-config) (raw-page-source)))
+(defn- merge-sources
+  [conf]
+  (stasis/merge-page-sources 
+    (assoc (all-pages conf)
+           :tags (tags conf)
+           :archive (archive conf)
+           :rss (rss conf))))
 
-(defn site []
-  (let [s (parse-site)]
-    (stasis/merge-page-sources
-      {:pages (pages s :pages)
-       :posts (pages s :posts)
-       :tags (tags s)
-       :archive (archive s)
-       :rss (rss s)})))
+(defn build-site []
+  (let [conf (load-config)]
+    (->> (raw-page-source)
+         (parse-pages conf)
+         (site/build conf)
+         merge-sources)))
 
 (defn app-init []
   (render/init-filters!)
   (selmer.parser/cache-off!))
 
 (def app
-  (-> (stasis/serve-pages site)
+  (-> (stasis/serve-pages build-site)
       assets/server 
       wrap-content-type))
 
@@ -85,7 +91,7 @@
    (assets/save target-dir)
    (log/info "exporting pages...")
    (render/init-filters!)
-   (stasis/export-pages (site) target-dir)
+   (stasis/export-pages (build-site) target-dir)
    (log/info "exporting site to" target-dir "done"))
   ([] (export default-export-target-dir)))
 

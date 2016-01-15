@@ -1,5 +1,6 @@
 (ns lepo.rss
   (:require [clojure.data.xml :as xml]
+            [lepo.site :as site]
             [lepo.page :as page]))
 
 (defn- post
@@ -14,7 +15,7 @@
 
 (defn- feed
   [conf]
-  (let [posts (:posts conf)
+  (let [posts (site/get-posts conf)
         atom-url (str (:site-url conf) (:atom-uri conf))]
     [:feed {:xmlns "http://www.w3.org/2005/Atom"}
       [:id (:site-urn conf)]
