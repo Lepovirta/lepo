@@ -100,11 +100,37 @@
        (utils/reverse-sort-by first)
        (map to-group)))
 
+(defn- augment-project
+  [conf project]
+  (assoc project
+         :github-url (str (:github conf) "/" (:github-id project))))
+
+(defn- augment-projects
+  [conf]
+  (let [raw-projects (:projects conf)
+        projects (map (partial augment-project conf) raw-projects)
+        project-rows (partition 2 projects)]
+    (assoc conf
+           :projects projects
+           :project-rows project-rows)))
+
+(defn- add-pages
+  [conf raw-pages]
+  (assoc conf :pages (process-pages conf raw-pages)))
+
+(defn- add-latest-posts
+  [conf]
+  (assoc conf :latest-posts (latest-posts conf)))
+
+(defn- add-tags
+  [conf]
+  (assoc conf :tags (get-tags conf)))
+
 (defn build
   [conf raw-pages]
-  (let [pages (process-pages conf raw-pages)
-        site (assoc conf :pages pages)]
-    (assoc site
-           :latest-posts (latest-posts site)
-           :tags (get-tags site))))
+  (-> conf
+      (add-pages raw-pages)
+      add-latest-posts
+      augment-projects
+      add-tags))
 

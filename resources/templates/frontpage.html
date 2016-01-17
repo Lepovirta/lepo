@@ -1,19 +1,33 @@
-{% extends "templates/normal.html" %}
-{% block more %}
-<h3>Recent posts</h3>
-<ul class="no-bul">
-  {% for post in latest-posts %}
-  <li>{{post.date|date:"yyy-MM-dd"}} &raquo; <a href="{{post.uri}}">{{post.title}}</a></li>
+{% extends "templates/base.html" %}
+{% block content %}
+<div class="custom-page">
+  {{page.content|safe}}
+
+  <h3>Projects</h3>
+
+  {% for project-row in project-rows %}
+  <div class="row">
+    {% for project in project-row %}
+    <div class="col">
+      <p class="title">
+        <a href="{{project.github-url}}">{{project.name}}</a>
+      </p>
+      <p>{{project.description|safe}}</p>
+    </div>
+    {% endfor %}
+  </div>
   {% endfor %}
-</ul>
-<ul class="no-bul inline-list">
-  <li><a href="/posts/">Archive</a></li>
-  <li><a href="{{atom-uri}}">RSS</a></li>
-</ul>
-<h3>Tags</h3>
-<ul class="no-bul inline-list">
-  {% for tag in tags %}
-  <li><a href="{{tag|tag-uri}}">{{tag}}</a></li>
-  {% endfor %}
-</ul>
+
+  <h3>Recent posts</h3>
+  <ul class="no-bul">
+    {% for post in latest-posts %}
+    <li>{{post.date|date:"yyy-MM-dd"}} &raquo; <a href="{{post.uri}}">{{post.title}}</a></li>
+    {% endfor %}
+  </ul>
+  <ul class="no-bul inline-list">
+    <li><a href="/posts/">Archive</a></li>
+    <li><a href="{{atom-uri}}">RSS</a></li>
+  </ul>
+</div>
 {% endblock %}
+

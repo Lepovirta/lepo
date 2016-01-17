@@ -30,6 +30,7 @@ $meta_fg:            #666;
 
 // Layout
 $content_max_width:  800px;
+$table_max_width:    600px;
 
 // Fonts
 $font_sans_serif:    "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -42,10 +43,12 @@ $code_font:          $font_monospace;
 $normal_font_size:   18px;
 $code_font_size:     16px;
 $meta_font_size:     15px;
-$footer_font_size:   medium;
+$footer_font_size:   16px;
 $title_font_size:    24px;
 $line_height:        1.4;
 $code_line_height:   1.2;
+$table_title_font_size: 20px;
+$table_body_font_size:  16px;
 
 // Mixins
 
@@ -257,6 +260,32 @@ footer {
   img {
     border: 1px solid $default_border;
     max-width: 100%;
+  }
+}
+
+@media (min-width: $table_max_width) {
+  .row { width: 100%; display: table; table-layout: fixed; }
+  .col { display: table-cell; }
+}
+
+.row {
+  border-spacing: 10px 0;
+  margin: 10px 0;
+
+  .col {
+    font-size: $table_body_font_size;
+    padding: 16px;
+    border: 1px solid #B5ACBF;
+    border-top: 3px solid #4d0099;
+
+    .title {
+      font-size: $table_title_font_size;
+      margin: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 100px;
+    }
   }
 }
 
