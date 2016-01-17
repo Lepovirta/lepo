@@ -1,0 +1,11 @@
+{% extends "templates/normal.html" %}
+{% block more %}
+{% if page.author-posts %}
+<h3>Posts</h3>
+<ul class="no-bul">
+  {% for post in page.author-posts %}
+  <li>{{post.date|date:"yyy-MM-dd"}} &raquo; <a href="{{post.uri}}">{{post.title}}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

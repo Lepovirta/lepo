@@ -33,21 +33,32 @@
 
 (defn post-year [post] (t/year (:date post)))
 
+(defn filename->page-id
+  [filename]
+  (-> filename utils/trim-slashes utils/remove-file-extension))
+
 (defn author-fullname
-  [post]
-  (let [details (:author-details post)
-        firstname (:firstname details)
+  [details]
+  (let [firstname (:firstname details)
         lastname (:lastname details)
         fullname (str firstname " " lastname)]
     (string/trim fullname)))
 
-(defn- main-dir
+(defn post-author-fullname
+  [post]
+  (author-fullname (:author-details post)))
+
+(defn- dir-list
   [path]
-  (->> (string/split path #"/")
-       (remove empty?)
-       first))
+  (remove string/blank? (string/split path #"/")))
+
+(defn path->author-id
+  [path]
+  (let [[main-dir author-id] (dir-list path)]
+    (when (= main-dir author-path)
+      (keyword author-id))))
 
 (defn path->page-type
   [path]
-  (get page-type-dirs (main-dir path) :default))
+  (get page-type-dirs (first (dir-list path)) :normal))
 

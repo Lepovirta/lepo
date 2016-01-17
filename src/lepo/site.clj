@@ -15,43 +15,60 @@
         linked-posts (map (partial apply link-post) (partition 3 1 [] posts))]
     (cons first-post linked-posts)))
 
-(defn- process-posts
-  [conf all-pages pages]
-  (->> pages
+(defn get-author-details
+  [conf author-id]
+  (get-in conf [:authors author-id]))
+
+(defn get-posts [site] (-> site :pages :post))
+
+(defn- get-author-posts
+  [posts author-id]
+  (filter #(= author-id (:author %)) posts))
+
+(defn- augment-post
+  [conf post]
+  (let [date (utils/str->date (:id post))
+        author-id (:author post)
+        author-details (get-author-details conf author-id)]
+    (assoc post
+           :date date
+           :author-details author-details)))
+
+(defn- augment-posts
+  [conf posts]
+  (->> posts
+       (map (partial augment-post conf))
        (utils/reverse-sort-by :date)
        link-posts))
 
-(defn- process-author-pages
-  [conf all-pages pages]
-  pages)
+(defn- augment-author-page
+  [conf posts page]
+  (let [author-id (page/path->author-id (:id page))
+        author-details (get-author-details conf author-id)
+        title (or (:title page) (page/author-fullname author-details))
+        author-posts (get-author-posts posts author-id)]
+    (assoc page
+           :title title
+           :author author-id
+           :author-posts author-posts
+           :author-details author-details)))
 
-(def processes-by-page-type
-  {:post process-posts
-   :author process-author-pages})
-
-(defn- process-by-page-type
-  [conf all-pages page-type pages]
-  (if-let [process (get processes-by-page-type page-type)]
-    (process conf all-pages pages)
-    pages))
+(defn- augment-author-pages
+  [conf posts pages]
+  (map (partial augment-author-page conf posts) pages))
 
 (defn- group-by-page-type
   [pages]
   (group-by :page-type pages))
 
-(defn- map-key-value
-  [f coll]
-  (map (fn [[k v]] [k (f k v)])
-       coll))
-
 (defn- process-pages
-  [conf pages]
-  (->> pages
-       group-by-page-type
-       (map-key-value (partial process-by-page-type conf pages))
-       (into {})))
-
-(defn get-posts [site] (-> site :pages :post))
+  [conf raw-pages]
+  (let [pages (group-by-page-type raw-pages)
+        posts (augment-posts conf (:post pages))
+        author-pages (augment-author-pages conf posts (:author pages))]
+    (assoc pages
+           :post posts
+           :author author-pages)))
 
 (defn- latest-posts
   [site]
