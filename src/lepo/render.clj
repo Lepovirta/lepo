@@ -36,7 +36,6 @@
                  :name tag
                  :posts (site/posts-for-tag conf tag))))
 
-
 (defn archives
   [conf]
   (render "archives"

@@ -18,11 +18,11 @@
   (let [posts (site/get-posts conf)
         atom-url (str (:site-url conf) (:atom-uri conf))]
     [:feed {:xmlns "http://www.w3.org/2005/Atom"}
-      [:id (:site-urn conf)]
-      [:updated (-> posts first :date)]
-      [:title {:type "text"} (:site-title conf)]
-      [:link {:rel "self" :href atom-url}]
-      (map (partial post conf) posts)]))
+     [:id (:site-urn conf)]
+     [:updated (-> posts first :date)]
+     [:title {:type "text"} (:site-title conf)]
+     [:link {:rel "self" :href atom-url}]
+     (map (partial post conf) posts)]))
 
 (defn atom-xml
   [conf]

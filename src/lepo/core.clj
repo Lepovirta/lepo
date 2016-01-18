@@ -61,10 +61,10 @@
 (defn- merge-sources
   [conf]
   (stasis/merge-page-sources 
-    (assoc (all-pages conf)
-           :tags (tags conf)
-           :archive (archive conf)
-           :rss (rss conf))))
+   (assoc (all-pages conf)
+          :tags (tags conf)
+          :archive (archive conf)
+          :rss (rss conf))))
 
 (defn build-site []
   (let [conf (load-config)]

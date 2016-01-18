@@ -5,7 +5,7 @@
 
 (defn- link-post
   ([prev current next]
-    (assoc current :prev prev :next next))
+   (assoc current :prev prev :next next))
   ([prev current]
    (link-post prev current nil)))
 

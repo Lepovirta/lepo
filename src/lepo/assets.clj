@@ -10,9 +10,9 @@
 
 (defn- sass-bundle []
   (assets/load-bundle
-    asset-dir
-    "main.css"
-    [#"/styles/.+\.scss"]))
+   asset-dir
+   "main.css"
+   [#"/styles/.+\.scss"]))
 
 (def static-asset-files
   ["/favicon.png"
@@ -24,8 +24,8 @@
 
 (defn- get-assets []
   (concat
-    (sass-bundle)
-    (static-file-bundle)))
+   (sass-bundle)
+   (static-file-bundle)))
 
 (defn server
   [app]
@@ -38,5 +38,5 @@
 (defn save
   [target-dir]
   (optimus.export/save-assets
-    (optz (get-assets) {})
-    target-dir))
+   (optz (get-assets) {})
+   target-dir))
