@@ -5,7 +5,7 @@ $lepo_indigo_dark:  #37005B;
 $lepo_alt:          #002B82;
 $lepo_alt_dark:     #001E5B;
 
-$lepo_white:        #E6EEFF;
+$lepo_white:        #FAF3FF;
 
 // Background colors
 $default_bg:         #ffffff;
@@ -157,16 +157,15 @@ ul {
 
 header#main-menu {
   background-color: $header_bg;
-  color: $header_fg;
   text-align: center;
   margin: 0;
   h1 {
     margin: 0;
     a {
-      color: $lepo_white;
+      color: $header_fg;
       text-decoration: none;
       &:hover {
-        color: $lepo_white;
+        color: $header_fg;
         &:before { content: "{" }
         &:after { content: "}" }
       }
