@@ -6,9 +6,9 @@
   <h3>Projects</h3>
 
   {% for project-row in project-rows %}
-  <div class="row">
+  <div id="projects">
     {% for project in project-row %}
-    <div class="col">
+    <div class="project">
       <p class="title">
         <a href="{{project.github-url}}">{{project.name}}</a>
       </p>
@@ -21,7 +21,7 @@
   <h3>Recent posts</h3>
   <ul class="no-bul">
     {% for post in latest-posts %}
-    <li>{{post.date|date:"yyy-MM-dd"}} &raquo; <a href="{{post.uri}}">{{post.title}}</a></li>
+    <li>{{post.date|date:"yyy-MM-dd"}} - <a href="{{post.uri}}">{{post.title}}</a></li>
     {% endfor %}
   </ul>
   <ul class="no-bul inline-list">
@@ -30,4 +30,3 @@
   </ul>
 </div>
 {% endblock %}
-
