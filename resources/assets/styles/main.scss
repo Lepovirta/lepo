@@ -173,6 +173,15 @@ header#main-menu {
   }
 }
 
+.figure {
+  text-align: center;
+  margin: 1em 0;
+  img {
+    border: 1px solid $lepo_white;
+    max-width: 100%;
+  }
+}
+
 #wrapper {
   width: $content_max_width;
   margin: 0 auto;
