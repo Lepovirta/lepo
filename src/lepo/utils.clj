@@ -45,3 +45,8 @@
   [keyfn coll]
   (sort-by keyfn reverse-compare coll))
 
+(defn map-values
+  [f coll]
+  (map (fn [[k v]] [k (f v)])
+       coll))
+
