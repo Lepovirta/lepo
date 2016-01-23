@@ -1,10 +1,19 @@
+// Branding
+$lepo_indigo:       #4E0082;
+$lepo_indigo_dark:  #37005B;
+
+$lepo_alt:          $lepo_indigo;
+$lepo_alt_dark:     $lepo_indigo_dark;
+
+$lepo_white:        #FAF3FF;
+
 // Background colors
 $default_bg:         #ffffff;
 $default_fg:         #222;
 $default_border:     #ddd;
 
 // Header colors
-$header_bg:          #213;
+$header_bg:          #4b0082;
 $header_fg:          #fff;
 
 // Footer colors
@@ -29,26 +38,23 @@ $code_block_border:  #35a;
 $meta_fg:            #666;
 
 // Layout
-$content_max_width:  800px;
+$content_max_width:  600px;
 $table_max_width:    600px;
 
 // Fonts
-$font_sans_serif:    "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font_monospace:     Menlo, Monaco, Consolas, "Lucida Console", monospace;
+$font_sans_serif:    "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font_monospace:     "Cousine", Menlo, Monaco, Consolas, "Lucida Console", monospace;
 $default_font:       $font_sans_serif;
 $content_font:       $font_sans_serif;
 $code_font:          $font_monospace;
 
 // Font sizes
-$normal_font_size:   18px;
-$code_font_size:     16px;
-$meta_font_size:     15px;
-$footer_font_size:   16px;
-$title_font_size:    24px;
-$line_height:        1.4;
-$code_line_height:   1.2;
-$table_title_font_size: 20px;
-$table_body_font_size:  16px;
+$normal_font_px:     18px;
+$normal_font_rem:    1.8rem;
+$line_height:        1.618; // Golden ratio
+
+$tiny_font_px:     12px;
+$tiny_font_rem:    1.2rem;
 
 // Mixins
 
@@ -60,10 +66,16 @@ $table_body_font_size:  16px;
 
 // Defaults
 
-html, body {
+html {
+  font-size: 62.5%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
   background-color: $default_bg;
   color: $default_fg;
-  font-size: $normal_font_size;
+  font-size: $normal_font_px; font-size: $normal_font_rem;
   font-family: $default_font;
   line-height: $line_height;
   margin: 0;
@@ -71,45 +83,40 @@ html, body {
 }
 
 p {
-  margin: 22px 0;
+  line-height: 1.618em;
   text-align: justify;
 }
 
 pre {
-  margin: 10px 0;
-  padding: 16px 10px;
-  border-left: 3px solid $code_block_border;
-  background-color: $code_block_bg;
+  margin: 1em 0;
+  padding: 1em;
+  border-left: 0.25em solid $lepo_alt;
+  background-color: $lepo_white;
   color: $code_block_fg;
   overflow-x: auto;
-  line-height: $code_line_height;
 }
 
 code {
-  border: 1px solid $code_border;
   background-color: $code_bg;
   color: $code_fg;
   @include border-radius(2px);
   padding: 0 6px;
   font-family: $code_font;
-  font-size: $code_font_size;
 }
 
 pre code {
+  font-size: $tiny_font_px; font-size: $tiny_font_rem;
   background-color: transparent;
   color: inherit;
   border: 0;
   padding: 0;
-  font-size: $code_font_size;
 }
 
 a {
-  color: $l_fg_color;
-  background-color: $l_bg_color;
+  color: $lepo_alt;
   text-decoration: underline;
   &:hover {
-    color: $l_hover_fg_color;
-    background-color: $l_hover_bg_color;
+    color: $lepo_alt_dark;
     text-decoration: none;
   }
 }
@@ -119,107 +126,14 @@ ol {
 }
 
 ul {
-  list-style-type: square; 
+  list-style-type: square;
 }
 
-// Page setup
+.left { float: left !important; }
 
-.header {
-  background-color: $header_bg;
-  color: $header_fg;
-  margin: 0;
+.right { float: right !important;}
 
-  h1 {
-    display: inline;
-  }
-
-  .title {
-    margin: 0;
-    padding: 5px 0;
-    font-size: $title_font_size;
-    font-weight: bold;
-    a:hover {
-      background-color: inherit;
-      color: inherit;
-    }
-  }
-
-  a {
-    color: #fff;
-    line-height: 24px;
-    text-decoration: none;
-    background-color: transparent;
-    display: inline-block;
-    padding: 5px 5px;
-    &:hover {
-      background-color: $header_fg;
-      color: $header_bg;
-    }
-  }
-}
-
-.content {
-  padding-bottom: 10px;
-  border-bottom: 1px solid $default_border;
-  font-family: $content_font;
-}
-
-footer {
-  color: $footer_fg;
-  padding: 10px;
-  font-size: $footer_font_size;
-  text-align: right;
-
-  a {
-    text-decoration: none;
-  }
-}
-
-// Random elements
-
-.box {
-  max-width: $content_max_width;
-  padding: 0 5px;
-  margin: 0 auto;
-}
-
-.pagetitle {
-  a {
-    color: inherit;
-    text-decoration: none;
-
-    &:hover {
-      color: $header_fg;
-      background-color: $header_bg;
-    }
-  }
-}
-
-.float-container {
-  .float-left {
-    float: left;
-  }
-
-  .float-right {
-    float: right;
-  }
-}
-
-.prev-next {
-  padding: 15px 0 0 0;
-  overflow: hidden;
-}
-
-.right {
-  float: right;
-  text-align: right;
-}
-
-.posts {
-  ul {
-    list-style: none;
-  }
-}
+  // Page setup
 
 .no-bul {
   list-style: none;
@@ -241,51 +155,74 @@ footer {
   }
 }
 
-.post-header {
-  h2 {
-    margin-bottom: 2px;
-  }
-  .post-meta {
-    margin-top: 0;
-    font-size: $meta_font_size;
-    color: $meta_fg;
-    span {
-      margin-right: 20px;
+header#main-menu {
+  background-color: $header_bg;
+  text-align: center;
+  margin: 0;
+  h1 {
+    margin: 0;
+    a {
+      color: $header_fg;
+      text-decoration: none;
+      &:hover {
+        color: $header_fg;
+        &:before { content: "{" }
+        &:after { content: "}" }
+      }
     }
   }
 }
 
 .figure {
   text-align: center;
+  margin: 1em 0;
   img {
-    border: 1px solid $default_border;
+    border: 1px solid $lepo_white;
     max-width: 100%;
   }
 }
 
-@media (min-width: $table_max_width) {
-  .row { width: 100%; display: table; table-layout: fixed; }
-  .col { display: table-cell; }
-}
-
-.row {
-  border-spacing: 10px 0;
-  margin: 10px 0;
-
-  .col {
-    font-size: $table_body_font_size;
-    padding: 16px;
-    border: 1px solid #B5ACBF;
-    border-top: 3px solid #4d0099;
-
-    .title {
-      font-size: $table_title_font_size;
-      margin: 0;
-    }
-
-    &:last-child {
-      margin-bottom: 100px;
+#wrapper {
+  width: $content_max_width;
+  margin: 0 auto;
+  #projects {
+    margin: 1em 0;
+    .project {
+      border-left: 0.25em solid $lepo_indigo;
+      background: $lepo_white;
+      padding: 1em;
+      margin-bottom: 1em;
+      p {
+        margin: 0;
+      }
     }
   }
 }
 
+#prev-next {
+  a {
+    margin: 1em 0;
+    text-align: center;
+    display: block;
+    line-height: 3em;
+    background: $lepo_alt;
+    color: $lepo_white;
+  }
+}
+
+footer {
+  border-top: 0.25em solid $lepo_indigo;
+  margin: 1.5em 0 0 0;
+  width: 100%;
+  div {
+    background: $lepo_white;
+    padding: 0.5em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #wrapper {
+    max-width: 98%;
+    padding: 0 1%;
+  }
+}

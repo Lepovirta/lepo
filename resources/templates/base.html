@@ -2,37 +2,35 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <title>{{site-title}}&raquo; {% block subtitle %}{% endblock %}</title>
+  <title>{{site-title}} - {% block subtitle %}{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link ref="alternate" type="application/atom+xml" title="posts" href="{{atom-uri}}" />
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
   {% style "/styles/main.css" %}
 </head>
 <body>
-
-<div class="header">
-  <div class="box">
+  <header id="main-menu">
     <h1 id="top" class="title">
-      <a href="/">{{site-title}}&raquo;</a>
+      <a href="/">{{site-title}}</a>
     </h1>
-  </div>
-</div>
-
-<div class="box">
-  <div class="content">
-    {% block content %}
-    {% endblock %}
-  </div>
-  <footer class="float-container">
-    <div class="float-left">
-      <a href="#top">&#9650; top</a>
+  </header>
+  <div id="wrapper">
+    <div class="content">
+      {% block content %}
+      {% endblock %}
     </div>
-    <div class="float-right">
-      <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
-    </div>
-  </footer>
+    <footer>
+      <div class="left">
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+      </div>
+      <div class="right">
+        <a href="#top">TOP</a>
+      </div>
+    </footer>
+  </div>
 </div>
 
 </body>
 </html>
-

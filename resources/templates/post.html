@@ -7,11 +7,11 @@
     <p class="post-meta">
       <span>
         Author: <a href="{{page|author-uri}}">{{page|author-fullname}}</a>
-      </span>
+      </span> -
       <span>
         Posted: {{page.date|date:"yyyy-MM-dd"}}
       </span>
-      {% if page.edited %}
+      {% if page.edited %} -
       <span>
         Last edited: {{page.edited|date:"yyyy-MM-dd"}}
       </span>
@@ -30,13 +30,16 @@
   </div>
   {% endif %}
 
-  <div class="prev-next">
+  <div id="prev-next">
     {% if page.prev %}
-    <a href="{{page.prev.uri}}">&laquo; {{page.prev.title}}</a>
+    <a href="{{page.prev.uri}}">
+      &laquo; {{page.prev.title}} ({{page.prev.date|date:"yy/MM"}})
+    </a>
     {% endif %}
-
     {% if page.next %}
-    <a class="right" href="{{page.next.uri}}">{{page.next.title}} &raquo;</a>
+    <a href="{{page.next.uri}}">
+      {{page.next.title}} ({{page.next.date|date:"yy/MM"}}) &raquo;
+    </a>
     {% endif %}
   </div>
 </div>
