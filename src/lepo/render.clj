@@ -1,6 +1,5 @@
 (ns lepo.render
   (:require [selmer.parser :as selmer]
-            [selmer.filters :refer [add-filter!]]
             [lepo.rss :as rss]
             [lepo.page :as page]
             [lepo.site :as site]
@@ -8,11 +7,6 @@
             [clojure.java.io :as io]))
 
 (def template-dirname "templates")
-
-(defn init-filters! []
-  (add-filter! :tag-uri page/tag-uri)
-  (add-filter! :author-fullname page/post-author-fullname)
-  (add-filter! :author-uri page/author-uri))
 
 (defn- template-path
   [template-name]

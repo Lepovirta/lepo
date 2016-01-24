@@ -49,3 +49,7 @@
   (map (fn [[k v]] [k (f v)])
        coll))
 
+(defn dir-list
+  [path]
+  (remove string/blank? (string/split path #"/")))
+

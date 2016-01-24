@@ -1,6 +1,7 @@
 (ns lepo.site
   (:require [clojure.string :as string]
             [lepo.utils :as utils]
+            [lepo.author :as author]
             [lepo.page :as page]))
 
 (defn- link-post
@@ -21,18 +22,22 @@
 
 (defn get-posts [site] (-> site :pages :post))
 
+(defn has-uri?
+  [conf uri]
+  (contains? (:uris conf) uri))
+
 (defn- get-author-posts
   [posts author-id]
-  (filter #(= author-id (:author %)) posts))
+  (filter #(= author-id (:author-id %)) posts))
 
 (defn- augment-post
   [conf post]
   (let [date (utils/str->date (:id post))
-        author-id (:author post)
+        author-id (:author-id post)
         author-details (get-author-details conf author-id)]
     (assoc post
            :date date
-           :author-details author-details)))
+           :author author-details)))
 
 (defn- augment-posts
   [conf posts]
@@ -43,15 +48,15 @@
 
 (defn- augment-author-page
   [conf posts page]
-  (let [author-id (page/path->author-id (:id page))
+  (let [author-id (author/path->author-id (:id page))
         author-details (get-author-details conf author-id)
-        title (or (:title page) (page/author-fullname author-details))
+        title (or (:title page) (:fullname author-details))
         author-posts (get-author-posts posts author-id)]
     (assoc page
            :title title
-           :author author-id
+           :author-id author-id
            :author-posts author-posts
-           :author-details author-details)))
+           :author author-details)))
 
 (defn- augment-author-pages
   [conf posts pages]
@@ -112,6 +117,28 @@
            :projects projects
            :project-rows project-rows)))
 
+(defn- augment-author
+  [conf author-id author]
+  (let [augmented (author/expand-details author-id author)
+        full-uri (:full-uri augmented)]
+    (if (has-uri? conf full-uri)
+      augmented
+      (dissoc augmented :full-uri :uri))))
+
+(defn- augment-authors
+  [conf]
+  (->> conf
+       :authors
+       (map (fn [[id details]] [id (augment-author conf id details)]))
+       (into {})
+       (assoc conf :authors)))
+
+(defn- pages->uris [pages] (into #{} (map :uri pages)))
+
+(defn- add-uris
+  [conf raw-pages]
+  (assoc conf :uris (pages->uris raw-pages)))
+
 (defn- add-pages
   [conf raw-pages]
   (assoc conf :pages (process-pages conf raw-pages)))
@@ -127,6 +154,8 @@
 (defn build
   [conf raw-pages]
   (-> conf
+      (add-uris raw-pages)
+      augment-authors
       (add-pages raw-pages)
       add-latest-posts
       augment-projects

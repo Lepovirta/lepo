@@ -77,7 +77,7 @@ E.g.
 
 ```
 {:title "My Cool Post"
- :author :someone}
+ :author-id :someone}
 ```
 
 After the map, there should be a `---` marker with at least one empty line on both sides.

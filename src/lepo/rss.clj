@@ -8,7 +8,7 @@
   [:entry
    [:title (:title post)]
    [:updated (:date post)]
-   [:author [:name (page/post-author-fullname post)]]
+   [:author [:name (-> post :author :fullname)]]
    [:link {:href (str (:site-url conf) (:uri post))}]
    [:id (str (:site-urn conf) ":post:" (:id post))]
    [:content {:type "html"} (:content post)]])
