@@ -4,6 +4,7 @@
             [lepo.page :as page]
             [lepo.site :as site]
             [lepo.utils :as utils]
+            [lepo.author :as author]
             [clojure.java.io :as io]))
 
 (def template-dirname "templates")
@@ -38,6 +39,11 @@
   (render "archives"
           (assoc conf :groups (site/posts-by-year conf))))
 
+(defn authors->html
+  [conf]
+  (render "authors"
+          (assoc conf :authors (author/sorted-authors conf))))
+
 (defn- page-pair
   [conf page]
   [(:uri page) (fn [_] (page->html conf page))])
@@ -71,4 +77,8 @@
 (defn rss
   [conf]
   {(:atom-uri conf) (fn [_] (rss/atom-xml conf))})
+
+(defn authors
+  [conf]
+  {author/authors-uri (fn [_] (authors->html conf))})
 

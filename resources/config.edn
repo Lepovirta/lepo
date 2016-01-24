@@ -10,4 +10,17 @@
              :description "<b>Yet Another Hints Extension</b> is an extension for Chrome that allows users to activate links without touching the mouse."
              :github-id "yahe"}]
  :authors {:jkpl {:firstname "Jaakko"
-                  :lastname "Pallari"}}}
+                  :lastname "Pallari"
+                  :description "Polyglot functional programmer"
+                  :links {:twitter "lepovirta"
+                          :github "jkpl"}}
+           :esajuhana {:firstname "Esa"
+                       :lastname "Juhana"
+                       :description "Design and user experience guru"
+                       :links {:twitter "esajuhana"
+                               :github "thevangelist" } }
+           :matson {:firstname "Matias"
+                    :lastname "Keveri"
+                    :description "Functional programmer with a soul for computer security"
+                    :links {:twitter "matiaskeveri"
+                            :github "keveri"}}}}
