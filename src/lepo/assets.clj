@@ -28,17 +28,16 @@
    (static-file-bundle)))
 
 (defn optimized-bundle []
-  (-> normal-bundle
+  (-> (normal-bundle)
       (optimizations/minify-css-assets {})))
 
 (defn server
   [app]
   (optimus/wrap app normal-bundle optimizations/none serve-live-assets))
 
-(defn save
+(defn save!
   [bundle target-dir]
   (optimus.export/save-assets bundle target-dir))
 
-(defn bundle-paths [bundle]
-  (map :path bundle))
+(defn paths [bundle] (map :path bundle))
 

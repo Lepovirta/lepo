@@ -20,6 +20,10 @@
          (site/build conf)
          merge-sources)))
 
-(defn save
+(defn save!
   [site target-dir]
+  (render/init-filters!)
   (stasis/export-pages site target-dir))
+
+(defn paths [site] (map first site))
+
