@@ -20,7 +20,7 @@
       (string/replace-first trailing-slashes-pattern "")))
 
 (defn remove-file-extension
-  [s]
+  [^java.lang.String s]
   (let [index (.lastIndexOf s ".")]
     (if (> index 0)
       (.substring s 0 index)
@@ -29,8 +29,7 @@
 (defn uri
   [& args]
   (->> args
-       (map str)
-       (map trim-slashes)
+       (map (comp trim-slashes str))
        (remove string/blank?)
        (string/join "/")
        (str "/")))

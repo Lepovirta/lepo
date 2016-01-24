@@ -46,13 +46,13 @@
     (write-to-path! files path)))
 
 (defn- delete-parent-when-empty!
-  [file]
+  [^java.io.File file]
   (when-let [parent (.getParentFile file)]
     (when (empty? (.listFiles parent))
       (io/delete-file parent))))
 
 (defn- delete-file!
-  [file]
+  [^java.io.File file]
   (when-not (.isDirectory file)
     (io/delete-file file)
     (delete-parent-when-empty! file)))

@@ -84,9 +84,8 @@
 
 (defn posts-for-tag
   [site tag]
-  (->> site
-       get-posts
-       (filter (partial page/has-tag? tag))))
+  (filter (partial page/has-tag? tag)
+          (get-posts site)))
 
 (defn- to-group
   [[group posts]]
@@ -94,8 +93,7 @@
 
 (defn posts-by-year
   [site]
-  (->> site
-       get-posts
+  (->> (get-posts site)
        (group-by page/post-year)
        (utils/reverse-sort-by first)
        (map to-group)))
