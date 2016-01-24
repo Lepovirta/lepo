@@ -18,12 +18,5 @@
     </div>
     {% endfor %}
   </div>
-  <ul>
-    {% for post in posts %}
-    <li>
-      {{post.date|date:"MMM dd YYYY"}} &raquo; <a href="{{post.uri}}">{{post.title}}</a>
-    </li>
-    {% endfor %}
-  </ul>
 </div>
 {% endblock %}
