@@ -18,10 +18,8 @@
                  [org.clojure/data.xml "0.0.8"]
                  [clj-time "0.11.0"]
                  [selmer "0.9.8"]]
-  :main ^:skip-aot lepo.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}}
   :plugins [[lein-ring "0.9.7"]]
-  :ring {:handler lepo.core/app
-         :init lepo.core/app-init}
-  :aliases {"build-site" ["run" "-m" "lepo.core/export"]})
+  :ring {:handler lepo.live/app
+         :init lepo.live/app-init}
+  :aliases {"build-site" ["run" "-m" "lepo.export/export"]})

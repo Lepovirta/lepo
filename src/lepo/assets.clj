@@ -22,21 +22,22 @@
 (defn- static-file-bundle []
   (assets/load-assets asset-dir static-asset-files))
 
-(defn- get-assets []
+(defn normal-bundle []
   (concat
    (sass-bundle)
    (static-file-bundle)))
 
+(defn optimized-bundle []
+  (-> (normal-bundle)
+      (optimizations/minify-css-assets {})))
+
 (defn server
   [app]
-  (optimus/wrap app get-assets optimizations/none serve-live-assets))
+  (optimus/wrap app normal-bundle optimizations/none serve-live-assets))
 
-(defn optz [assets options]
-  (-> assets
-      (optimizations/minify-css-assets options)))
+(defn save!
+  [bundle target-dir]
+  (optimus.export/save-assets bundle target-dir))
 
-(defn save
-  [target-dir]
-  (optimus.export/save-assets
-   (optz (get-assets) {})
-   target-dir))
+(defn paths [bundle] (map :path bundle))
+
