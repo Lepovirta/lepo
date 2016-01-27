@@ -1,11 +1,11 @@
 // Branding
-$lepo_indigo:       #4E0082;
-$lepo_indigo_dark:  #37005B;
+$lepo_indigo:       #44118d;
+$lepo_indigo_dark:  #300C63;
 
 $lepo_alt:          $lepo_indigo;
 $lepo_alt_dark:     $lepo_indigo_dark;
 
-$lepo_white:        #FAF3FF;
+$lepo_white:        #F7F1FF;
 
 // Background colors
 $default_bg:         #ffffff;
@@ -13,7 +13,7 @@ $default_fg:         #222;
 $default_border:     #ddd;
 
 // Header colors
-$header_bg:          #4b0082;
+$header_bg:          $lepo_indigo;
 $header_fg:          #fff;
 
 // Footer colors
