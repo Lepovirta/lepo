@@ -13,3 +13,4 @@ pom.xml.asc
 .sass-cache
 /resources/assets/styles
 deploy.sh
+.DS_Store
