@@ -1,5 +1,6 @@
 (ns lepo.build
   (:require [lepo.render :as render]
+            [lepo.filters :as filters]
             [lepo.site :as site]
             [lepo.resources :as resources]
             [lepo.parse :refer [parse-pages]]
@@ -9,9 +10,10 @@
   [conf]
   (stasis/merge-page-sources 
    (assoc (render/pages conf)
-          :tags (render/tags conf)
+          :tags    (render/tags conf)
           :archive (render/archive conf)
-          :rss (render/rss conf))))
+          :authors (render/authors conf)
+          :rss     (render/rss conf))))
 
 (defn build-site []
   (let [conf (resources/load-config)]
@@ -22,7 +24,7 @@
 
 (defn save!
   [site target-dir]
-  (render/init-filters!)
+  (filters/init!)
   (stasis/export-pages site target-dir))
 
 (defn paths [site] (map first site))

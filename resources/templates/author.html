@@ -1,5 +1,7 @@
-{% extends "templates/normal.html" %}
-{% block more %}
+{% extends "templates/base.html" %}
+{% block content %}
+<h2>{{page.title}}</h2>
+{{page.content|safe}}
 {% if page.author-posts %}
 <h3>Posts</h3>
 <ul class="no-bul">

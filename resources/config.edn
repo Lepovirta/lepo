@@ -1,13 +1,42 @@
-{:site-title       "Lepo.IO"
- :site-url         "https://lepo.io/"
- :site-urn         "urn:lepo-io:feed"
- :atom-uri         "/atom.xml"
- :github           "https://github.com/Lepovirta"
- :projects [{:name "Kuvia"
-             :description "<b>Kuvia</b> is a simple image gallery for static web sites. Give it a list of image files, and you've got an image gallery that can be hosted in any web host."
-             :github-id "kuvia"}
-            {:name "Yet Another Hints Extension (YAHE)"
-             :description "<b>Yet Another Hints Extension</b> is an extension for Chrome that allows users to activate links without touching the mouse."
-             :github-id "yahe"}]
- :authors {:jkpl {:firstname "Jaakko"
-                  :lastname "Pallari"}}}
+{
+  :site-title       "Lepo.IO"
+  :site-url         "https://lepo.io/"
+  :site-urn         "urn:lepo-io:feed"
+  :atom-uri         "/atom.xml"
+  :github           "https://github.com/Lepovirta"
+  :projects [
+    {
+      :name        "Kuvia"
+      :github-id   "kuvia"
+      :description "<b>Kuvia</b> is a simple image gallery for static web sites. Give it a list of image files, and you've got an image gallery that can be hosted in any web host."
+    }
+    {
+      :name        "Yet Another Hints Extension (YAHE)"
+      :github-id   "yahe"
+      :description "<b>Yet Another Hints Extension</b> is an extension for Chrome that allows users to activate links without touching the mouse."
+    }
+  ]
+
+  :authors {
+    :jkpl {
+      :firstname   "Jaakko"
+      :lastname    "Pallari"
+      :homepage    "/team/jkpl/"
+    }
+    :esajuhana {
+      :firstname   "Esa"
+      :lastname    "Juhana"
+      :homepage    "http://www.esajuhana.com/"
+    }
+    :matson {
+      :firstname   "Matias"
+      :lastname    "Keveri"
+      :homepage    "http://matias.keveri.fi/"
+    }
+    :visav {
+      :firstname   "Visa"
+      :lastname    "Varjus"
+      :homepage    "https://github.com/visav"
+    }
+  }
+}

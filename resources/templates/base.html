@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <title>{{site-title}} - {% block subtitle %}{% endblock %}</title>
+  <title>{{site-title}} - {% block subtitle %}{{page.title}}{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link ref="alternate" type="application/atom+xml" title="posts" href="{{atom-uri}}" />
@@ -12,6 +12,7 @@
 </head>
 <body>
   <header id="main-menu">
+    <img id="logo" src="/img/lepologo.svg" alt="Logo of Lepo.IO">
     <h1 id="top" class="title">
       <a href="/">{{site-title}}</a>
     </h1>
