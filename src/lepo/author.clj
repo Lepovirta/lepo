@@ -5,10 +5,6 @@
 
 (def author-path "team")
 
-(def link-expansions
-  {:twitter [(partial str "@") (partial str "https://twitter.com/")]
-   :github  [(fn [_] "Github") (partial str "https://github.com/")]})
-
 (defn fullname
   [details]
   (let [firstname (:firstname details)
@@ -27,29 +23,12 @@
   [author-id]
   (utils/uri (uri author-id) "index.html"))
 
-(defn- expand-link
-  [link]
-  (let [[id fragment]        link
-        [site-name expander] (link-expansions id)]
-    (if (some nil? [site-name expander])
-      (do (log/warn "Unknown link ID" id) nil)
-      [id (site-name fragment) (expander fragment)])))
-
-(defn- expand-links
-  [links]
-  (->> links
-       (map expand-link)
-       (remove nil?)
-       (sort-by first)
-       (map rest)))
-
 (defn expand-details
   [id details]
   (assoc details
          :fullname (fullname details)
          :uri      (uri id)
-         :full-uri (full-uri id)
-         :links    (expand-links (:links details))))
+         :full-uri (full-uri id)))
 
 (defn path->author-id
   [path]

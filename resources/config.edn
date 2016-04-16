@@ -21,29 +21,22 @@
     :jkpl {
       :firstname   "Jaakko"
       :lastname    "Pallari"
-      :description "Polyglot functional programmer"
-      :links {
-        :twitter "lepovirta"
-        :github  "jkpl"
-      }
+      :homepage    "/team/jkpl/"
     }
     :esajuhana {
       :firstname   "Esa"
       :lastname    "Juhana"
-      :description "Design and user experience guru"
-      :links {
-        :twitter "esajuhana"
-        :github  "thevangelist"
-      }
+      :homepage    "http://www.esajuhana.com/"
     }
     :matson {
       :firstname   "Matias"
       :lastname    "Keveri"
-      :description "Functional programmer with a soul for computer security"
-      :links {
-        :twitter "matiaskeveri"
-        :github  "keveri"
-      }
+      :homepage    "http://matias.keveri.fi/"
+    }
+    :visav {
+      :firstname   "Visa"
+      :lastname    "Varjus"
+      :homepage    "https://github.com/visav"
     }
   }
 }

@@ -1,19 +1,7 @@
 {% extends "templates/base.html" %}
 {% block content %}
 <h2>{{page.title}}</h2>
-<div class="author-description">{{page.author.description}}</div>
 {{page.content|safe}}
-{% if page.author.links %}
-<h3>Links</h3>
-<ul>
-  {% for linkname,linkuri in page.author.links %}
-  <li><a href="{{linkuri}}">{{linkname}}</a></li>
-  {% endfor %}
-  {% for linkname,linkuri in page.otherlinks %}
-  <li><a href="{{linkuri}}">{{linkname}}</a></li>
-  {% endfor %}
-</ul>
-{% endif %}
 {% if page.author-posts %}
 <h3>Posts</h3>
 <ul class="no-bul">

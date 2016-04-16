@@ -8,16 +8,7 @@
   <div class="team">
     {% for author in authors %}
     <div class="member">
-      <h3>{{author.fullname}}</h3>
-      <p>{{author.description}}</p>
-      <div class="links">
-        {% for linkname,linkuri in author.links %}
-        <a href="{{linkuri}}">{{linkname}}</a>
-        {% endfor %}
-        {% if author.uri %}
-        <a href="{{author.uri}}">More about {{author.firstname}}</a>
-        {% endif %}
-      </div>
+      <h3><a href="{{author.homepage}}">{{author.fullname}}</a></h3>
     </div>
     {% endfor %}
   </div>
