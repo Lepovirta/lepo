@@ -5,9 +5,8 @@
   <title>{{site-title}} - {% block subtitle %}{{page.title}}{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link ref="alternate" type="application/atom+xml" title="posts" href="{{atom-uri}}" />
-  <link href='https://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+  <link rel="alternate" type="application/atom+xml" title="posts" href="{{atom-uri}}" />
+  {% style "/styles/fonts.css" %}
   {% style "/styles/main.css" %}
 </head>
 <body>
@@ -31,7 +30,5 @@
       </div>
     </footer>
   </div>
-</div>
-
 </body>
 </html>

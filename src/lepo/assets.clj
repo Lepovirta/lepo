@@ -17,6 +17,7 @@
 (def static-asset-files
   ["/favicon.png"
    #"/img/.*"
+   #"/styles/.+\.css"
    #"/files/.*"])
 
 (defn- static-file-bundle []
@@ -40,4 +41,3 @@
   (optimus.export/save-assets bundle target-dir))
 
 (defn paths [bundle] (map :path bundle))
-
