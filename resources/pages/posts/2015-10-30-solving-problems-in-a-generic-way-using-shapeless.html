@@ -302,7 +302,7 @@ implicit def coproductConsDepth[L, R &lt;: Coproduct](implicit ldepth: Depth[L],
     case Inl(l) =&gt; ldepth.depth(l)
     case Inr(r) =&gt; rdepth.depth(r)
   }
-}</pre></code>
+}</code></pre>
 
 <p>
 Instead of using all of the implicit dependencies,
@@ -422,4 +422,3 @@ One such feature is the extensible record,
 which allows reusing existing fields for creating new record types in an ad-hoc manner.
 This makes it possible to apply functions that rely on specific fields for any new records that contain those fields.
 </p>
-

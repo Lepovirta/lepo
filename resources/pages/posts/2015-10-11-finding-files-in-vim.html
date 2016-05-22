@@ -51,7 +51,7 @@ After calling the function, the search window should be selected.
         botright new
         setfiletype findbuf
     endif
-endfunction</pre></code>
+endfunction</code></pre>
 
 <p>
 After the search window has been initialized,
@@ -69,7 +69,7 @@ and returns the cursor to the first line of the buffer (line 5).
     execute 'silent $read !' . a:cmd
     g/^$/d
     1
-endfunction</pre></code>
+endfunction</code></pre>
 
 <p>
 By default, the search result window's height will be half of the full height of the Vim window.
@@ -87,7 +87,7 @@ so adjust accordingly.
     let buflines = line('$')
     let wsize = min([a:maxsize, &amp;lines / 2, l:buflines])
     execute 'resize ' . l:wsize
-endfunction</pre></code>
+endfunction</code></pre>
 
 <p>
 To call the file search, we'll glue these three functions together to a single function,
@@ -114,7 +114,7 @@ Thus calling the command <code>:Find *.html</code> will search all of the HTML f
 </p>
 
 <pre><code>function! s:Find(pattern)
-    let defaultcmd = 'find . \( -type f -o -type l \) -iname' 
+    let defaultcmd = 'find . \( -type f -o -type l \) -iname'
     let cmd = exists('g:findcmd') ? g:findcmd : l:defaultcmd
     let fullcmd = l:cmd . " '" . a:pattern . "'"
     let maxwinsize = exists('g:findwinsize') ? g:findwinsize : 10
@@ -127,7 +127,7 @@ Thus calling the command <code>:Find *.html</code> will search all of the HTML f
     let &amp;l:statusline='Find: ' . a:pattern . ' %= %l/%L'
 endfunction
 
-command! -nargs=1 Find call s:Find(&lt;q-args&gt;)</pre></code>
+command! -nargs=1 Find call s:Find(&lt;q-args&gt;)</code></pre>
 
 <h3>Extending the script</h3>
 
@@ -177,7 +177,7 @@ The functionality is mapped to the enter key in the keyboard.
 endfunction
 
 au FileType findbuf
-    \ nnoremap &lt;buffer&gt; &lt;Return&gt; :call CursorFileInPreviousWindow()&lt;CR&gt; </pre></code>
+    \ nnoremap &lt;buffer&gt; &lt;Return&gt; :call CursorFileInPreviousWindow()&lt;CR&gt; </code></pre>
 
 
 <h3>Alternatives</h3>
@@ -207,4 +207,3 @@ They also support a more dynamic kind of search where the search results are upd
   <li><a href="https://github.com/szw/vim-ctrlspace">Vim-CtrlSpace</a></li>
   <li><a href="https://github.com/Shougo/unite.vim">Unite</a></li>
 </ul>
-
