@@ -3,7 +3,14 @@
 <head>
   <meta charset="utf-8"/>
   <title>{{site-title}} - {% block subtitle %}{{page.title}}{% endblock %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="{{page.description}}" />
+  <meta property="og:image" content="{{site-url}}img/lepologo.png" />
+  {% for key,value in page.og %}
+  <meta property="og:{{key|name}}" content="{{value}}" />
+  {% endfor %}
+  <meta property="og:site_name" content="{{site-title}}" />
+  <meta property="og:see_also" content="{{site-url}}" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="alternate" type="application/atom+xml" title="posts" href="{{atom-uri}}" />
   {% style "/styles/fonts.css" %}

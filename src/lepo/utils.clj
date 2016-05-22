@@ -26,13 +26,20 @@
       (.substring s 0 index)
       s)))
 
-(defn uri
+(defn- slash-separated
   [& args]
   (->> args
        (map (comp trim-slashes str))
        (remove string/blank?)
-       (string/join "/")
-       (str "/")))
+       (string/join "/")))
+
+(defn url
+  [& args]
+  (apply slash-separated args))
+
+(defn uri
+  [& args]
+  (str "/" (apply slash-separated args)))
 
 (defn uri-dir
   [& args]
@@ -52,4 +59,3 @@
 (defn dir-list
   [path]
   (remove string/blank? (string/split path #"/")))
-

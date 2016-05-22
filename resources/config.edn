@@ -1,5 +1,6 @@
 {
   :site-title       "Lepo.IO"
+  :site-description "We are a group of developers who enjoy making open source software."
   :site-url         "https://lepo.io/"
   :site-urn         "urn:lepo-io:feed"
   :atom-uri         "/atom.xml"

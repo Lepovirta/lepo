@@ -11,6 +11,9 @@
   {posts-path :post
    author/author-path :author})
 
+(def og-types
+  {:post "article"})
+
 (defn tag-uri
   [tag]
   (utils/uri tags-path (str tag ".html")))
@@ -36,3 +39,6 @@
   [path]
   (get page-type-dirs (first (utils/dir-list path)) :normal))
 
+(defn page-type->og-type
+  [page-type]
+  (get og-types page-type "website"))

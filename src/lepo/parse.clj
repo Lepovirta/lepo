@@ -20,4 +20,3 @@
 (defn parse-pages
   [conf pages-source]
   (map (partial apply parse-file) pages-source))
-

@@ -18,7 +18,8 @@
   ["/favicon.png"
    #"/img/.*"
    #"/styles/.+\.css"
-   #"/files/.*"])
+   ;#"/files/.*"
+   ])
 
 (defn- static-file-bundle []
   (assets/load-assets asset-dir static-asset-files))

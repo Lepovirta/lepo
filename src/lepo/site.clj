@@ -30,6 +30,25 @@
   [posts author-id]
   (filter #(= author-id (:author-id %)) posts))
 
+(defn- augment-common
+  [conf page]
+  (let [site-url  (:site-url conf)
+        page-uri  (:uri page)
+        url       (utils/url site-url page-uri)
+        page-type (:page-type page)
+        og        {:type (page/page-type->og-type page-type)
+                   :description (:description page)
+                   :url url
+                   :title (:title page)}]
+    (assoc page
+           :url url
+           :og og)))
+
+(defn- augment-common-many
+  [conf pages]
+  (map (partial augment-common conf)
+       pages))
+
 (defn- augment-post
   [conf post]
   (let [date (utils/str->date (:id post))
@@ -68,7 +87,8 @@
 
 (defn- process-pages
   [conf raw-pages]
-  (let [pages (group-by-page-type raw-pages)
+  (let [augmented-pages (augment-common-many conf raw-pages)
+        pages (group-by-page-type augmented-pages)
         posts (augment-posts conf (:post pages))
         author-pages (augment-author-pages conf posts (:author pages))]
     (assoc pages
@@ -160,4 +180,3 @@
       add-latest-posts
       augment-projects
       add-tags))
-
