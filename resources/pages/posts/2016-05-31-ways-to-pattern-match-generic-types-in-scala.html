@@ -20,6 +20,11 @@
 <li><a href="#type-tags">Type tags</a></li>
 <li><a href="#conclusions">Conclusions</a></li>
 </ol>
+
+<p>
+This article was first published in <a href="http://www.cakesolutions.net/teamblogs/ways-to-pattern-match-generic-types-in-scala">Cake Solutions's tech blog</a>.
+</p>
+
 <h2 id="avoid-losing-the-generic-type">Avoid losing the generic type</h2>
 <p>Before you try to pattern match on generic types, try to figure out if you actually need it at all. If you have the control of the code that requires pattern matching, try to structure the code in a manner that doesn't lose generic type information. Here's an example of a structure that will encounter problems in pattern matching:</p>
 <pre class="scala"><code>sealed trait Result
