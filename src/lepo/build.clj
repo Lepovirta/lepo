@@ -8,7 +8,7 @@
 
 (defn- merge-sources
   [conf]
-  (stasis/merge-page-sources 
+  (stasis/merge-page-sources
    (assoc (render/pages conf)
           :tags    (render/tags conf)
           :archive (render/archive conf)
@@ -18,7 +18,7 @@
 (defn build-site []
   (let [conf (resources/load-config)]
     (->> (resources/raw-page-source)
-         (parse-pages conf)
+         (parse-pages)
          (site/build conf)
          merge-sources)))
 
@@ -28,4 +28,3 @@
   (stasis/export-pages site target-dir))
 
 (defn paths [site] (map first site))
-

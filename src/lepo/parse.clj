@@ -18,5 +18,5 @@
            :page-type page-type)))
 
 (defn parse-pages
-  [conf pages-source]
+  [pages-source]
   (map (partial apply parse-file) pages-source))
