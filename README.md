@@ -1,5 +1,7 @@
 # lepo
 
+[![Build Status](https://travis-ci.org/Lepovirta/pikkuwiki.svg?branch=master)](https://travis-ci.org/Lepovirta/pikkuwiki)
+
 Static website generator for [Lepo.IO](https://lepo.io/).
 
 ## Requirements
@@ -62,7 +64,7 @@ Here's what each template is used for:
 * **archives**: posts archive template
 * **tag**: tag posts listing template
 * **author**: author page template
-* **frontpage**: template for `resources/pages/index.html` 
+* **frontpage**: template for `resources/pages/index.html`
 * **post**: blog post template
 * **normal**: template for all of the other pages
 
