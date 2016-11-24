@@ -1,6 +1,6 @@
 # lepo
 
-[![Build Status](https://travis-ci.org/Lepovirta/pikkuwiki.svg?branch=master)](https://travis-ci.org/Lepovirta/pikkuwiki)
+[![Build Status](https://travis-ci.org/Lepovirta/lepo.svg?branch=master)](https://travis-ci.org/Lepovirta/lepo)
 
 Static website generator for [Lepo.IO](https://lepo.io/).
 
