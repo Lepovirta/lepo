@@ -38,8 +38,8 @@ $code_block_border:  #35a;
 $meta_fg:            #666;
 
 // Layout
-$content_max_width:  600px;
-$table_max_width:    600px;
+$content_max_width:  700px;
+$table_max_width:    700px;
 
 // Fonts
 $font_sans_serif:    "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -214,7 +214,7 @@ footer {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   #wrapper {
     max-width: 98%;
     padding: 0 1%;
