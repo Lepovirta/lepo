@@ -1,1 +1,3 @@
 language: clojure
+notifications:
+  slack: lepovirta:v3PaLDZ95F0rcm3WvtDJ84YZ
