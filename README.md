@@ -1,6 +1,7 @@
 # lepo
 
 [![Build Status](https://travis-ci.org/Lepovirta/lepo.svg?branch=master)](https://travis-ci.org/Lepovirta/lepo)
+[![codecov](https://codecov.io/gh/Lepovirta/lepo/branch/master/graph/badge.svg)](https://codecov.io/gh/Lepovirta/lepo)
 
 Static website generator for [Lepo.IO](https://lepo.io/).
 
