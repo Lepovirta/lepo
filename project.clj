@@ -19,7 +19,8 @@
                  [clj-time "0.11.0"]
                  [selmer "1.0.4"]]
   :target-path "target/%s"
-  :plugins [[lein-ring "0.9.7"]]
+  :plugins [[lein-ring "0.9.7"]
+            [lein-cloverage "1.0.9"]]
   :ring {:handler lepo.live/app
          :init lepo.live/app-init}
   :aliases {"build-site" ["run" "-m" "lepo.export/export"]})
