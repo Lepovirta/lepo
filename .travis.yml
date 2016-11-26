@@ -1,18 +1,18 @@
 language: clojure
 notifications:
   slack: lepovirta:v3PaLDZ95F0rcm3WvtDJ84YZ
-before_deploy: "lein build-site"
+before_deploy: lein build-site
 deploy:
   provider: s3
   access_key_id: AKIAJFPGB7D4DVXCQ7UA
   secret_access_key:
-    secure: Hyv2S4+ZtGtH2f4UNPmmcEJMKFruE01/5JTupIo5GqHHT4NPad3ZJDJV1u8ShnAUujPNoEcHIgUYWjwbrI4gJqHomCytNL3w35XfitCdDK/4U+r2VO/KdAMlDxJP9MYWqDsjH5POmeMA6HVXnqiIL1/DmP4giyJRlYQ7V8EaHc0ks6bPn80EXoDyveCi+N3yByomWcM1QbqKGn0s5EU/QhwdOU14cIYhK1oLPpqaP+Zb8vWK9zspLjPxV1HkOov9qxnfiUAe9bNa6s1yn+A/8MVF9NH7ixPaStI1vBjtMoK0z0m7YJmHe2zO+uSBNf9CoEL1dm0Tur3PkTSIBr0+39vbQ1EZKvGcYbNdv/ly+lkT6rcU6IeopMf2ltO3KyaM2pNk47NCGQAUilKZOIE7GsXFqlX0fiSOMGHog6fGxYOhBh6ZZ8v3OMcxNT6fD5N12hIaH+DSCr6ZVDNO2WzSpIF6vYWVsrhwC2HDQapbms58jlQaea0HByD2FOkFCa61S7ELQ5aXlgqpkq/y7VOi1B1TI1LPQASxed2LlMiV7vQnztHYlUbFx0Jp2i1JeGSGZVujD4pBCeK+qfs/00LBY8x6QogqMV7G7E3u53ZSQZdj157U31XWW/tzH3x3IoBrxx1eDZtjLnhRkM4BiqCJxg1EIYI7SATnUuygsszmJZ4=
+    secure: VgTyiS87QJOoJDi4Ozb+wwm/JzFUGekokk0k7BKCntYo09WlVYxNEQL4hww8wGfwPqZYxuGbdl/NfZiP0VE8HybCJ/uIQ91dfeSPZo2ElOaZX/7CzVc0wH4oObzqEZlmW0c4yCHdjiKXLOUll5JU4B/MTkzJTaWsVCjZIlQHGRJOtlhigYxCgu01ndiW08w+RE1O+oqwF1cnnhagUNDN+JUD3X+t67FfruQJ3R7fuCIqJ8fp7LbMdJMgp25H39Af5yaqNcavPb6e/aXSvLsw965Hs3LIK9hQjpAoNk4dXtiEqbNa4ETqLQwKoUpqApI5CIFMhI9Lml+IY7CNUcFThMcsyDsXxILs98xsggDyOxf/L67KJ9pInql4OgP3wmMwsUcl3b0xtjutKO+AJjcCTr4o3Y5vZ97UoOqgLsJtc9PvE1tczwRdf1s1yRPjELD9et0jwWG4ycOYQHDORSOzpWiyN4yJBogQRcasXojx65pk3Iz6sDcP+Wu604a+bRdbykJCWqci2S9BDIhmCQyJUzGdc0tNYZ2IkUdVik5y8v1VA3ScNWAG6Y/zsYidHX2jtt3Dy0jEhIJgg6hzKzKl2kx8JUxsYTcTDcNiEpNsJNMprQ/apaO3gYlfsIXS/bKgGwg2UYchiHZZEViuixlpQT3SYCZ0NKOkWDSWucPYDpI=
   bucket: aws-website-lepoio-odpfm
   skip_cleanup: true
   local-dir: target/website
   acl: public_read
   detect_encoding: true
-  default_text_charset: 'utf-8'
+  default_text_charset: utf-8
   on:
     repo: Lepovirta/lepo
     branch: master
