@@ -1,6 +1,7 @@
 (ns lepo.site
   (:require [clojure.string :as string]
             [lepo.utils :as utils]
+            [lepo.uri :as uri]
             [lepo.author :as author]
             [lepo.page :as page]))
 
@@ -34,7 +35,7 @@
   [conf page]
   (let [site-url  (:site-url conf)
         page-uri  (:uri page)
-        url       (utils/url site-url page-uri)
+        url       (uri/parts->url site-url page-uri)
         page-type (:page-type page)
         og        {:type (page/page-type->og-type page-type)
                    :description (:description page)

@@ -1,5 +1,6 @@
 (ns lepo.page
   (:require [lepo.utils :as utils]
+            [lepo.uri :as uri]
             [lepo.author :as author]
             [clj-time.core :as t]
             [clojure.string :as string]))
@@ -16,10 +17,10 @@
 
 (defn tag-uri
   [tag]
-  (utils/uri tags-path (str tag ".html")))
+  (uri/parts->path tags-path (str tag ".html")))
 
 (def archive-uri
-  (utils/uri posts-path "index.html"))
+  (uri/parts->path posts-path "index.html"))
 
 (defn has-tag?
   [tag post]
@@ -33,11 +34,11 @@
 
 (defn filename->page-id
   [filename]
-  (-> filename utils/trim-slashes utils/remove-file-extension))
+  (-> filename utils/trim-slashes uri/remove-extension))
 
 (defn path->page-type
   [path]
-  (get page-type-dirs (first (utils/dir-list path)) :normal))
+  (get page-type-dirs (first (uri/path->parts path)) :normal))
 
 (defn page-type->og-type
   [page-type]

@@ -1,7 +1,7 @@
 (ns lepo.author
   (:require [clojure.string :as string]
             [clojure.tools.logging :as log]
-            [lepo.utils :as utils]))
+            [lepo.uri]))
 
 (def author-path "team")
 
@@ -13,15 +13,15 @@
     (string/trim fullname)))
 
 (def authors-uri
-  (utils/uri author-path "index.html"))
+  (lepo.uri/parts->path author-path "index.html"))
 
 (defn uri
   [author-id]
-  (utils/uri-dir author-path (name author-id)))
+  (lepo.uri/parts->dir author-path (name author-id)))
 
 (defn full-uri
   [author-id]
-  (utils/uri (uri author-id) "index.html"))
+  (lepo.uri/parts->path (uri author-id) "index.html"))
 
 (defn expand-details
   [id details]
@@ -32,7 +32,7 @@
 
 (defn path->author-id
   [path]
-  (let [[main-dir author-id] (utils/dir-list path)]
+  (let [[main-dir author-id] (lepo.uri/path->parts path)]
     (when (= main-dir author-path)
       (keyword author-id))))
 

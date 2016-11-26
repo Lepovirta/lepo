@@ -19,32 +19,6 @@
       (string/replace-first leading-slashes-pattern "")
       (string/replace-first trailing-slashes-pattern "")))
 
-(defn remove-file-extension
-  [^java.lang.String s]
-  (let [index (.lastIndexOf s ".")]
-    (if (> index 0)
-      (.substring s 0 index)
-      s)))
-
-(defn- slash-separated
-  [& args]
-  (->> args
-       (map (comp trim-slashes str))
-       (remove string/blank?)
-       (string/join "/")))
-
-(defn url
-  [& args]
-  (apply slash-separated args))
-
-(defn uri
-  [& args]
-  (str "/" (apply slash-separated args)))
-
-(defn uri-dir
-  [& args]
-  (str (apply uri args) "/"))
-
 (defn reverse-compare [a b] (compare b a))
 
 (defn reverse-sort-by
@@ -55,7 +29,3 @@
   [f coll]
   (map (fn [[k v]] [k (f v)])
        coll))
-
-(defn dir-list
-  [path]
-  (remove string/blank? (string/split path #"/")))
