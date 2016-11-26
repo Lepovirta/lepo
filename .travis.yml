@@ -1,6 +1,8 @@
 language: clojure
 notifications:
   slack: lepovirta:v3PaLDZ95F0rcm3WvtDJ84YZ
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 before_deploy: lein build-site
 deploy:
   provider: s3
