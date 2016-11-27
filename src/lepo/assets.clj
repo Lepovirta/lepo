@@ -17,7 +17,7 @@
 (def static-asset-files
   ["/favicon.png"
    #"/img/.*"
-   #"/styles/.+\.css"
+   ;#"/styles/.+\.css"
    ;#"/files/.*"
    ])
 

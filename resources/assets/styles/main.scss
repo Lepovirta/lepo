@@ -56,6 +56,19 @@ $line_height:        1.618; // Golden ratio
 $tiny_font_px:     12px;
 $tiny_font_rem:    1.2rem;
 
+@font-face {
+  font-family: 'Cousine';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Cousine'), url(//fonts.gstatic.com/s/cousine/v10/DwTQUBZUm7p0EqFjmSeK4w.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Titillium Web'), local('TitilliumWeb-Regular'), url(//fonts.gstatic.com/s/titilliumweb/v4/7XUFZ5tgS-tD6QamInJTcU3KvHLhcNjEHFQzwNtdMQY.ttf) format('truetype');
+}
+
 // Mixins
 
 @mixin border-radius($radius: 5px) {
