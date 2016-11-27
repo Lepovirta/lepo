@@ -4,21 +4,21 @@ notifications:
     rooms:
     - lepovirta:v3PaLDZ95F0rcm3WvtDJ84YZ#github
     template:
-      - "Build [#%{build_number}](%{build_url}) ([%{commit}](%{compare_url})) of %{repository_slug} by %{author} %{result} in %{elapsed_time}: %{message}"
-      - "Website @ http://staging.lepo.io/%{branch}/"
-
+    - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}
+      by %{author} %{result} in %{elapsed_time}: %{message}"
+    - "Website @ http://staging.lepo.io/%{branch}/"
 after_success:
 - CLOVERAGE_VERSION=1.0.9 lein cloverage --codecov
 - bash <(curl -s https://codecov.io/bash) -f target/coverage/codecov.json
 before_deploy: sudo pip install awscli
 deploy:
 - provider: script
-  script: ./script/deploy production
+  script: "./script/deploy production"
   on:
     repo: Lepovirta/lepo
     branch: master
 - provider: script
-  script: ./script/deploy staging
+  script: "./script/deploy staging"
   on:
     repo: Lepovirta/lepo
     all_branches: true
@@ -26,3 +26,5 @@ env:
   global:
   - secure: qKnKqeiPTUBHWpFQ7+1U4+aoUpaUTfFOlLXAScG879RDsh0uo31Y1SYJayRrgo57MBj6NYKLPNcf4J0dE0GI4LBypYryE7w7QG3PGC3RTRktKXmpLIZF7zexKthOeKumUD3IS4z3AAkkOcQJWiik7UQnHWta9zivy3xq7tC9YrUL4G+WHcf14PChxhVk+T/kvJPXIqKiSiLsMPSxu3a6KcqGF0BgDxZNY2h96PY/YDdRnueR6sEppBBNgLV/Zq+OAA71CU1SOJmXTDfudKtk+G6ScAskQzN815VHW47SZXDMbGyOwUYc3fQ3mSt6NPPaNlO2lNU2dLT6Vrlr9snF/MrrPOCKzVEAR5ekkC5zajqlG2qJklTzC/R1wVgAQ+njz7j/zhyad09wwjKnCnws+0U7347obXbTNIlqXQrPXKJrrDoRaEjvAVDu3/S46dg/rkJ8JH9Hy6/V+DgMmpGd3dMrzvTO2A5gOpHG+vKDEiVRsr8HG5VUUxHVhS49lAWoV7wyJe85n+FvdX9V5G6axKrnI27v/YvWB1vs98/8AHYyQeZnxU5nfO5kAWw2V7SbahAjOogKqi380iDuQuX5ph0lO40wOSShx6+Os1ObCvx9lihg3Lvy/VAZeWCu4myyUs0e7t1DXskWkznj8Ssb3ZzvI4LkqtI1Z9Flh2RHSCI=
   - secure: BEfvhhszFWMMnSoofbCfDqd3vynJ100JaKB/EWl5CMaC0P0moYzbSeQhvSf9xQ9Nen2uSizwhMQGqZlmhl6zZ+AeSI2E6usElM/PsDbV0JvYFONE9CY3fldGVf8+aQsDAn29ZT0P5tNyyMQhEv/5wDYMbGOFzqQQGn2fhXr1GfWmiWcZCI7iI5me08GKmJjq2EbbczlOvWDVEw7UDvU7tUn7usuRin3LFqEDHHzOjkpX+ev7sPr91qjY/17oZRCWvXlIhYSxKgERNlCP/qAzxzEzRxAzBgwoctUIGlz0a2/pA2uhOHzdYoMXNaSZ25zkvFJXa5HydOet8VAXAqJURTyCo+cIeh13mRY+fVTptMHLINUuHmJ+pZveeCTXCWBw5Lk6huykGyDWKXhWj7ZYujxWcQRJffMrllf0/IfVPq6J7yMRQTS9XGxD3TbI6SZMwIsvaun59jbfD1fxE+qokMsvWEtvWMvpJQgqsxyF5UBQ5W5BDC/vB4pMGU0sDnaHN/I+U/c8rmqioUkfvTRsP3Ec525LEopOU2ZhAK0m2efg3WL71L+hJuEflAdDY2QX52CYNmajDs8I5DkpwTmrOLjIiHzozHpIEf3rDdwBDeaEErqXgrzfeaeJsXxwaILh073XL72pxTUwlTVFBnbHZGVJpEMSty9eGIQ9l+aYf/Y=
+  - secure: bxaX2+yLzYEtZJNH3kI2l9nJrjkaPBbGw6GBrJYj7x8rk50+PDQVUv97oNdX08J2Kp6RbGbWaY/dOwPF945YW9Ma95u8uRXDV5pMJCCc2dZxIXGxkoQavQhfcCNR6fGBe3ajRqpcZWrK2OuCU31adSOMqTl4TrZV9/oRCMg20h0yc5VKu3WhcqR1NCI5VwF6e689PcmBqEk60LrpGfaEi2TamZM7odMDEgeNFu8MpdqsnZeieMOge+TonQPgsenYNCAjcptblgnTUeXZ7vRFHg2uR2wZWykZE7taKZzw2kS5nnB2oPrTlQ8K8C/5vZeX2Z4iRUNm7aG6P06LqoJN03IS4hvObJXJ1eAFr/CYv6ne20ajVTsljHNmUeuPt9M01HeQyOYR4Rz1hcGN0UKAxMTWWD90WB5VRvJ9qLc/I1Y8V7qTUw7LCGoJat5E52tJXrMTCVga2WGscczh2eUmfpG4g5Y9Ok+yOgDNMShWYZggUxsUIU7FXVeoSEbVl3QUjzvYDLmhG9ueTbjpJKEfw7zQIVtv41E+JCAMIkxLrZa9L70fv4zg2KjPhJSTWHCyLV7iZcG4XN/sckmCxZxjzMpibZ1KJEU5jqAY7LvG8kLD0oNYQGbjo5lX4oGWYJHGKNjlYRYfirRq5Cp1VM3j58d3lbvkkPtH+pb8qNUaIeY=
+  - secure: a5bW7DizE7+IB0mZwKWZxiOAULc7vRrNmYo7uU3Fyo36d86eAXNgZRoaf/D68rY8PK0vB6igYXTgfvQfrzBEjXhksWR1gawkUNcCQ7s979XEYWu4M01IlfkxYKtY1ZkxZ1qRJMuJXehVp2u7jm54LUhuCLv5ccvYzLhbeliMJbBxQK5jqC7LDpZmGPL4HuxfN4944WQRLwIT3evWQP2+23A97Jw4/EYZF6vpj8GsoouKCBI3EE43NwqRLYznz/gYzF51cCSX7/VJc7+pgZohX5Bp26KHrx27fj9FiGL4zBarejienlUT9drYakYae4hjhmByQEHTR1LftuhoKKZ3vBEG1LEoa4qrereNq2k+uq0QXvq+IWwiZP/XXbS8n6WQRQFZGYk35tV1KfxdjjcfKFQMH3oYFVA/RZkgsVgh70JVZe9Y3ovrefgmqZTEC0FT/BZSkzqzcAHwuYXBXhBFrbVKu19a9qr3MMb5I6LZTnX/9Be0rXpfu0EC7/eIxJ1aCgom8wQ9ESduB3Oq6fFYxr6vFeDnNKYrnfGLRmzYrps1LqsPD3ySdgS2NyOHrXs8Z/oyfPi8jjnZD+oxBF8MeN/kL+x+n8J/tX7cqEiDiKb+S8x6ckbT6G505k0lU5sdqaZWsqLKzsoCXbFDeUcZ4nQuofbLpI/6ssp7H0S5rrw=
