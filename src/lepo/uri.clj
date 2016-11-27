@@ -9,6 +9,18 @@
       (.substring s 0 index)
       s)))
 
+(defn absolute-path?
+  [^String uri]
+  (and (.startsWith uri "/")
+       (not (.startsWith uri "//"))))
+
+(defn add-root-path
+  [root path]
+  (if (and (not (empty? root))
+           (absolute-path? path))
+    (str "/" (utils/trim-slashes root) path)
+    path))
+
 (defn- slash-separated
   [& args]
   (->> args

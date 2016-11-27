@@ -17,7 +17,9 @@
                  [ring "1.5.0"]
                  [org.clojure/data.xml "0.0.8"]
                  [clj-time "0.12.2"]
-                 [selmer "1.10.0"]]
+                 [selmer "1.10.0"]
+                 [clj-tagsoup/clj-tagsoup "0.3.0" :exclusions [org.clojure/clojure]]
+                 [hiccup "1.0.5"]]
   :target-path "target/%s"
   :plugins [[lein-ring "0.10.0"]
             [lein-cloverage "1.0.9"]]
