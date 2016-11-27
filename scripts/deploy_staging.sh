@@ -2,5 +2,5 @@
 
 set -e
 
-SCRIPT_DIR=$(basename "$0")
+SCRIPT_DIR=$(dirname "$0")
 "$SCRIPT_DIR/deploy.sh" staging "$STAGING_S3_BUCKET"
