@@ -4,7 +4,7 @@ notifications:
     rooms:
     - lepovirta:v3PaLDZ95F0rcm3WvtDJ84YZ#github
     template:
-    - 'Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}
+    - 'Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch}
       by %{author} %{result} in %{elapsed_time}: %{message}'
     - Website @ http://staging.lepo.io/%{branch}/
 after_success:
