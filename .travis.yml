@@ -13,13 +13,13 @@ after_success:
 before_deploy: sudo pip install awscli
 deploy:
 - provider: script
-  script: "./script/deploy production"
+  script: "./script/deploy.sh production"
   skip_cleanup: true
   on:
     repo: Lepovirta/lepo
     branch: master
 - provider: script
-  script: "./script/deploy staging"
+  script: "./script/deploy.sh staging"
   skip_cleanup: true
   on:
     repo: Lepovirta/lepo
