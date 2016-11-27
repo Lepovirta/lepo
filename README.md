@@ -4,26 +4,39 @@
 [![codecov](https://codecov.io/gh/Lepovirta/lepo/branch/master/graph/badge.svg)](https://codecov.io/gh/Lepovirta/lepo)
 [![Dependencies Status](https://jarkeeper.com/Lepovirta/lepo/status.svg)](https://jarkeeper.com/Lepovirta/lepo)
 
-Static website generator for [Lepo.IO](https://lepo.io/).
+Static website generator for [Lepo.IO][lepoio].
 
 ## Requirements
 
 You need to have JDK installed.
 Either Oracle's JDK or OpenJDK is fine.
-After installing the JDK, you need to install [Leiningen](http://leiningen.org/).
+After installing the JDK, you need to install [Leiningen][].
 
 ## Running a live version of the site
 
 Use Leiningen to run a live version of the site.
 Go to project root directory and run
 
-    $ lein ring server
+    $ lein live
 
 This will open the site in your browser automatically.
 The first run might take a while to get started.
 
 When you edit the source code or the resources while running the live site,
-refreshing the page will reload the latest changes automatically.
+reload the page will reload the latest changes.
+
+### Auto-reload
+
+You can use [LiveReloadX][] in combination with [LiveReload browser extensions][livereload-ext]
+to automatically reload the page after making changes to the source code.
+
+Install the browser extension of your choice and LiveReloadX using [NPM][] (use `sudo` if necessary):
+
+    $ npm install -g livereloadx
+
+Once installed, you can run both the live version of the site and LiveReloadX at the same time using `run.sh`:
+
+    $ ./run.sh
 
 ## Generating a static site
 
@@ -34,9 +47,15 @@ Go to project root directory and run
 
 This will place the site under directory `target/website/` in the project root directory.
 You can also specify a target directory where to place the contents.
-WARNING: the `build-site` command deletes EVERYTHING from the target directory before generating a new one.
+**WARNING**: the `build-site` command deletes the previously generated files from the target directory before generating the new files.
 
     $ lein build-site path/to/some/dir
+
+You can also specify the root directory for the site using an additional parameter:
+
+    $ lein build-site path/to/some/dir myroot
+
+This will generate a site that assumes all the pages are under `/myroot` path in the web server rather than root (i.e. `/`).
 
 ## Editing the site
 
@@ -100,3 +119,9 @@ your option) any later version.
 
 All the resources are licensed under
 [Creative Commons Attribution-ShareAlike 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
+
+[lepoio]: https://lepo.io/
+[leiningen]: http://leiningen.org/
+[livereloadx]: https://nitoyon.github.io/livereloadx/
+[livereload-ext]: http://livereload.com/extensions/
+[npm]: https://www.npmjs.com/

@@ -25,4 +25,5 @@
             [lein-cloverage "1.0.9"]]
   :ring {:handler lepo.live/app
          :init lepo.live/app-init}
-  :aliases {"build-site" ["run" "-m" "lepo.export/export"]})
+  :aliases {"build-site" ["run" "-m" "lepo.export/export"]
+            "live" ["ring" "server"]})

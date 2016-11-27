@@ -2,7 +2,7 @@
 
 set -e
 
-OUTPUT_DIR="target/website/"
+OUTPUT_DIR="target/website"
 
 is_installed() {
     hash "$1" 2>/dev/null
@@ -16,7 +16,7 @@ deploy_production() {
     local bucket="$1"
 
     lein build-site "$OUTPUT_DIR"
-    aws s3 sync "$OUTPUT_DIR" "s3://$bucket/"
+    aws s3 sync "$OUTPUT_DIR/" "s3://$bucket/"
 }
 
 deploy_staging() {
