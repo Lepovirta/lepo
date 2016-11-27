@@ -13,7 +13,7 @@ after_success:
 before_deploy: sudo pip install awscli
 deploy:
   provider: script
-  script: "$TRAVIS_BUILD_DIR/script/travis_deploy.sh"
+  script: "$TRAVIS_BUILD_DIR/scripts/travis_deploy.sh"
   skip_cleanup: true
   on:
     repo: Lepovirta/lepo
