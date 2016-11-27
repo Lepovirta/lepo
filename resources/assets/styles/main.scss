@@ -69,14 +69,6 @@ $tiny_font_rem:    1.2rem;
   src: local('Titillium Web'), local('TitilliumWeb-Regular'), url(//fonts.gstatic.com/s/titilliumweb/v4/7XUFZ5tgS-tD6QamInJTcU3KvHLhcNjEHFQzwNtdMQY.ttf) format('truetype');
 }
 
-// Mixins
-
-@mixin border-radius($radius: 5px) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  border-radius: $radius;
-}
-
 // Defaults
 
 html {
@@ -112,7 +104,7 @@ pre {
 code {
   background-color: $code_bg;
   color: $code_fg;
-  @include border-radius(2px);
+  border-radius: 2px;
   padding: 0 6px;
   font-family: $code_font;
 }
