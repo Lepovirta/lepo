@@ -4,7 +4,7 @@ notifications:
     rooms:
     - lepovirta:v3PaLDZ95F0rcm3WvtDJ84YZ#github
     template:
-      - "Build #%{build_number} (%{commit}) of %{repository_slug} by %{author} %{result} in %{elapsed_time}: %{message}"
+      - "Build [#%{build_number}](%{build_url}) ([%{commit}](%{compare_url})) of %{repository_slug} by %{author} %{result} in %{elapsed_time}: %{message}"
       - "Website @ http://staging.lepo.io/%{branch}/"
 
 after_success:
@@ -21,6 +21,7 @@ deploy:
   script: ./script/deploy staging
   on:
     repo: Lepovirta/lepo
+    all_branches: true
 env:
   global:
   - secure: qKnKqeiPTUBHWpFQ7+1U4+aoUpaUTfFOlLXAScG879RDsh0uo31Y1SYJayRrgo57MBj6NYKLPNcf4J0dE0GI4LBypYryE7w7QG3PGC3RTRktKXmpLIZF7zexKthOeKumUD3IS4z3AAkkOcQJWiik7UQnHWta9zivy3xq7tC9YrUL4G+WHcf14PChxhVk+T/kvJPXIqKiSiLsMPSxu3a6KcqGF0BgDxZNY2h96PY/YDdRnueR6sEppBBNgLV/Zq+OAA71CU1SOJmXTDfudKtk+G6ScAskQzN815VHW47SZXDMbGyOwUYc3fQ3mSt6NPPaNlO2lNU2dLT6Vrlr9snF/MrrPOCKzVEAR5ekkC5zajqlG2qJklTzC/R1wVgAQ+njz7j/zhyad09wwjKnCnws+0U7347obXbTNIlqXQrPXKJrrDoRaEjvAVDu3/S46dg/rkJ8JH9Hy6/V+DgMmpGd3dMrzvTO2A5gOpHG+vKDEiVRsr8HG5VUUxHVhS49lAWoV7wyJe85n+FvdX9V5G6axKrnI27v/YvWB1vs98/8AHYyQeZnxU5nfO5kAWw2V7SbahAjOogKqi380iDuQuX5ph0lO40wOSShx6+Os1ObCvx9lihg3Lvy/VAZeWCu4myyUs0e7t1DXskWkznj8Ssb3ZzvI4LkqtI1Z9Flh2RHSCI=
