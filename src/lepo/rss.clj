@@ -13,7 +13,7 @@
    [:id (str (:site-urn conf) ":post:" (:id post))]
    [:content {:type "html"} (:content post)]])
 
-(defn- feed
+(defn- atom-sexp
   [conf]
   (let [posts (site/get-posts conf)
         atom-url (str (:site-url conf) (:atom-uri conf))]
@@ -26,6 +26,7 @@
 
 (defn atom-xml
   [conf]
-  (->> (feed conf)
+  (->> conf
+       atom-sexp
        xml/sexp-as-element
        xml/emit-str))
