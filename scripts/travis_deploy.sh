@@ -10,5 +10,5 @@ cd "$TRAVIS_BUILD_DIR"
 if [ "$TRAVIS_BRANCH" = "master" ]; then
     "$DEPLOY" production "$PRODUCTION_S3_BUCKET"
 else
-    "$DEPLOY" staging "$STAGING_S3_BUCKET"
+    "$DEPLOY" staging "$STAGING_S3_BUCKET" "$TRAVIS_BRANCH"
 fi

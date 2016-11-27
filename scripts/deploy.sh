@@ -12,29 +12,34 @@ log() {
     echo "$@" 1>&2
 }
 
+current_branch() {
+    git symbolic-ref --short HEAD
+}
+
 deploy_production() {
-    local bucket="$1"
+    local bucket=$1
 
     lein build-site "$OUTPUT_DIR"
     aws s3 sync "$OUTPUT_DIR/" "s3://$bucket/" --delete
 }
 
 deploy_staging() {
-    local bucket="$1"
-    local branch_name=$(git rev-parse --abbrev-ref HEAD)
+    local bucket=$1
+    local root_dir=${2:-$(current_branch)}
 
-    if [ ! "$branch_name" ]; then
-        log "Empty branch name!"
+    if [ ! "$root_dir" ]; then
+        log "No root directory defined!"
         exit 1
     fi
 
-    lein build-site "$OUTPUT_DIR" "$branch_name"
-    aws s3 cp "$OUTPUT_DIR/$branch_name/" "s3://$bucket/$branch_name/" --recursive
+    lein build-site "$OUTPUT_DIR" "$root_dir"
+    aws s3 cp "$OUTPUT_DIR/$root_dir/" "s3://$bucket/$root_dir/" --recursive
 }
 
 main() {
-    local target="$1"
-    local bucket="$2"
+    local target=$1
+    local bucket=$2
+    local root_dir=$3
 
     if [ ! "$bucket" ]; then
         log "Bucket not specified!"
@@ -43,7 +48,7 @@ main() {
 
     case "$target" in
         "production") deploy_production "$bucket" ;;
-        "staging") deploy_staging "$bucket" ;;
+        "staging") deploy_staging "$bucket" "$root_dir" ;;
         *) log "usage: $0 production|staging"
     esac
 }
