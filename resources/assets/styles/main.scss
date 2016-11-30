@@ -101,6 +101,18 @@ pre {
   overflow-x: auto;
 }
 
+blockquote {
+  color: #7A7582;
+  font-size: 120%;
+  margin: 0;
+  font-style: italic;
+  font-weight: 200;
+  &:before {
+    content:"''";
+    padding: 0.1em;
+  }
+}
+
 code {
   background-color: $code_bg;
   color: $code_fg;
