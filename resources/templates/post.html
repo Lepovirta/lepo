@@ -26,13 +26,16 @@
     {{page.content|safe}}
   </div>
   {% if page.tags|not-empty %}
-  <div class="post-tags">
-    <b>Tags: </b>
+
+  <div id="tags">
+  <b>Tags:</b>
+  <ul class="inline inline-list">
     {% for tag in page.tags %}
-    <a href="{{tag|tag-uri}}">{{tag}}</a>
+    <li><a href="{{tag|tag-uri}}">{{tag}}</a></li>
     {% endfor %}
-  </div>
+  </ul>
   {% endif %}
+  </div>
 
   <div id="prev-next">
     {% if page.prev %}
