@@ -150,17 +150,24 @@ ul {
 
 .right { float: right !important;}
 
-  // Page setup
+// Page setup
 
 .no-bul {
   list-style: none;
+  padding: 0;
 }
 
 .inline-list {
+  list-style: none;
+  padding: 0;
   li {
     display: inline;
-    padding: 0 5px;
+    padding: 0 5px 0 0;
   }
+}
+
+.inline {
+  display: inline;
 }
 
 header#main-menu {
@@ -208,6 +215,12 @@ header#main-menu {
         margin: 0;
       }
     }
+  }
+}
+
+#tags {
+  b {
+    margin-right: 5px;
   }
 }
 
