@@ -37,12 +37,12 @@
 (defn archives->html
   [conf]
   (render "archives"
-          (assoc conf :groups (site/posts-by-year conf))))
+          (assoc conf :groups (site/post-archive conf))))
 
 (defn authors->html
   [conf]
   (render "authors"
-          (assoc conf :authors (author/sorted-authors conf))))
+          (assoc conf :authors (site/authors conf))))
 
 (defn- page-pair
   [conf page]
@@ -62,7 +62,7 @@
 
 (defn- tag-pair
   [conf tag]
-  [(page/tag-uri tag) (fn [_] (tag->html conf tag))])
+  [(site/tag-uri conf tag) (fn [_] (tag->html conf tag))])
 
 (defn tags
   [conf]
@@ -72,7 +72,7 @@
 
 (defn archive
   [conf]
-  {page/archive-uri (fn [_] (archives->html conf))})
+  {(:archive-uri conf) (fn [_] (archives->html conf))})
 
 (defn rss
   [conf]
@@ -80,5 +80,4 @@
 
 (defn authors
   [conf]
-  {author/authors-uri (fn [_] (authors->html conf))})
-
+  {(:authors-uri conf) (fn [_] (authors->html conf))})

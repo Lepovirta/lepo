@@ -1,5 +1,5 @@
 {% extends "templates/base.html" %}
-{%block subtitle %}Meet the team{% endblock %}
+{% block subtitle %}Meet the team{% endblock %}
 {% block content %}
 <div class="posts">
   <div class="page-header">
@@ -8,7 +8,7 @@
   <div class="team">
     {% for author in authors %}
     <div class="member">
-      <h3><a href="{{author.homepage}}">{{author.fullname}}</a></h3>
+      <h3><a href="{% author-uri author %}">{{author.name}}</a></h3>
     </div>
     {% endfor %}
   </div>

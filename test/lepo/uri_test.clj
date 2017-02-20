@@ -3,12 +3,24 @@
             [clojure.test :refer :all]))
 
 (deftest parts-to-uri
-  (is (= "https://lepovirta.org/foo/bar/zap"
+  (is (= "https://lepovirta.org/foo/bar/zap/"
          (uri/parts->url "https://lepovirta.org/foo/" "//bar/" "zap//")))
-  (is (= "/foo/bar/zap"
+  (is (= "https://lepovirta.org/foo/bar/zap/"
+         (uri/parts->url "https://lepovirta.org/foo" "/bar////" "/zap//")))
+  (is (= "https://lepovirta.org/bar/zap/"
+         (uri/parts->url "https://lepovirta.org" "//bar/" "zap//")))
+  (is (= "https://lepovirta.org/bar/zap"
+         (uri/parts->url "https://lepovirta.org" "//bar/" "//zap")))
+  (is (= "/foo/bar/zap/"
          (uri/parts->path "/foo/" "//bar/" "zap//")))
   (is (= "/foo/bar/zap/"
-         (uri/parts->dir "/foo/" "//bar/" "zap//"))))
+         (uri/parts->path "/foo/" "//bar/" "zap" "/")))
+  (is (= "/foo/bar/zap"
+         (uri/parts->path "/foo/" "//bar/" "zap")))
+  (is (= "/foo/bar/zap/"
+         (uri/parts->dir "/foo/" "//bar/" "zap//")))
+  (is (= "/"
+         (uri/parts->dir))))
 
 (deftest path-to-parts
   (is (= '("foo" "bar" "zap")
@@ -32,8 +44,11 @@
 
 (deftest add-root-path
   (is (= "/index.html" (uri/add-root-path "" "/index.html")))
+  (is (= "/index.html" (uri/add-root-path "/" "/index.html")))
   (is (= "/dir/index.html" (uri/add-root-path "dir" "/index.html")))
   (is (= "/dir/img/pic.jpg" (uri/add-root-path "dir" "/img/pic.jpg")))
+  (is (= "/dir/index.html" (uri/add-root-path "/dir/" "/index.html")))
+  (is (= "/dir/img/pic.jpg" (uri/add-root-path "dir/" "/img/pic.jpg")))
   (is (= "img/pic.jpg" (uri/add-root-path "dir" "img/pic.jpg")))
   (is (= "stuff.html" (uri/add-root-path "dir" "stuff.html")))
   (is (= "//example.org/index.html" (uri/add-root-path "dir" "//example.org/index.html")))

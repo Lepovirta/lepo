@@ -4,7 +4,8 @@
             [optimus.optimizations :as optimizations]
             [optimus.strategies :refer [serve-live-assets]]
             [optimus.export]
-            [optimus-sass.core]))
+            [optimus-sass.core]
+            [lepo.uri :as uri]))
 
 (def asset-dir "assets")
 
@@ -24,14 +25,22 @@
 (defn- static-file-bundle []
   (assets/load-assets asset-dir static-asset-files))
 
+(defn- assets-with-root
+  [bundle root]
+  (map (fn [assets]
+         (update-in assets [:path]
+                    (partial uri/add-root-path root)))
+       bundle))
+
 (defn normal-bundle []
   (concat
    (sass-bundle)
    (static-file-bundle)))
 
-(defn optimized-bundle []
+(defn optimized-bundle [{root :root-path}]
   (-> (normal-bundle)
-      (optimizations/minify-css-assets {})))
+      (optimizations/minify-css-assets {})
+      (assets-with-root root)))
 
 (defn server
   [app]

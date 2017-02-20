@@ -7,9 +7,9 @@
       <span>
         Author:
         {% if page.author.uri %}
-        <a href="{{page.author.uri}}">{{page.author.fullname}}</a>
+        <a href="{{page.author.uri}}">{{page.author.name}}</a>
         {% else %}
-        {{page.author.fullname}}
+        {{page.author.name}}
         {% endif %}
       </span> -
       <span>
@@ -23,7 +23,7 @@
     </p>
   </header>
   <div>
-    {{page.content|safe}}
+    {{page.content|hiccup}}
   </div>
   {% if page.tags|not-empty %}
 
@@ -31,7 +31,7 @@
   <b>Tags:</b>
   <ul class="inline inline-list">
     {% for tag in page.tags %}
-    <li><a href="{{tag|tag-uri}}">{{tag}}</a></li>
+    <li><a href="{% tag-uri tag %}">{{tag}}</a></li>
     {% endfor %}
   </ul>
   {% endif %}

@@ -1,8 +1,6 @@
 (ns lepo.export
   (:require [lepo.assets :as assets]
             [lepo.build :as build]
-            [lepo.uri :as uri]
-            [lepo.html :as html]
             [lepo.manifest :as manifest]
             [clojure.tools.logging :as log]))
 
@@ -14,32 +12,13 @@
   (concat (build/paths site)
           (assets/paths assets)))
 
-(defn- page-with-root
-  [root path page]
-  [(uri/add-root-path root path)
-   (fn [context]
-     (html/with-html (page context)
-       (partial html/add-root-path root)))])
-
-(defn- site-with-root
-  [root site]
-  (into {}
-        (map (fn [[path page]]
-               (page-with-root root path page))
-             site)))
-
-(defn- assets-with-root
-  [root bundle]
-  (map (fn [assets]
-         (update-in assets [:path] (partial uri/add-root-path root)))
-       bundle))
-
 (defn export
   ([target-dir root-dir]
    (log/info "exporting site to" target-dir)
 
-   (let [site   (site-with-root root-dir (build/build-site))
-         assets (assets-with-root root-dir (assets/optimized-bundle))
+   (let [orides {:root-path root-dir}
+         site   (build/build-site orides)
+         assets (assets/optimized-bundle orides)
          paths  (manifest-files site assets)]
 
      (log/info "emptying target directory")

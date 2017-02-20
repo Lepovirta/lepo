@@ -31,5 +31,21 @@
          (page/page-type->og-type :post))))
 
 (deftest page-id-operations
-  (is (= "posts/2016-10-10-hello-world"
+  (is (= "posts:2016-10-10-hello-world"
          (page/filename->page-id "/posts/2016-10-10-hello-world.html"))))
+
+(deftest page-filtering
+  (is (= (list {:author-id :jkpl :content "hello"}
+               {:author-id :jkpl :content "world"})
+         (page/filter-by-author
+          :jkpl
+          [{:author-id :jkpl :content "hello"}
+           {:author-id :someone :content "cool"}
+           {:author-id :jkpl :content "world"}])))
+  (is (= (list {:content "web"    :tags ["scala" "play" "shapeless"]}
+               {:content "types"  :tags ["scala" "shapeless" "scalaz"]})
+         (page/filter-by-tag
+          "scala"
+          [{:content "web"    :tags ["scala" "play" "shapeless"]}
+           {:content "devops" :tags ["python" "aws"]}
+           {:content "types"  :tags ["scala" "shapeless" "scalaz"]}]))))

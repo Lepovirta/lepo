@@ -1,13 +1,12 @@
 {% extends "templates/base.html" %}
 {% block content %}
 <div class="custom-page">
-  {{page.content|safe}}
+  {{page.content|hiccup}}
 
   <h3>Projects</h3>
 
-  {% for project-row in project-rows %}
   <div id="projects">
-    {% for project in project-row %}
+    {% for project in projects %}
     <div class="project">
       <p class="title">
         <a href="{{project.github-url}}">{{project.name}}</a>
@@ -16,7 +15,6 @@
     </div>
     {% endfor %}
   </div>
-  {% endfor %}
 
   <h3>Recent posts</h3>
   <ul class="no-bul">
@@ -25,7 +23,7 @@
     {% endfor %}
   </ul>
   <ul class="inline-list">
-    <li><a href="/posts/">Archive</a></li>
+    <li><a href="{{archive-uri}}">Archive</a></li>
     <li><a href="{{atom-uri}}">RSS</a></li>
   </ul>
 </div>
