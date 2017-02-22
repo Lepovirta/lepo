@@ -1,7 +1,6 @@
-(ns lepo.filters
-  (:require [lepo.page :as page]
-            [lepo.uri :as uri]
-            [lepo.site :as site]
+(ns lepo.selmer
+  (:require [lepo.uri]
+            [lepo.site]
             [hiccup.core]
             [selmer.filters :refer [add-filter!]]
             [selmer.parser :refer [add-tag!]]))
@@ -19,14 +18,14 @@
 
 (defn- absolute
   [args context]
-  (uri/add-root-path (:root-path context)
-                     (first args)))
+  (lepo.uri/add-root-path (:root-path context)
+                          (first args)))
 
 (defn- tag-uri
   [args context]
   (let [key (keyword (first args))
         tag (key context)]
-    (site/tag-uri context tag)))
+    (lepo.site/tag-uri context tag)))
 
 (defn- author-uri
   [args context]

@@ -1,16 +1,15 @@
 (ns lepo.live
-  (:require [stasis.core :as stasis]
-            [lepo.render :as render]
-            [lepo.filters :as filters]
-            [lepo.build :as build]
-            [lepo.assets :as assets]
+  (:require [lepo.selmer]
+            [lepo.build]
+            [lepo.assets]
+            [stasis.core :as stasis]
             [ring.middleware.content-type :refer [wrap-content-type]]))
 
 (defn app-init []
-  (filters/init!)
+  (lepo.selmer/init!)
   (selmer.parser/cache-off!))
 
 (def app
-  (-> (stasis/serve-pages (partial build/build-site {}))
-      assets/server
+  (-> (stasis/serve-pages (partial lepo.build/build-site {}))
+      lepo.assets/server
       wrap-content-type))

@@ -1,8 +1,8 @@
 (ns lepo.build
   (:require [lepo.render :as render]
-            [lepo.filters :as filters]
-            [lepo.site :as site]
-            [lepo.resources :as resources]
+            [lepo.resources]
+            [lepo.site]
+            [lepo.selmer]
             [lepo.parse :refer [parse-pages]]
             [stasis.core :as stasis]))
 
@@ -17,19 +17,19 @@
 
 (defn- load-config
   [overrides]
-  (merge (resources/load-config) overrides))
+  (merge (lepo.resources/load-config) overrides))
 
 (defn build-site
   [overrides]
   (let [conf (load-config overrides)]
-    (->> (resources/raw-page-source)
+    (->> (lepo.resources/raw-page-source)
          parse-pages
-         (site/build conf)
+         (lepo.site/build conf)
          merge-sources)))
 
 (defn save!
   [site target-dir]
-  (filters/init!)
+  (lepo.selmer/init!)
   (stasis/export-pages site target-dir))
 
 (defn paths [site] (map first site))
