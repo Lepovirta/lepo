@@ -27,12 +27,12 @@
 ---
 
 <p>so hot</p>"
-    "{:description \"my homepage\"}
+   "{:description \"my homepage\"}
 
 ---
 
 <p>Hi, I'm John Smith!</p>"
-    "
+   "
 {:title \"ZOMBOCOM\"
  :description \"Welcome to ZOMBOCOM\"
  :template \"zombo\"}

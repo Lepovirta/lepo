@@ -23,11 +23,11 @@
 (defn- process-pages
   [conf pages]
   (as-> pages $
-    (lepo.augments.page/augment conf $)
-    (update-in $ [:post]
-               (partial lepo.augments.post/augment conf))
-    (assoc $ :author
-           (lepo.augments.author/augment-author-pages conf $))))
+        (lepo.augments.page/augment conf $)
+        (update-in $ [:post]
+                   (partial lepo.augments.post/augment conf))
+        (assoc $ :author
+               (lepo.augments.author/augment-author-pages conf $))))
 
 (defn- get-posts
   [conf]

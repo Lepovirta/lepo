@@ -20,7 +20,7 @@
    #"/img/.*"
    ;#"/styles/.+\.css"
    ;#"/files/.*"
-   ])
+])
 
 (defn- static-file-bundle []
   (assets/load-assets asset-dir static-asset-files))

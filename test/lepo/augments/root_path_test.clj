@@ -42,8 +42,8 @@
    {:root-path "root"
     :v ["/foobar" {:uri "foobar"}]}
    {:root-path "foobar"
-      :nodes [{:a "/asdf"
-               :b (list [:uri "/yo"])}]}])
+    :nodes [{:a "/asdf"
+             :b (list [:uri "/yo"])}]}])
 
 (def trees-with-root
   [{:root-path "root"
@@ -54,8 +54,8 @@
    {:root-path "root"
     :v ["/foobar" {:uri "foobar"}]}
    {:root-path "foobar"
-      :nodes [{:a "/asdf"
-               :b (list [:uri "/foobar/yo"])}]}])
+    :nodes [{:a "/asdf"
+             :b (list [:uri "/foobar/yo"])}]}])
 
 (defn add-root-path-to-html
   [root]
