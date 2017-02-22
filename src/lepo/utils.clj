@@ -11,13 +11,21 @@
 
 (defn str->date
   [s]
-  (tf/parse date-formatter (re-find date-pattern s)))
+  (some->> s
+           (re-find date-pattern)
+           (tf/parse date-formatter)))
+
+(defn remove-leading-slashes
+  [s]
+  (string/replace-first s leading-slashes-pattern ""))
+
+(defn remove-trailing-slashes
+  [s]
+  (string/replace-first s trailing-slashes-pattern ""))
 
 (defn trim-slashes
   [s]
-  (-> s
-      (string/replace-first leading-slashes-pattern "")
-      (string/replace-first trailing-slashes-pattern "")))
+  (-> s remove-leading-slashes remove-trailing-slashes))
 
 (defn reverse-compare [a b] (compare b a))
 

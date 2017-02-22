@@ -3,7 +3,6 @@
   :site-description "We are a group of developers who enjoy making open source software."
   :site-url         "https://lepo.io/"
   :site-urn         "urn:lepo-io:feed"
-  :atom-uri         "/atom.xml"
   :github           "https://github.com/Lepovirta"
   :projects [
     {
@@ -20,23 +19,19 @@
 
   :authors {
     :jkpl {
-      :firstname   "Jaakko"
-      :lastname    "Pallari"
-      :homepage    "/team/jkpl/"
+      :name        "Jaakko Pallari"
+      :homepage    "https://lepo.io/team/jkpl/"
     }
     :esajuhana {
-      :firstname   "Esa"
-      :lastname    "Juhana"
+      :name        "Esa Juhana"
       :homepage    "http://www.esajuhana.com/"
     }
     :matson {
-      :firstname   "Matias"
-      :lastname    "Keveri"
+      :name        "Matias Keveri"
       :homepage    "http://matias.keveri.fi/"
     }
     :visav {
-      :firstname   "Visa"
-      :lastname    "Varjus"
+      :name        "Visa Varjus"
       :homepage    "https://github.com/visav"
     }
   }

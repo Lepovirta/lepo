@@ -11,6 +11,6 @@
   (selmer.parser/cache-off!))
 
 (def app
-  (-> (stasis/serve-pages build/build-site)
-      assets/server 
+  (-> (stasis/serve-pages (partial build/build-site {}))
+      assets/server
       wrap-content-type))

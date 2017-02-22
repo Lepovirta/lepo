@@ -15,10 +15,15 @@
           :authors (render/authors conf)
           :rss     (render/rss conf))))
 
-(defn build-site []
-  (let [conf (resources/load-config)]
+(defn- load-config
+  [overrides]
+  (merge (resources/load-config) overrides))
+
+(defn build-site
+  [overrides]
+  (let [conf (load-config overrides)]
     (->> (resources/raw-page-source)
-         (parse-pages)
+         parse-pages
          (site/build conf)
          merge-sources)))
 

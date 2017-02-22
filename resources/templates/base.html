@@ -11,15 +11,15 @@
   {% endfor %}
   <meta property="og:site_name" content="{{site-title}}" />
   <meta property="og:see_also" content="{{site-url}}" />
-  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" type="image/png" href="{% absolute /favicon.png %}" />
   <link rel="alternate" type="application/atom+xml" title="posts" href="{{atom-uri}}" />
   {% style "/styles/main.css" %}
 </head>
 <body>
   <header id="main-menu">
-    <img id="logo" src="/img/lepologo.svg" alt="Logo of Lepo.IO">
+    <img id="logo" src="{% absolute /img/lepologo.svg %}" alt="Logo of Lepo.IO">
     <h1 id="top" class="title">
-      <a href="/">{{site-title}}</a>
+      <a href="{{root-path}}">{{site-title}}</a>
     </h1>
   </header>
   <div id="wrapper">

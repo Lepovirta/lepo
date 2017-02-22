@@ -5,13 +5,6 @@
 
 (def author-path "team")
 
-(defn fullname
-  [details]
-  (let [firstname (:firstname details)
-        lastname  (:lastname details)
-        fullname  (str firstname " " lastname)]
-    (string/trim fullname)))
-
 (def authors-uri
   (lepo.uri/parts->path author-path "index.html"))
 
@@ -24,9 +17,8 @@
   (lepo.uri/parts->path (uri author-id) "index.html"))
 
 (defn expand-details
-  [id details]
-  (assoc details
-         :fullname (fullname details)
+  [id author]
+  (assoc author
          :uri      (uri id)
          :full-uri (full-uri id)))
 
@@ -37,7 +29,5 @@
       (keyword author-id))))
 
 (defn sorted-authors
-  [conf]
-  (->> (:authors conf)
-       (map second)
-       (sort-by :fullname)))
+  [authors]
+  (->> authors (sort-by :name)))
