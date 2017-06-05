@@ -1,0 +1,135 @@
+{:title "Error handling pitfalls in Scala"
+ :author-id :jkpl
+ :description "In this article, I'll demonstrate how you can fall into a pit with by accidentally hiding the errors in Scala's standard error types."
+ :tags  ["scala"]}
+
+---
+
+<p>There are multiple strategies for error handling in Scala.</p>
+<p>Errors can be represented as <a href="http://alvinalexander.com/scala/scala-try-catch-finally-syntax-examples-exceptions-wildcard">exceptions</a>, which is a common way of dealing with errors in languages such as Java. However, exceptions are invisible to the type system, which can make them challenging to deal with. It's easy to leave out the necessary error handling, which can result in unfortunate runtime errors.</p>
+<p>In Scala, it is usually recommended to represent errors as part of the return type. Scala's standard library types such as <a href="http://danielwestheide.com/blog/2013/01/02/the-neophytes-guide-to-scala-part-7-the-either-type.html">Either</a> and <a href="http://danielwestheide.com/blog/2012/12/26/the-neophytes-guide-to-scala-part-6-error-handling-with-try.html">Try</a> can be used for capturing errors in synchronous operations, while <a href="http://danielwestheide.com/blog/2013/01/09/the-neophytes-guide-to-scala-part-8-welcome-to-the-future.html">Future</a> can be used for representing asynchronous operations. Furthermore, Scala programmers can also represent different outcomes as a custom type using <a href="http://alvinalexander.com/scala/benefits-of-sealed-traits-in-scala-java-enums">sealed trait</a> capabilities.</p>
+<p>Return type based error handling has its own problems. In this article, I'll demonstrate how you can fall into a pit with types like <code>Either</code> and <code>Try</code> by accidentally hiding the error scenarios. To avoid the pit, I'll then describe how alternative constructs and code linting can mitigate the presented problems.</p>
+<p>This blog post was first published in <a href="http://www.cakesolutions.net/teamblogs/error-handling-pitfalls-in-scala">Cake Solutions's tech blog</a>.</p>
+<h2 id="ways-to-accidentally-hide-errors">Ways to accidentally hide errors</h2>
+<p>Unless you're using custom types for representing different outcomes, the return type you use for capturing errors most likely comes with methods for composition: <code>map</code>, <code>flatMap</code>, and <code>withFilter</code>. With these methods in place, we can leverage Scala's for-comprehensions when building programs which can produce errors.</p>
+<pre class="scala"><code>// Example #1
+def foo(i: Int): Try[String] = ???
+
+def bar(): Try[String] =
+  for { // equivalent to foo(1).flatMap(x =&gt; foo(2).map(y =&gt; x + y))
+    x &lt;- foo(1)
+    y &lt;- foo(2)
+  } yield y + y</code></pre>
+<p>In the example above (example #1), <code>foo</code> can produce an error, which is represented in the <code>Try</code> return type. When we compose the operations together using <code>for</code> / <code>flatMap</code>, we're describing how the program should work in the happy path scenario. If at any point an error value is met, the functions following it are not executed, and the error value is escalated as the return value. Using these composition methods, we can easily create programs that have flows similar to more traditional exception based error handling, and at the same time we can have the errors represented in the return type. This sequential composition style is called <a href="https://darrenjw.wordpress.com/2016/04/15/first-steps-with-monads-in-scala/">the Monadic style</a>.</p>
+<p>As we can see from the example program, the composition is a manual step that the developer has to fulfil. What would happen if parts of our program don't follow the composition flow?</p>
+<pre class="scala"><code>// Example #2
+def foo(i: Int): Try[String] = ???
+
+def bar(): Try[String] = {
+  val xf = foo(1)
+  val yf = foo(2)
+  val zf = foo(3) // unused
+
+  for {
+    x &lt;- xf
+    y &lt;- yf
+  } yield x + y
+}</code></pre>
+<p>The example above (example #2) is very similar to example #1. Both examples compose the same results, and the happy path scenario works the same.</p>
+<p>There are a couple of differences how these examples work at runtime. In example #2, the result of <code>foo(3)</code> is assigned the name <code>zf</code>, but its result is never used. Because it's never used, it will also not affect the result of <code>bar</code> at all. Therefore, any error that <code>foo(3)</code> might produce will be completely silent.</p>
+<p>Another property of example #2 is that we've made multiple calls of <code>foo</code>, but we'll only capture at most one of the errors that might occur when we run the program. This is because the composition will always end when it meets the first error. For example, if both <code>xf</code> and <code>yf</code> contain an error, then the result of <code>bar</code> will be the same as <code>xf</code>.</p>
+<p>In many cases, capturing these error cases is vital. If <code>foo</code> has no side effects (e.g. <code>foo</code> is for computing the square root of a number), the function call simply wastes some computing resources for the duration of the function call. However, if <code>foo</code> does have side effects (e.g. <code>foo</code> writes the input to the database), we most likely want to at least capture the error it might have produced rather than let it silently fail in the background.</p>
+<p>What makes these properties problematic is how easy it is to get yourself in trouble. Slightly altering the placement in which these function calls are made creates subtle differences in how (or whether) the error cases are handled. Often we'd like both of the styles presented in these examples to work the same at runtime.</p>
+<p>These properties are not limited to just <code>Try</code>. Both <code>Either</code> and <code>Future</code> share the same properties.</p>
+<p>It's also important to highlight that you can also get yourself into trouble by using some of the methods in these types. For example, <code>Try</code>, <code>Either</code>, and <code>Future</code> all have the method <a href="http://www.scala-lang.org/api/current/scala/util/Try.html#foreach%5BU%5D(f:T=%3EU):Unit">foreach</a>, which will execute the given function only for successful results, but it will completely ignore the failure scenario:</p>
+<pre class="scala"><code>def foo(i: Int): Try[String] = ???
+
+def bar() = { // the type is Unit
+  val x = foo(2)
+  x.foreach(println(_))
+}</code></pre>
+<h2 id="in-search-of-an-alternative-solution">In search of an alternative solution</h2>
+<p>The problem we're seeing with <code>Either</code>, <code>Try</code>, and <code>Future</code> is that all of them are evaluated eagerly, and at the same time they can cause side effects.</p>
+<p>These properties seem problematic together. What if our computations had only one of these properties? If the computation can have side effects, but it's not evaluated until examined, we could build our computations so that the side effects will not get executed until there's an error handling in place. On the other hand, if the computation can't have side effects, the worst you do cause is waste some CPU cycles and memory.</p>
+<p>Let's explore these combinations, and see what solutions we can find.</p>
+<h3 id="side-effects-with-lazy-evaluation">Side effects with lazy evaluation</h3>
+<p>Scala's <code>Try</code> values are evaluated eagerly. Let's create our own version of <code>Try</code> that is lazy evaluated. When the value is examined, it produces a Scala <code>Try</code> as a result.</p>
+<pre class="scala"><code>import scala.util.{Try, Success, Failure}
+
+// WARNING: This is only a demo!
+final class Attempt[A](proc: =&gt; A) {
+
+  def evaluate(): Try[A] = Try(proc)
+
+  def evaluateUnsafe(): A = proc
+
+  def map[B](f: A =&gt; B): Attempt[B] =
+    new Attempt[B](f(proc))
+
+  def flatMap[B](f: A =&gt; Attempt[B]): Attempt[B] =
+    new Attempt[B](f(proc).evaluateUnsafe())
+
+  def withFilter(f: A =&gt; Boolean): Attempt[A] =
+    new Attempt[A]({
+      val r = proc
+      if (f(r)) r
+      else throw new NoSuchElementException(&quot;filter == false&quot;)
+    })
+}
+
+object Attempt {
+  def apply[A](proc: =&gt; A): Attempt[A] = new Attempt(proc)
+}</code></pre>
+<p>In the code listing above, we've defined our own version of <code>Try</code> called <code>Attempt</code>. <code>Attempt</code> is given a procedure as a parameter, which can either produce a value or throw an exception when evaluated. The procedure can be evaluated in two ways: Evaluating it safely will produce the result of the procedure wrapped in a standard Scala <code>Try</code>, while evaluating it unsafely will escalate any errors as exceptions. In order to make <code>Attempt</code> composable, it also has definitions for the <code>map</code>, <code>flatMap</code>, and <code>withFilter</code> methods.</p>
+<p>Let's see <code>Attempt</code> in action. We'll define a program with <code>Attempt</code> which performs side effects, and verify that only the side effects part of the flow will get executed.</p>
+<pre class="scala"><code>def attemptPrint(s: String): Attempt[Unit] = Attempt(println(s))
+
+def attemptOkExample: Attempt[Int] = {
+  val _ = attemptPrint(&quot;I won&#39;t be printed&quot;)
+  for {
+    x &lt;- Attempt(1)
+    _ &lt;- attemptPrint(&quot;x = &quot; + x)
+    y &lt;- Attempt(2)
+    _ &lt;- attemptPrint(&quot;y = &quot; + y)
+  } yield x + y
+}
+
+attemptOkExample.evaluate() match {
+  case Success(i) =&gt; println(&quot;Got: &quot; + i)
+  case Failure(ex) =&gt; println(&quot;Failed: &quot; + ex.getMessage)
+}</code></pre>
+<p>In the example above, the flow of our program prints two numbers and sums them. As part of the same function call, and outside of the flow, there's another print command wrapped in an <code>Attempt</code>. Since <code>Attempt</code> is lazy evaluated, the rogue print command will not be executed at all. We can verify this from the program output:</p>
+<pre><code>x = 1
+y = 2
+Got: 3</code></pre>
+<p>We could create a similar solution for Scala <code>Future</code>, which would provide us lazy evaluated computations in an asynchronous context. Instead of implementing everything ourselves, we can leverage existing solutions from third party libraries:</p>
+<ul>
+<li><a href="https://github.com/scalaz/scalaz">ScalaZ</a> provides <a href="http://timperrett.com/2014/07/20/scalaz-task-the-missing-documentation/">Task</a></li>
+<li><a href="https://github.com/typelevel/cats">Cats</a> provides <a href="https://github.com/typelevel/cats-effect">IO</a></li>
+<li><a href="https://monix.io/">Monix</a> provides <a href="https://monix.io/docs/2x/eval/task.html">Task</a></li>
+</ul>
+<p>All three of them are lazy rather than eager. ScalaZ Task and Cats IO are designed for both synchronous and asynchronous computations, while Monix Task is designed for asynchronous computations only.</p>
+<h3 id="no-side-effects-with-eager-evaluation">No side effects with eager evaluation</h3>
+<p>Scala programs can have side effects at any point of the code. The programmer can rigorously follow the <a href="http://alvinalexander.com/scala/scala-idiom-methods-functions-no-side-effects">idiom</a> of limiting the use of side effects, but there's not much the compiler can do to help. However, if one decides to follow this idiom, Scala's standard library types will be enough to avoid the problems presented earlier. The limitation here is of course that we now have no way to express effects within our computations.</p>
+<h3 id="no-side-effects-with-lazy-evaluation">No side effects with lazy evaluation</h3>
+<p>Effects are incredibly useful, and usually we'd like to have at least some way to express them in our programs. However, combining eager evaluation with effects leads us back to the problem we presented earlier. Can we build a system where effects are expressed as pure computations instead?</p>
+<p>Earlier, we explored a few solutions for computations which are lazy and have side effects. What if we were to eliminate both side effects and eager evaluation?</p>
+<p>In this system, all the effects would be represented as values as opposed to side effects. These values can then be composed together to create programs. When we are ready to execute our program, we run it through an interpreter that translates our values into actual side effects.</p>
+<p>One way to implement this kind of a system is to use <a href="http://typelevel.org/cats/datatypes/freemonad.html">Free monads</a>. The topic of Free monads is large enough to require an article of its own. For more in-depth information, I recommend reading <a href="http://perevillega.com/understanding-free-monads">Pere Villega's overview on Free monads</a>.</p>
+<h2 id="im-stuck-with-eithertryfuture-what-do-i-do">&quot;I'm stuck with Either/Try/Future! What do I do?&quot;</h2>
+<p>Not every project can switch to alternative computation types such as <code>Task</code>. Even fewer projects can start using Free monads. The project might either be heavily tied to existing Scala types or it simply cannot afford to include another dependency.</p>
+<p>Whatever the reason may be, it'd be still nice if we could detect some of the problems presented in this article. Having knowledge of the problem combined with a proper code review process helps, but it'd be even better to have something we could automate.</p>
+<p>The Scala compiler provides a few helpful compiler flags which can help detect potential problems, by producing warnings during compilation:</p>
+<ul>
+<li><code>-Ywarn-dead-code</code> helps you detect any unreachable code.</li>
+<li><code>-Ywarn-unused:locals</code> (2.12.x) and <code>-Ywarn-unused</code> (2.11.x) help detect unused values in functions.</li>
+<li><code>-Ywarn-value-discard</code> helps detect when non-Unit results are unused. If you really don't need the value, you can explicitly assign it to <code>_</code> to make it clear you want to discard the value. Keep in mind though that you cannot assign multiple values to <code>_</code> due to <a href="https://github.com/scala/bug/issues/7691">SI-7691</a>. To get around this issue, you can create a function or a method which discards the value for you.</li>
+<li><code>-Xfatal-warnings</code> turns all the warnings into compile errors. This way you can enforce conformance to these rules at build time.</li>
+</ul>
+<p>The flags will not detect all the problems on their own. For example, there's no flag for detecting when you compose two already executed results. However, they can still be useful for highlighting some of the common problems.</p>
+<p>If you want to find more information on how compiler flags can help you detect problems, I recommend checking out Rob Norris' Scala flags recommendations for Scala versions <a href="https://tpolecat.github.io/2017/04/25/scalac-flags.html">2.12</a> and <a href="https://tpolecat.github.io/2014/04/11/scalac-flags.html">2.11</a>. In addition to the compiler flags, you can use tools such as <a href="http://www.wartremover.org/">WartRemover</a> for finding additional code lint.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>In this article, I've explored some of the pitfalls of Scala's standard library types for error handling. I've presented alternative constructs that avoid the presented problems as well as utilities for detecting them.</p>
+<p>While there are definitely problem areas in Scala's standard library types, they're still incredibly useful for many situations. Compiler flags and linting can help detect problems in many cases, but larger codebases will benefit from alternative constructs that avoid the problem completely.</p>
+<p>One area I didn't explore in this article was error handling in types that don't follow the Monadic style of composition. Types such as <a href="https://www.47deg.com/blog/fp-for-the-average-joe-part-1-scalaz-validation/">ScalaZ Validation</a> and <a href="https://sihil.net/cats-validated.html">Cats Validated</a> can be composed in <a href="https://softwaremill.com/applicative-functor/">the Applicative style</a>, which provides you capabilities for aggregating errors.</p>
+<p>As always, I've published the code examples in a <a href="https://gist.github.com/jkpl/a91d4b93c452efc20f2c866ac3a2c577">GitHub Gist</a>. Thanks for reading!</p>
