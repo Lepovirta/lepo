@@ -19,7 +19,7 @@ def bar(): Try[String] =
   for { // equivalent to foo(1).flatMap(x =&gt; foo(2).map(y =&gt; x + y))
     x &lt;- foo(1)
     y &lt;- foo(2)
-  } yield y + y</code></pre>
+  } yield x + y</code></pre>
 <p>In the example above (example #1), <code>foo</code> can produce an error, which is represented in the <code>Try</code> return type. When we compose the operations together using <code>for</code> / <code>flatMap</code>, we're describing how the program should work in the happy path scenario. If at any point an error value is met, the functions following it are not executed, and the error value is escalated as the return value. Using these composition methods, we can easily create programs that have flows similar to more traditional exception based error handling, and at the same time we can have the errors represented in the return type. This sequential composition style is called <a href="https://darrenjw.wordpress.com/2016/04/15/first-steps-with-monads-in-scala/">the Monadic style</a>.</p>
 <p>As we can see from the example program, the composition is a manual step that the developer has to fulfil. What would happen if parts of our program don't follow the composition flow?</p>
 <pre class="scala"><code>// Example #2
