@@ -27,4 +27,4 @@
   :ring {:handler lepo.live/app
          :init lepo.live/app-init}
   :aliases {"build-site" ["run" "-m" "lepo.export/export"]
-            "live" ["ring" "server"]})
+            "live" ["ring" "server-headless"]})
