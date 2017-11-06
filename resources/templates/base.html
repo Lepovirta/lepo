@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8"/>
   <title>{{site-title}} - {% block subtitle %}{{page.title}}{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#44118d"/>
   <meta name="description" content="{{page.description}}" />
   <meta property="og:image" content="{{site-url}}img/lepologo.png" />
   {% for key,value in page.og %}
@@ -16,17 +17,14 @@
   {% style "/styles/main.css" %}
 </head>
 <body>
-  <header id="main-menu">
-    <img id="logo" src="{% absolute /img/lepologo.svg %}" alt="Logo of Lepo.IO">
-    <h1 id="top" class="title">
-      <a href="{{root-path}}">{{site-title}}</a>
-    </h1>
-  </header>
-  <div id="wrapper">
-    <div class="content">
+  <div id="top">
+    <a href="{{root-path}}">{{site-title}}</a>
+  </div>
+  <div class="wrapper">
+    <main role="main">
       {% block content %}
       {% endblock %}
-    </div>
+    </main>
     <footer>
       <div class="left">
         <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>

@@ -1,53 +1,42 @@
 {% extends "templates/base.html" %}
 {% block content %}
-<div class="post">
-  <header class="post-header">
-    <h2>{{page.title}}</h2>
-    <p class="post-meta">
-      <span>
-        Author:
-        {% if page.author.uri %}
-        <a href="{{page.author.uri}}">{{page.author.name}}</a>
-        {% else %}
-        {{page.author.name}}
-        {% endif %}
-      </span> -
-      <span>
-        Posted: {{page.date|date:"yyyy-MM-dd"}}
-      </span>
-      {% if page.edited %} -
-      <span>
-        Last edited: {{page.edited|date:"yyyy-MM-dd"}}
-      </span>
-      {% endif %}
-    </p>
-  </header>
+<header><h1>{{page.title}}</h1></header>
+<div>
+  {{page.content|hiccup}}
+</div>
+<div class="post-meta">
+  <b>Author:</b>
+  {% if page.author.uri %}<a href="{{page.author.uri}}">{{page.author.name}}</a>
+  {% else %}{{page.author.name}}{% endif %}
   <div>
-    {{page.content|hiccup}}
+    <b>Posted:</b> <time>{{page.date|date:"yyyy-MM-dd"}}</time>
   </div>
-  {% if page.tags|not-empty %}
-
-  <div id="tags">
-  <b>Tags:</b>
-  <ul class="inline inline-list">
-    {% for tag in page.tags %}
-    <li><a href="{% tag-uri tag %}">{{tag}}</a></li>
-    {% endfor %}
-  </ul>
+  {% if page.edited %}
+  <div>
+    <b>Last edited:</b> <time>{{page.edited|date:"yyyy-MM-dd"}}</time>
+  </div>
   {% endif %}
+  {% if page.tags|not-empty %}
+  <div>
+    <b>Tags:</b>
+    <ul class="inline-list">
+      {% for tag in page.tags %}
+      <li><a href="{% tag-uri tag %}">{{tag}}</a></li>
+      {% endfor %}
+    </ul>
   </div>
-
-  <div id="prev-next">
-    {% if page.prev %}
-    <a href="{{page.prev.uri}}">
-      &laquo; {{page.prev.title}} ({{page.prev.date|date:"yy/MM"}})
-    </a>
-    {% endif %}
-    {% if page.next %}
-    <a href="{{page.next.uri}}">
-      {{page.next.title}} ({{page.next.date|date:"yy/MM"}}) &raquo;
-    </a>
-    {% endif %}
-  </div>
+  {% endif %}
+</div>
+<div id="prev-next">
+  {% if page.prev %}
+  <a href="{{page.prev.uri}}">
+    &laquo; {{page.prev.title}} ({{page.prev.date|date:"yy/MM"}})
+  </a>
+  {% endif %}
+  {% if page.next %}
+  <a href="{{page.next.uri}}">
+    {{page.next.title}} ({{page.next.date|date:"yy/MM"}}) &raquo;
+  </a>
+  {% endif %}
 </div>
 {% endblock %}

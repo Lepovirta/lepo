@@ -1,19 +1,15 @@
 {% extends "templates/base.html" %}
 {%block subtitle %}Archive{% endblock %}
 {% block content %}
-<div class="posts">
-  <div class="page-header">
-    <h2>Archive</h2>
-  </div>
-  {% for group in groups %}
-  <h4>{{group.group}}</h4>
-  <ul>
-    {% for post in group.posts %}
-    <li>
-      {{post.date|date:"MMM dd"}} &raquo; <a href="{{post.uri}}">{{post.title}}</a>
-    </li>
-    {% endfor %}
-  </ul>
+<header><h1>Archive</h1></header>
+{% for group in groups %}
+<h2>{{group.group}}</h2>
+<ul class="no-bul">
+  {% for post in group.posts %}
+  <li>
+    {{post.date|date:"MMM dd"}} &raquo; <a href="{{post.uri}}">{{post.title}}</a>
+  </li>
   {% endfor %}
-</div>
+</ul>
+{% endfor %}
 {% endblock %}

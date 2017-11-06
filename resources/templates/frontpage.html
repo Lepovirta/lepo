@@ -1,30 +1,26 @@
 {% extends "templates/base.html" %}
 {% block content %}
-<div class="custom-page">
-  {{page.content|hiccup}}
+{{page.content|hiccup}}
 
-  <h3>Projects</h3>
+<h2>Meet the team</h2>
 
-  <div id="projects">
-    {% for project in projects %}
-    <div class="project">
-      <p class="title">
-        <a href="{{project.github-url}}">{{project.name}}</a>
-      </p>
-      <p>{{project.description|safe}}</p>
-    </div>
-    {% endfor %}
-  </div>
+We are the Lepo members.
 
-  <h3>Recent posts</h3>
-  <ul class="no-bul">
-    {% for post in latest-posts %}
-    <li>{{post.date|date:"yyy-MM-dd"}} - <a href="{{post.uri}}">{{post.title}}</a></li>
-    {% endfor %}
-  </ul>
-  <ul class="inline-list">
-    <li><a href="{{archive-uri}}">Archive</a></li>
-    <li><a href="{{atom-uri}}">RSS</a></li>
-  </ul>
-</div>
+<ul>
+  {% for _, author in authors %}
+  <li><a href="{% author-uri author %}">{{author.name}}</a></li>
+  {% endfor %}
+</ul>
+
+
+<h2>Recent posts</h2>
+<ul class="no-bul">
+  {% for post in latest-posts %}
+  <li>{{post.date|date:"yyy-MM-dd"}} - <a href="{{post.uri}}">{{post.title}}</a></li>
+  {% endfor %}
+</ul>
+
+<p>
+  Check out the <a href="{{archive-uri}}">Archive</a> for more posts. Subscribe to <a href="{{atom-uri}}">RSS feed</a> for the latest posts.
+</p>
 {% endblock %}
