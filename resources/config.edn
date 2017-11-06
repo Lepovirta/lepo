@@ -1,22 +1,9 @@
 {
-  :site-title       "Lepo.IO"
+  :site-title       "Lepo"
   :site-description "We are a group of developers who enjoy making open source software."
   :site-url         "https://lepo.io/"
-  :site-urn         "urn:lepo-io:feed"
+  :site-urn         "urn:lepo:feed"
   :github           "https://github.com/Lepovirta"
-  :projects [
-    {
-      :name        "Kuvia"
-      :github-id   "kuvia"
-      :description "<b>Kuvia</b> is a simple image gallery for static web sites. Give it a list of image files, and you've got an image gallery that can be hosted in any web host."
-    }
-    {
-      :name        "Yet Another Hints Extension (YAHE)"
-      :github-id   "yahe"
-      :description "<b>Yet Another Hints Extension</b> is an extension for Chrome that allows users to activate links without touching the mouse."
-    }
-  ]
-
   :authors {
     :jkpl {
       :name        "Jaakko Pallari"

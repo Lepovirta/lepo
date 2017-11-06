@@ -1,9 +1,9 @@
 {% extends "templates/base.html" %}
 {% block content %}
-<h2>{{page.title}}</h2>
+<header><h1>{{page.title}}</h1></header>
 {{page.content|hiccup}}
 {% if page.author-posts %}
-<h3>Posts</h3>
+<h2>Posts</h2>
 <ul class="no-bul">
   {% for post in page.author-posts %}
   <li>{{post.date|date:"yyy-MM-dd"}} &raquo; <a href="{{post.uri}}">{{post.title}}</a></li>

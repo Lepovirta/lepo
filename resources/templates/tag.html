@@ -1,16 +1,12 @@
 {% extends "templates/base.html" %}
 {%block subtitle %}Posts Tagged &quot;{{name}}&quot;{% endblock %}
 {% block content %}
-<div class="posts">
-  <div class="page-header">
-    <h2>Posts Tagged &quot;{{name}}&quot;</h2>
-  </div>
-  <ul>
-    {% for post in posts %}
-    <li>
-      {{post.date|date:"MMM dd YYYY"}} &raquo; <a href="{{post.uri}}">{{post.title}}</a>
-    </li>
-    {% endfor %}
-  </ul>
-</div>
+<header><h1>Posts Tagged &quot;{{name}}&quot;</h1></header>
+<ul class="no-bul">
+  {% for post in posts %}
+  <li>
+    {{post.date|date:"MMM dd YYYY"}} &raquo; <a href="{{post.uri}}">{{post.title}}</a>
+  </li>
+  {% endfor %}
+</ul>
 {% endblock %}

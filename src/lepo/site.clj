@@ -6,7 +6,6 @@
             [lepo.augments.author]
             [lepo.augments.page]
             [lepo.augments.post]
-            [lepo.augments.projects]
             [lepo.augments.root-path]))
 
 (defn- update-conf
@@ -91,7 +90,6 @@
         lepo.augments.conf/augment
         (update-conf :authors lepo.augments.author/augment-authors pages)
         (add-to-conf :pages process-pages pages)
-        (update-conf :projects lepo.augments.projects/augment)
         (add-to-conf :tags get-tags)
         (add-to-conf :latest-posts latest-posts)
         lepo.augments.root-path/add-root)))

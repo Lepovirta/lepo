@@ -12,7 +12,6 @@
    (assoc (render/pages conf)
           :tags    (render/tags conf)
           :archive (render/archive conf)
-          :authors (render/authors conf)
           :rss     (render/rss conf))))
 
 (defn- load-config

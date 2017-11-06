@@ -39,11 +39,6 @@
   (render "archives"
           (assoc conf :groups (site/post-archive conf))))
 
-(defn authors->html
-  [conf]
-  (render "authors"
-          (assoc conf :authors (site/authors conf))))
-
 (defn- page-pair
   [conf page]
   [(:uri page) (fn [_] (page->html conf page))])
@@ -77,7 +72,3 @@
 (defn rss
   [conf]
   {(:atom-uri conf) (fn [_] (rss/atom-xml conf))})
-
-(defn authors
-  [conf]
-  {(:authors-uri conf) (fn [_] (authors->html conf))})

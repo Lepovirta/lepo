@@ -13,7 +13,7 @@ list the files in a separate Vim window, and
 allow quick access to the found files.
 </p>
 
-<h3>The core script</h3>
+<h2>The core script</h2>
 
 <p>
 In order to show the file search results,
@@ -130,7 +130,7 @@ endfunction
 
 command! -nargs=1 Find call s:Find(&lt;q-args&gt;)</code></pre>
 
-<h3>Extending the script</h3>
+<h2>Extending the script</h2>
 
 <p>
 The search window can be further extended by adding features to the <code>findbuf</code> file type.
@@ -181,7 +181,7 @@ au FileType findbuf
     \ nnoremap &lt;buffer&gt; &lt;Return&gt; :call CursorFileInPreviousWindow()&lt;CR&gt; </code></pre>
 
 
-<h3>Alternatives</h3>
+<h2>Alternatives</h2>
 
 <p>
 If the file search solution shown in this article wasn't for you,

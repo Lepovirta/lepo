@@ -13,7 +13,6 @@
                                com.sun.jmx/jmxri]]
                  [stasis "2.3.0"]
                  [optimus "0.20.1"]
-                 [optimus-sass "0.0.3"]
                  [ring "1.6.2"]
                  [org.clojure/data.xml "0.0.8"]
                  [clj-time "0.14.0"]

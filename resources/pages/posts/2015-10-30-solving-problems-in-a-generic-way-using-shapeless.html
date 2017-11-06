@@ -32,7 +32,7 @@ Finally, I'll use the solution made for the heterogenous structures to create a 
 This article was first published in <a href="http://www.cakesolutions.net/teamblogs/solving-problems-in-a-generic-way-using-shapeless">Cake Solution's tech blog</a>.
 </p>
 
-<h3>The problem</h3>
+<h2>The problem</h2>
 
 <p>
 Let's assume that we've just inherited a Scala library that contains a large algebraic data type (ADT) consisting of immutable case classes, sealed traits, and various Scala value and collection types.
@@ -51,13 +51,13 @@ The left side of the image shows the type of each level in the tree shown in the
 while the right side shows the depth of each level.
 </p>
 
-<div class="figure">
+<figure>
   <img src="/img/sample_depth.png"
        alt="Figure 1: Depth progression for Vector[(Int, String)]"
        title="Figure 1: Depth progression for Vector[(Int, String)]"
        />
-       <div class="figure-caption">Figure 1: Depth progression for <code>Vector[(Int, String)]</code></div>
-</div>
+       <figcaption>Figure 1: Depth progression for <code>Vector[(Int, String)]</code></figcaption>
+</figure>
 
 <p>
 One way to approach the problem is through type classes.
@@ -180,7 +180,7 @@ Since we already know the pattern for writing the instances,
 could we somehow express the pattern in code and derive instances for all case classes and sealed traits in order to avoid writing the boilerplate ourselves?
 </p>
 
-<h3>From Case Classes to Products</h3>
+<h2>From Case Classes to Products</h2>
 
 <p>
 Let's look at alternative ways for expressing case classes and sealed traits.
@@ -258,7 +258,7 @@ If there's only one field in the list,
 the dependency will resolve to the HNil's instance instead.
 </p>
 
-<h3>From Sealed Traits to Coproducts</h3>
+<h2>From Sealed Traits to Coproducts</h2>
 
 <p>
 Scala's sealed traits are essentially coproducts.
@@ -313,7 +313,7 @@ Otherwise, the instance for the remainder of the coproduct will be used instead.
 The instance for the remainder is resolved to the same instance or the <code>CNil</code> instance.
 </p>
 
-<h3>A type class for deriving type class instances</h3>
+<h2>A type class for deriving type class instances</h2>
 
 <p>
 The type class instances shown earlier work for all <code>HLists</code> and <code>Coproducts</code> types,
@@ -378,15 +378,15 @@ and brought that solution back to Scala types using type class instance derivati
 This process is demonstrated in figure 2.
 </p>
 
-<div class="figure">
+<figure>
   <img src="/img/type_universes.png"
        alt="Figure 2: Graph demonstrating the generic solution using Shapeless types."
        title="Figure 2: Graph demonstrating the generic solution using Shapeless types."
        />
-  <div class="figure-caption">Figure 2: Graph demonstrating the generic solution using Shapeless types.</div>
-</div>
+  <figcaption>Figure 2: Graph demonstrating the generic solution using Shapeless types.</figcaption>
+</figure>
 
-<h3>Conclusions</h3>
+<h2>Conclusions</h2>
 
 <p>
 In this article, I've demonstrated how generic solutions can be created for ADTs without relying on an expensive runtime feature such as reflection.
