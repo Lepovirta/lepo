@@ -1,26 +1,21 @@
 (ns lepo.render
-  (:require [selmer.parser :as selmer]
+  (:require [lepo.template.core :as template]
             [lepo.rss :as rss]
             [lepo.page :as page]
             [lepo.site :as site]
             [lepo.utils :as utils]
             [lepo.author :as author]
-            [clojure.java.io :as io]))
-
-(def template-dirname "templates")
-
-(defn- template-path
-  [template-name]
-  (.getPath (io/file template-dirname
-                     (str template-name ".html"))))
+            [hiccup.page]))
 
 (defn- template-from-page
   [page]
-  (or (:template page) (-> page :page-type name)))
+  (or (:template page)
+      (:page-type page)))
 
 (defn- render
   [template-name conf]
-  (selmer/render-file (template-path template-name) conf))
+  (hiccup.page/html5
+   (lepo.template.core/template conf template-name)))
 
 (defn page->html
   [conf page]
@@ -29,14 +24,14 @@
 
 (defn tag->html
   [conf tag]
-  (render "tag"
+  (render :tag
           (assoc conf
                  :name tag
                  :posts (site/posts-for-tag conf tag))))
 
 (defn archives->html
   [conf]
-  (render "archives"
+  (render :archive
           (assoc conf :groups (site/post-archive conf))))
 
 (defn- page-pair

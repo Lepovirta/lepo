@@ -2,7 +2,6 @@
   (:require [lepo.render :as render]
             [lepo.resources]
             [lepo.site]
-            [lepo.selmer]
             [lepo.parse :refer [parse-pages]]
             [stasis.core :as stasis]))
 
@@ -28,7 +27,6 @@
 
 (defn save!
   [site target-dir]
-  (lepo.selmer/init!)
   (stasis/export-pages site target-dir))
 
 (defn paths [site] (map first site))

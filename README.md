@@ -72,8 +72,6 @@ Here are some of the things it contains:
   The paths under this directory will be mapped to same path in the output.
 * **pages/posts**: directory of all the blog posts.
 * **pages/team**: directory of team member pages.
-* **templates**: directory of all the templates used in combination with the pages.
-  Templates use the [Selmer](https://github.com/yogthos/Selmer) format.
 * **config.edn**: the base configuration for the site in EDN format.
 
 ### Editing the layouts
