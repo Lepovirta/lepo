@@ -16,7 +16,6 @@
                  [ring "1.6.2"]
                  [org.clojure/data.xml "0.0.8"]
                  [clj-time "0.14.0"]
-                 [selmer "1.11.1"]
                  [hickory "0.7.1"]
                  [hiccup "1.0.5"]]
   :profiles {:dev {:dependencies [[org.clojure/test.check "0.9.0"]]}}
