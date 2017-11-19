@@ -33,10 +33,10 @@
   [v]
   (string? v))
 
-(defn update-uri-kv
+(defn- update-uri-kv
   [root x]
   (if (kv? x)
-    (let [[k v] x
+    (let [[k v]     x
           uri-pair? (and (uri-key? k) (uri-value? v))]
       [k (if uri-pair? (uri/add-root-path root v) v)])
     x))

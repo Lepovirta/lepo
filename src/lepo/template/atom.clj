@@ -1,10 +1,6 @@
-(ns lepo.rss
-  (:require [clojure.data.xml :as xml]
-            [hiccup.core :as hiccup]
-            [lepo.page :as page]
+(ns lepo.template.atom
+  (:require [hiccup.core :as hiccup]
             [lepo.uri]))
-
-(def uri "/atom.xml")
 
 (defn- post
   [conf post]
@@ -18,7 +14,7 @@
     {:type "html"}
     (-> post :content hiccup/html)]])
 
-(defn atom-feed
+(defn from-conf
   [conf]
   (let [posts    (get-in conf [:pages :post])
         atom-url (lepo.uri/parts->url (:site-url conf) (:atom-uri conf))]
@@ -28,11 +24,3 @@
      [:title {:type "text"} (:site-title conf)]
      [:link {:rel "self" :href atom-url}]
      (map (partial post conf) posts)]))
-
-(defn feed->xml
-  [feed]
-  (->> feed xml/sexp-as-element xml/emit-str))
-
-(defn atom-xml
-  [conf]
-  (-> conf atom-feed feed->xml))

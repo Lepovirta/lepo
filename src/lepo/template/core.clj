@@ -5,7 +5,8 @@
             [lepo.template.frontpage]
             [lepo.template.normal]
             [lepo.template.post]
-            [lepo.template.tag]))
+            [lepo.template.tag]
+            [lepo.template.atom]))
 
 (def sub-templates
   {:archive   lepo.template.archive/template
@@ -29,3 +30,5 @@
   (let [sub-template (get-sub-template template-key)
         content      (sub-template conf)]
     (lepo.template.base/template conf content)))
+
+(def atom-feed lepo.template.atom/from-conf)

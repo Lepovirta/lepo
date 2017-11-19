@@ -11,15 +11,10 @@
    (html/anchor atom-uri "RSS feed")
    " for the latest posts."])
 
-(defn- author-uri
-  [author]
-  (or (:full-uri author)
-      (:homepage author)))
-
 (defn- author-list-item
   [[author-id author]]
   [:li
-   (html/anchor (author-uri author)
+   (html/anchor (:uri author)
                 (:name author))])
 
 (defn- authors-list

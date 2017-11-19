@@ -1,41 +1,53 @@
 (ns lepo.site.author
-  (require [lepo.author :as author]
-           [lepo.page :as page]
+  (require [lepo.site.conf]
+           [lepo.uri]
+           [clojure.string :as string]
            [clojure.tools.logging :as log]))
+
+(defn- uri
+  [author-id]
+  (lepo.uri/parts->dir lepo.site.conf/author-path (name author-id)))
+
+(defn- full-uri
+  [author-id]
+  (lepo.uri/parts->path (uri author-id) "index.html"))
+
+(defn- path->author-id
+  [path]
+  (let [[main-dir author-id] (lepo.uri/path->parts path)]
+    (when (= main-dir lepo.site.conf/author-path)
+      (keyword author-id))))
 
 (defn- augment-author
   [paths author-id author]
-  (let [author   (author/expand-details author-id author)
-        full-uri (:full-uri author)]
-    (if (paths full-uri)
-      author
-      (do (log/debug "No page for author" author-id "available")
-          (dissoc author :full-uri :uri)))))
-
-(defn- author-paths
-  [pages]
-  (->> pages
-       (filter (comp (partial = :author) :page-type))
-       (map :path)
-       (into #{})))
+  (let [has-local-uri (paths (full-uri author-id))
+        author-uri    (if has-local-uri
+                        (uri author-id)
+                        (:homepage author))]
+    (if-not has-local-uri
+      (log/debug "No page for author" author-id "available"))
+    (assoc author :uri author-uri)))
 
 (defn augment-authors
-  [conf authors pages]
-  (let [paths (author-paths pages)]
-    (->> authors
-         (map (fn [[id author]]
-                [id (augment-author paths id author)]))
-         (into {}))))
+  [conf authors paths]
+  (into {}
+        (map (fn [[id author]]
+               [id (augment-author paths id author)])
+             authors)))
+
+(defn- filter-by-author
+  [author-id pages]
+  (filter (comp (partial = author-id) :author-id)
+          pages))
 
 (defn- augment-author-page
   [conf posts page]
-  (let [author-id      (author/path->author-id (:path page))
+  (let [author-id      (path->author-id (:path page))
         author-details (get-in conf [:authors author-id])
         title          (or (:title page) (:name author-details))
-        author-posts   (page/filter-by-author author-id posts)]
+        author-posts   (filter-by-author author-id posts)]
     (assoc page
            :title title
-           :author-id author-id
            :author-posts author-posts
            :author author-details)))
 
