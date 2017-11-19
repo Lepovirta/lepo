@@ -1,4 +1,4 @@
-(ns lepo.augments.author
+(ns lepo.site.author
   (require [lepo.author :as author]
            [lepo.page :as page]
            [clojure.tools.logging :as log]))

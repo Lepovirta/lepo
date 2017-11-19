@@ -1,4 +1,4 @@
-(ns lepo.augments.post
+(ns lepo.site.post
   (:require [lepo.utils :as utils]
             [lepo.page :as page]))
 

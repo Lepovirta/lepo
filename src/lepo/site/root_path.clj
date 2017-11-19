@@ -1,6 +1,6 @@
-(ns lepo.augments.root-path
+(ns lepo.site.root-path
   (:require [lepo.uri :as uri]
-            [clojure.walk :as walk]))
+            [clojure.walk]))
 
 (def attr-names-with-uris
   #{:src :href})
@@ -23,7 +23,7 @@
   [root html]
   (if (empty? root)
     html
-    (walk/postwalk (partial update-uri-attr root) html)))
+    (clojure.walk/postwalk (partial update-uri-attr root) html)))
 
 (defn- uri-key?
   [k]
@@ -47,4 +47,4 @@
      (add-root root conf)
      conf))
   ([root form]
-   (walk/postwalk (partial update-uri-kv root) form)))
+   (clojure.walk/postwalk (partial update-uri-kv root) form)))

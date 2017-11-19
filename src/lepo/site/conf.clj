@@ -1,4 +1,4 @@
-(ns lepo.augments.conf
+(ns lepo.site.conf
   (:require [lepo.uri :as uri]
             [lepo.utils :as utils]
             [lepo.page]

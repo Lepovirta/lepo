@@ -2,7 +2,7 @@
   (:require [lepo.template.core :as template]
             [lepo.rss :as rss]
             [lepo.page :as page]
-            [lepo.site :as site]
+            [lepo.site.core :as site]
             [lepo.utils :as utils]
             [lepo.author :as author]
             [hiccup.page]))

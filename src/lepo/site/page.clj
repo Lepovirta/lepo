@@ -1,4 +1,4 @@
-(ns lepo.augments.page
+(ns lepo.site.page
   (:require [lepo.page :as page]))
 
 (defn- open-graph
