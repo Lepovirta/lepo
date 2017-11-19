@@ -1,7 +1,7 @@
 (ns lepo.build
   (:require [lepo.render :as render]
             [lepo.resources]
-            [lepo.site]
+            [lepo.site.core]
             [lepo.parse :refer [parse-pages]]
             [stasis.core :as stasis]))
 
@@ -22,7 +22,7 @@
   (let [conf (load-config overrides)]
     (->> (lepo.resources/raw-page-source)
          parse-pages
-         (lepo.site/build conf)
+         (lepo.site.core/build conf)
          merge-sources)))
 
 (defn save!
