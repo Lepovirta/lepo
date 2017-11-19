@@ -17,11 +17,11 @@
 (defn- read-unsafe!
   [directory]
   (as-> directory $
-        (manifest-path $)
-        (slurp $)
-        (string/split $ #"\n")
-        (remove string/blank? $)
-        (map (partial line->file directory) $)))
+    (manifest-path $)
+    (slurp $)
+    (string/split $ #"\n")
+    (remove string/blank? $)
+    (map (partial line->file directory) $)))
 
 (defn read!
   [directory]
@@ -66,4 +66,3 @@
 (defn delete-manifest-files!
   [directory]
   (-> directory read! delete-files!))
-

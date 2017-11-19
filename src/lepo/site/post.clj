@@ -1,6 +1,5 @@
 (ns lepo.site.post
-  (:require [lepo.utils :as utils]
-            [lepo.page :as page]))
+  (:require [lepo.utils :as utils]))
 
 (defn- link-post
   [[prev current next]]
@@ -18,9 +17,11 @@
 
 (defn- augment-post
   [conf post]
-  (let [author-id      (:author-id post)
+  (let [all-tags       (:tags conf)
+        author-id      (:author-id post)
         author-details (get-in conf [:authors author-id])]
     (assoc post
+           :tags (map all-tags (:tags post))
            :author author-details)))
 
 (defn augment

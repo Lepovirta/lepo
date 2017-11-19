@@ -1,11 +1,12 @@
 (ns lepo.site.core
   (:require [lepo.uri :as uri]
-            [lepo.author :as author]
-            [lepo.page :as page]
+            [lepo.utils :as utils]
+            [lepo.site.archive]
             [lepo.site.conf]
             [lepo.site.author]
             [lepo.site.page]
             [lepo.site.post]
+            [lepo.site.tag]
             [lepo.site.root-path]))
 
 (defn- update-conf
@@ -22,68 +23,29 @@
 (defn- process-pages
   [conf pages]
   (as-> pages $
-        (lepo.site.page/augment conf $)
-        (update-in $ [:post]
-                   (partial lepo.site.post/augment conf))
-        (assoc $ :author
-               (lepo.site.author/augment-author-pages conf $))))
+    ;; augment all pages
+    (lepo.site.page/augment conf $)
+    ;; augment posts
+    (update-in $ [:post]
+               (partial lepo.site.post/augment conf))
+    ;; augment author pages
+    (assoc $ :author
+           (lepo.site.author/augment-author-pages conf $))
+    ;; add tag pages
+    (assoc $ :tag (lepo.site.tag/tag-pages conf $))))
 
-(defn- get-posts
-  [conf]
-  (get-in conf [:pages :post]))
-
-(defn- latest-posts
-  [conf]
-  (take (get conf :latest-posts-count 5)
-        (get-posts conf)))
-
-(defn- get-tags
-  [conf]
-  (-> conf get-posts page/pages->tags))
-
-(defn- extend-conf
-  [conf]
-  (->> conf
-       lepo.site.conf/augment
-       lepo.site.root-path/add-root))
-
-(defn- add-root-to-page
-  [root page]
-  (update-in page [:content]
-             (partial lepo.site.root-path/add-root-to-html root)))
-
-(defn- add-root-to-pages
-  [{root :root-path} pages]
-  (map (partial add-root-to-page root)
-       pages))
-
-(defn- pair->archive
-  [[name posts]]
-  {:group name :posts posts})
-
-(defn post-archive
-  [conf]
-  (->> (get-posts conf)
-       page/by-year
-       (map pair->archive)))
-
-(defn tag-uri
-  [{root :root-path} tag]
-  (uri/parts->path root (page/tag-uri tag)))
-
-(defn posts-for-tag
-  [conf tag]
-  (page/filter-by-tag tag
-                      (get-posts conf)))
+(defn- pages->paths
+  [pages]
+  (into #{} (map :path pages)))
 
 (defn build
-  [conf pages]
-  (let [conf  (extend-conf conf)
-        pages (add-root-to-pages conf pages)]
+  [overrides pages]
+  (let [conf  (lepo.site.conf/build overrides)
+        paths (pages->paths pages)]
     (-> conf
-        lepo.site.conf/augment
-        (update-conf :authors lepo.site.author/augment-authors pages)
+        (update-conf :authors lepo.site.author/augment-authors paths)
+        (add-to-conf :tags lepo.site.tag/all-tags pages)
         (add-to-conf :pages process-pages pages)
-        (add-to-conf :tags get-tags)
-        (add-to-conf :latest-posts latest-posts)
+        (add-to-conf :archive lepo.site.archive/conf->archive)
+        (add-to-conf :latest-posts lepo.site.archive/latest-posts)
         lepo.site.root-path/add-root)))

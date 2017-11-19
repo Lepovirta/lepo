@@ -1,23 +1,16 @@
 (ns lepo.template.post
   (require [lepo.template.html :as html]
-           [lepo.template.utils :as utils]
-           [lepo.uri]
-           [lepo.page]))
+           [lepo.template.utils :as utils]))
 
 (defn- author-name-html
-  [{name :name
-    uri :uri}]
+  [{name :name uri :uri}]
   (if uri
     (html/anchor uri name)
     name))
 
-(defn tag-uri
-  [root tag]
-  (lepo.uri/add-root-path root (lepo.page/tag-uri tag)))
-
 (defn- tag-list-item
-  [root tag]
-  [:li (html/anchor (tag-uri root tag) tag)])
+  [root {tag-uri :uri tag :tag}]
+  [:li (html/anchor tag-uri tag)])
 
 (defn- tag-list
   [tags root]

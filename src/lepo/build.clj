@@ -9,21 +9,15 @@
   [conf]
   (stasis/merge-page-sources
    (assoc (render/pages conf)
-          :tags    (render/tags conf)
           :archive (render/archive conf)
-          :rss     (render/rss conf))))
-
-(defn- load-config
-  [overrides]
-  (merge (lepo.resources/load-config) overrides))
+          :atom    (render/atom-feed conf))))
 
 (defn build-site
   [overrides]
-  (let [conf (load-config overrides)]
-    (->> (lepo.resources/raw-page-source)
-         parse-pages
-         (lepo.site.core/build conf)
-         merge-sources)))
+  (->> (lepo.resources/raw-page-source)
+       parse-pages
+       (lepo.site.core/build overrides)
+       merge-sources))
 
 (defn save!
   [site target-dir]

@@ -1,16 +1,9 @@
 (ns lepo.render
   (:require [lepo.template.core :as template]
-            [lepo.rss :as rss]
-            [lepo.page :as page]
             [lepo.site.core :as site]
             [lepo.utils :as utils]
-            [lepo.author :as author]
-            [hiccup.page]))
-
-(defn- template-from-page
-  [page]
-  (or (:template page)
-      (:page-type page)))
+            [hiccup.page]
+            [clojure.data.xml :as xml]))
 
 (defn- render
   [template-name conf]
@@ -19,20 +12,12 @@
 
 (defn page->html
   [conf page]
-  (render (template-from-page page)
+  (render (:template page)
           (assoc conf :page page)))
-
-(defn tag->html
-  [conf tag]
-  (render :tag
-          (assoc conf
-                 :name tag
-                 :posts (site/posts-for-tag conf tag))))
 
 (defn archives->html
   [conf]
-  (render :archive
-          (assoc conf :groups (site/post-archive conf))))
+  (render :archive conf))
 
 (defn- page-pair
   [conf page]
@@ -50,20 +35,14 @@
        (utils/map-values (partial page-pairs conf))
        (into {})))
 
-(defn- tag-pair
-  [conf tag]
-  [(site/tag-uri conf tag) (fn [_] (tag->html conf tag))])
-
-(defn tags
-  [conf]
-  (->> (:tags conf)
-       (map (partial tag-pair conf))
-       (into {})))
-
 (defn archive
   [conf]
   {(:archive-uri conf) (fn [_] (archives->html conf))})
 
-(defn rss
+(defn- feed->xml
+  [feed]
+  (->> feed xml/sexp-as-element xml/emit-str))
+
+(defn atom-feed
   [conf]
-  {(:atom-uri conf) (fn [_] (rss/atom-xml conf))})
+  {(:atom-uri conf) (fn [_] (-> conf template/atom-feed feed->xml))})
