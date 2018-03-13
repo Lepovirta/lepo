@@ -1,12 +1,4 @@
 language: clojure
-notifications:
-  slack:
-    rooms:
-    - lepovirta:v3PaLDZ95F0rcm3WvtDJ84YZ#github
-    template:
-    - 'Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch}
-      by %{author} %{result} in %{elapsed_time}: %{message}'
-    - Website @ http://staging.lepo.group/%{branch}/
 after_success:
 - CLOVERAGE_VERSION=1.0.9 lein cloverage --codecov
 - bash <(curl -s https://codecov.io/bash) -f target/coverage/codecov.json
