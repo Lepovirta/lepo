@@ -17,7 +17,7 @@ In order to enable auto-reloading, install LiveReloadX:
 EOF
 else
     livereloadx \
-        --include '*.scss' \
+        --include '*.css' \
         --include '*.svg' \
         --include '*.clj' \
         --include '*.edn' \

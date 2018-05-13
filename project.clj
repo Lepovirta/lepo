@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/tools.logging "0.4.0"]
+                 [org.clojure/tools.logging "0.4.1"]
                  [org.slf4j/slf4j-log4j12 "1.7.25"]
                  [log4j/log4j "1.2.17"
                   :exclusions [javax.mail/mail
@@ -13,9 +13,9 @@
                                com.sun.jmx/jmxri]]
                  [stasis "2.3.0"]
                  [optimus "0.20.1"]
-                 [ring "1.6.2"]
+                 [ring "1.6.3"]
                  [org.clojure/data.xml "0.0.8"]
-                 [clj-time "0.14.0"]
+                 [clj-time "0.14.3"]
                  [hickory "0.7.1"]
                  [hiccup "1.0.5"]]
   :profiles {:dev {:dependencies [[org.clojure/test.check "0.9.0"]]}}
