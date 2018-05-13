@@ -1,6 +1,6 @@
 (ns lepo.template.utils
-  (:require [clj-time.format :as time-format]
-           [lepo.utils]))
+  (:require [java-time]
+            [lepo.utils]))
 
 (def time-formats-str
   {:archive-post "MMM dd"
@@ -9,11 +9,11 @@
 
 (def time-formats
   (into {}
-        (lepo.utils/map-values time-format/formatter
+        (lepo.utils/map-values java-time/formatter
                                time-formats-str)))
 
 (defn format-date
   ([date format]
-   (time-format/unparse (get time-formats format) date))
+   (java-time/format (get time-formats format) date))
   ([date]
    (format-date date :default)))

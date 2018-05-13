@@ -1,6 +1,6 @@
 (ns lepo.site.archive
   (:require [lepo.utils :as utils]
-            [clj-time.core :as time]))
+            [java-time]))
 
 (defn- pair->archive
   [[name posts]]
@@ -8,7 +8,7 @@
 
 (defn- post-year
   [post]
-  (time/year (:date post)))
+  (java-time/year (:date post)))
 
 (defn- group-by-year
   [pages]

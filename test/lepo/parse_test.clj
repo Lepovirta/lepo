@@ -2,7 +2,6 @@
   (:require [lepo.parse :as parse]
             [lepo.example-data :as example-data]
             [clojure.test :refer :all]
-            [clj-time.core :as t]
             [lepo.test-utils :refer :all]))
 
 (def expected-parsed-pages

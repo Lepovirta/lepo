@@ -15,7 +15,7 @@
                  [optimus "0.20.1"]
                  [ring "1.6.3"]
                  [org.clojure/data.xml "0.0.8"]
-                 [clj-time "0.14.3"]
+                 [clojure.java-time "0.3.2"]
                  [hickory "0.7.1"]
                  [hiccup "1.0.5"]]
   :profiles {:dev {:dependencies [[org.clojure/test.check "0.9.0"]]}}
