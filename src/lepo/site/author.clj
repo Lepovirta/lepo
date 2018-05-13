@@ -1,8 +1,8 @@
 (ns lepo.site.author
   (:require [lepo.site.conf]
-           [lepo.uri]
-           [clojure.string :as string]
-           [clojure.tools.logging :as log]))
+            [lepo.uri]
+            [clojure.string :as string]
+            [clojure.tools.logging :as log]))
 
 (defn- uri
   [author-id]
