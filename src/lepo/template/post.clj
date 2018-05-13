@@ -1,6 +1,6 @@
 (ns lepo.template.post
   (:require [lepo.template.html :as html]
-           [lepo.template.utils :as utils]))
+            [lepo.template.utils :as utils]))
 
 (defn- author-name-html
   [{name :name uri :uri}]
