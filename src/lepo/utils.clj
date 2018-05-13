@@ -1,19 +1,18 @@
 (ns lepo.utils
   (:require [clojure.string :as string]
-            [clj-time.core :as t]
-            [clj-time.format :as tf]))
+            [java-time]))
 
 (def slash-pattern #"^[/]*")
 (def trailing-slashes-pattern #"[/]*$")
 (def leading-slashes-pattern #"^[/]*")
-(def date-formatter (tf/formatter "yyyy-MM-dd"))
+(def date-formatter (java-time/formatter "yyyy-MM-dd"))
 (def date-pattern #"\d+-\d+-\d+")
 
 (defn str->date
   [s]
   (some->> s
            (re-find date-pattern)
-           (tf/parse date-formatter)))
+           (java-time/local-date date-formatter)))
 
 (defn remove-leading-slashes
   [s]

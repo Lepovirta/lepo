@@ -1,6 +1,6 @@
 (ns lepo.utils-test
   (:require [lepo.utils :as utils]
-            [clj-time.core :as t]
+            [java-time]
             [clojure.test :refer :all]))
 
 (deftest slash-handling
@@ -17,7 +17,7 @@
          (utils/reverse-sort-by identity '(1 2 3)))))
 
 (deftest date-parsing
-  (is (= (t/date-time 2016 12 9)
+  (is (= (java-time/local-date 2016 12 9)
          (utils/str->date "/posts/2016-12-09-hello-world.html")))
-  (is (= (t/date-time 2011 8 12)
+  (is (= (java-time/local-date 2011 8 12)
          (utils/str->date "posts:2011-08-12-hello-world"))))
