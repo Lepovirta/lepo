@@ -1,5 +1,5 @@
-(ns lepo.augments.root-path-test
-  (:require [lepo.augments.root-path :as root-path]
+(ns lepo.site.root-path-test
+  (:require [lepo.site.root-path :as root-path]
             [lepo.test-utils :refer :all]
             [clojure.test :refer :all]))
 
