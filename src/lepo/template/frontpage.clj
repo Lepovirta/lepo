@@ -1,5 +1,5 @@
 (ns lepo.template.frontpage
-  (require [lepo.template.html :as html]))
+  (:require [lepo.template.html :as html]))
 
 (defn- more-posts-ad
   [{archive-uri :archive-uri

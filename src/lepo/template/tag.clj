@@ -1,5 +1,5 @@
 (ns lepo.template.tag
-  (require [lepo.template.html :as html]))
+  (:require [lepo.template.html :as html]))
 
 (defn template
   [{page :page}]

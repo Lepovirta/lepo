@@ -1,5 +1,5 @@
 (ns lepo.template.author
-  (require [lepo.template.html :as html]))
+  (:require [lepo.template.html :as html]))
 
 (defn- html-posts
   [author-posts]
