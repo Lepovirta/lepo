@@ -1,5 +1,5 @@
 (ns lepo.template.utils
-  (require [clj-time.format :as time-format]
+  (:require [clj-time.format :as time-format]
            [lepo.utils]))
 
 (def time-formats-str

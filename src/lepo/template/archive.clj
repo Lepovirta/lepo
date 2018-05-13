@@ -1,5 +1,5 @@
 (ns lepo.template.archive
-  (require [lepo.template.html :as html]))
+  (:require [lepo.template.html :as html]))
 
 (defn- html-archive-group
   [{name :name posts :posts}]

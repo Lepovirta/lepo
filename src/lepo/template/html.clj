@@ -1,5 +1,5 @@
 (ns lepo.template.html
-  (require [lepo.template.utils :as utils]))
+  (:require [lepo.template.utils :as utils]))
 
 (defn heading
   [level text]

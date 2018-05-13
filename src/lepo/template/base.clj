@@ -1,6 +1,6 @@
 (ns lepo.template.base
-  (require [lepo.template.html :as html]
-           [lepo.uri]))
+  (:require [lepo.template.html :as html]
+            [lepo.uri]))
 
 (def viewport "width=device-width, initial-scale=1")
 (def theme-color "#44118d")

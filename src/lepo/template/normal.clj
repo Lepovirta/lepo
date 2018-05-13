@@ -1,5 +1,5 @@
 (ns lepo.template.normal
-  (require [lepo.template.html :as html]))
+  (:require [lepo.template.html :as html]))
 
 (defn template
   [conf]
