@@ -1,6 +1,6 @@
 (defproject lepo "0.1.0-SNAPSHOT"
-  :description "Website generator for lepo.io"
-  :url "https://lepo.io/"
+  :description "Website generator for Lepo"
+  :url "https://lepo.group/"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.9.0"]
