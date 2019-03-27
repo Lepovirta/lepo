@@ -1,0 +1,17 @@
+{{ define "main" }}
+<img alt="Logo of Lepo" class="logo" src="/img/lepo.svg">
+
+<h2>Recent posts</h2>
+
+<ul class="no-bul">
+    {{ range first 10 (where .Pages "Type" "posts") }}
+    <li>
+        {{ .PublishDate.Format "2006/01" }} &raquo; <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+    {{ end }}
+</ul>
+<p>
+    See the <a href="/posts.html">archive</a> for more posts.
+    Subscribe to <a href="/posts/index.xml">RSS feed</a> for the latest posts.
+</p>
+{{ end }}
