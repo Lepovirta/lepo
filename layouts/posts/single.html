@@ -1,0 +1,23 @@
+{{ define "main" }}
+<header>
+    <h1>{{ .Title }}</h1>
+</header>
+{{ .Content }}
+<div class="post-meta">
+    <div><b>Posted:</b> {{ .PublishDate.Format "2006-01-02" }}</div>
+    {{ if .Params.tags }}
+    <div>
+        <b>Tags:</b>
+        <ul class="inline-list">
+            {{ range .Params.tags }}
+                {{ $name := . }}
+                {{ with $.Site.GetPage (printf "/tags/%s" ($name | urlize))}}
+                <li><a href="{{ .Permalink }}">{{ $name }}</a></li>
+                {{ end }}
+            {{ end }}
+        </ul>
+    </div>
+    {{ end }}
+    <div><a href="/posts.html">more posts &hellip;</a></div>
+</div>
+{{ end }}
