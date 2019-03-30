@@ -12,12 +12,12 @@
             {{ range .Params.tags }}
                 {{ $name := . }}
                 {{ with $.Site.GetPage (printf "/tags/%s" ($name | urlize))}}
-                <li><a href="{{ .Permalink }}">{{ $name }}</a></li>
+                <li><a href="{{ .RelPermalink }}">{{ $name }}</a></li>
                 {{ end }}
             {{ end }}
         </ul>
     </div>
     {{ end }}
-    <div><a href="/posts.html">more posts &hellip;</a></div>
+    <div><a href="{{ "/posts.html" | relURL }}">more posts &hellip;</a></div>
 </div>
 {{ end }}
