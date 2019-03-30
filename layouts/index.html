@@ -1,5 +1,7 @@
 {{ define "main" }}
-<img alt="Logo of Lepo" class="logo" src="/img/lepo.svg">
+<img alt="Logo of Lepo" class="logo" src="{{ "/img/lepo.svg" | relURL }}">
+
+{{ .Content }}
 
 <h2>Recent posts</h2>
 
@@ -11,7 +13,6 @@
     {{ end }}
 </ul>
 <p>
-    See the <a href="/posts.html">archive</a> for more posts.
-    Subscribe to <a href="/posts/index.xml">RSS feed</a> for the latest posts.
+    See the <a href="{{ "/posts.html" | relURL }}">archive</a> for more posts.
 </p>
 {{ end }}

@@ -12,17 +12,17 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="#44118d" name="theme-color">
     <meta content="{{ .Page.Summary | plainify }}" name="description">
-    <meta content="{{ .Site.BaseURL }}img/lepo.png" property="og:image">
-    <meta content="{{ .Site.Title }}" property="og:site_name">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <link href="/atom.xml" rel="alternate" title="posts" type="application/atom+xml">
-    <meta content="website" property="og:type">
     <meta content="{{ .Page.Summary | plainify }}" property="og:description">
-    <meta content="{{ .Site.BaseURL }}/index.html" property="og:url">
+    <meta content="{{ "/index.html" | absURL }}" property="og:url">
     <meta content="{{ .Page.Title }}" property="og:title">
+    <meta content="{{ "/img/lepo.png" | absURL }}" property="og:image">
+    <meta content="{{ .Site.Title }}" property="og:site_name">
+    <meta content="website" property="og:type">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ "/apple-touch-icon.png" | relURL }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ "/favicon-32x32.png" | relURL }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ "/favicon-16x16.png" | relURL }}">
+    <link rel="manifest" href="{{ "/manifest.json" | relURL }}">
+    <link href="{{ "/posts/index.xml" | relURL }}" rel="alternate" title="posts" type="application/rss+xml">
     <style>
         body {
             background-color: #fefefe;
@@ -194,6 +194,7 @@
             <div class="left"><a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license">CC BY-SA 4.0</a>
             </div>
             <div class="right">
+                <a href="{{ "/about.html" | relURL }}">ABOUT</a> &mdash;
                 <a href="#top">TOP</a>
             </div>
         </footer>
