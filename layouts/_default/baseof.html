@@ -3,11 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>
-        {{ .Site.Title }}
-        {{ if and (ne .Page.Title "") (ne .Page.Title .Site.Title) }}
-        - {{ .Page.Title }}
-        {{ end }}
+    <title>{{ .Site.Title }}
+        {{- if and (ne .Page.Title "") (ne .Page.Title .Site.Title) }} - {{ .Page.Title }} {{- end -}}
     </title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="#44118d" name="theme-color">
