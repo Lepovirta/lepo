@@ -2,6 +2,20 @@
 
 Static website generator for [Lepo](https://lepo.group/).
 
+## Developing
+
+This project follows a standard [Hugo](https://gohugo.io/) site structure.
+See the Hugo documentation for more information on how to use it.
+
+There's a couple of helper scripts to help you get started:
+
+* `bin/serve.sh`: starts live server for Hugo
+* `bin/generate.sh`: generates the full site to the `public/` directory
+
+These scripts automatically download the correct version of Hugo to the `bin/` directory.
+You can also download Hugo manually using `bin/download_hugo.sh`,
+and then use `bin/hugo` directly.
+
 ## License
 
 All of the content in this site is licensed under
