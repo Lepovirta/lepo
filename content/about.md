@@ -1,5 +1,7 @@
 ---
 title: About
+aliases:
+  - /team/jkpl/
 ---
 
 This site is a space for sharing and collaborating on ideas, tools, and knowledge to help software developers of all skill levels.
