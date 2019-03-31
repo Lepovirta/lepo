@@ -6,7 +6,7 @@
     <title>
         {{ .Site.Title }}
         {{ if and (ne .Page.Title "") (ne .Page.Title .Site.Title) }}
-        &raquo; {{ .Page.Title }}
+        - {{ .Page.Title }}
         {{ end }}
     </title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -27,7 +27,6 @@
         body {
             background-color: #fefefe;
             color: #444;
-            font-family: sans-serif;
             line-height: 1.618;
             margin: 0;
         }
@@ -59,11 +58,11 @@
 
         a {
             color: #44118d;
-            text-decoration: underline;
-        }
-
-        a:hover {
             text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
         }
 
         img {
@@ -71,12 +70,31 @@
             max-width: 100%;
         }
 
-        main {
+        article {
             font-family: serif;
+        }
+
+        article a {
+            text-decoration: underline;
+        }
+
+        header h1 {
+            font-size: 2em;
+        }
+
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: sans-serif;
         }
 
         footer {
             border-top: 0.25em solid #44118d;
+            padding: 5px 0 20px 0;
         }
 
         .logo {
@@ -85,13 +103,10 @@
             display: block;
         }
 
-        .description img {
-            width: 30%
-        }
-
-        .description ul {
-            padding: 1em;
-            width: 70%
+        .slogan {
+            text-align: center;
+            font-size: 300%;
+            color: lightgray;
         }
 
         .no-bul {
@@ -159,6 +174,7 @@
 
         .post-meta {
             text-align: right;
+            margin: 16px 0;
         }
 
         .post-meta b {
@@ -166,11 +182,11 @@
         }
 
         .wrapper {
-            width: 650px;
-            margin: 0 auto;
+            width: 700px;
+            margin: 0 auto 20px auto;
         }
 
-        @media screen and (max-width: 650px) {
+        @media screen and (max-width: 700px) {
             .logo {
                 width: 70%;
             }
@@ -179,6 +195,10 @@
                 width: auto;
                 padding: 0 10px;
             }
+
+            .slogan {
+                font-size: 200%;
+            }
         }
     </style>
 </head>
@@ -186,15 +206,13 @@
 <body>
     <div id="top"><a href="/">Lepo</a></div>
     <div class="wrapper">
-        <main>
-            {{ block "main" . }}
-            {{ end }}
-        </main>
+        {{ block "main" . }}
+        {{ end }}
         <footer>
-            <div class="left"><a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license">CC BY-SA 4.0</a>
+            <div class="left">
+                <a href="{{ "/about.html" | relURL }}">ABOUT</a>
             </div>
             <div class="right">
-                <a href="{{ "/about.html" | relURL }}">ABOUT</a> &mdash;
                 <a href="#top">TOP</a>
             </div>
         </footer>
