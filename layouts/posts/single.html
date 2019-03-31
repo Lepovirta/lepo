@@ -1,8 +1,10 @@
 {{ define "main" }}
-<header>
-    <h1>{{ .Title }}</h1>
-</header>
-{{ .Content }}
+<article>
+    <header>
+        <h1>{{ .Title }}</h1>
+    </header>
+    {{ .Content }}
+</article>
 <div class="post-meta">
     <div><b>Posted:</b> {{ .PublishDate.Format "2006-01-02" }}</div>
     {{ if .Params.tags }}
