@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <div id="top"><a href="/">Lepo</a></div>
+    <div id="top"><a href="{{ "/" | relURL }}">Lepo</a></div>
     <div class="wrapper">
         {{ block "main" . }}
         {{ end }}
