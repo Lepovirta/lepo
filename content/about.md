@@ -4,12 +4,6 @@ aliases:
   - /team/jkpl/
 ---
 
-This site is a space for sharing and collaborating on ideas, tools, and knowledge to help software developers of all skill levels.
-
-<!--more-->
-
-## Meaning of Lepo
-
 *Lepo* is Finnish for *rest* and *repose*.
 
 The culture of chasing deadline after deadline at a breackneck speed is unsustainable.
@@ -17,7 +11,9 @@ Value the health of yourself and others over the goals of your projects.
 Avoid burnout, and allow yourself to have a break.
 *Relax*.
 
-## Code
+This site is a space for sharing and collaborating on ideas, tools, and knowledge to help software developers of all skill levels.
+
+<!--more-->
 
 All Lepo related code is hosted on [GitHub](https://github.com/Lepovirta).
 None of the projects have any schedules,
