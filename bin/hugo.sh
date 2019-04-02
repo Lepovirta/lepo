@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd "$(dirname "$0")"
 
 case "$OSTYPE" in
 linux*) DETECTED_OS="Linux" ;;
@@ -16,25 +15,36 @@ arm) DETECTED_ARCH="arm64" ;;
 esac
 
 HUGO_VERSION="${HUGO_VERSION:-0.54.0}"
+SCRIPT_DIR="$(dirname "$0")"
+HUGO_PATH="$SCRIPT_DIR/hugo"
 RELEASE_BASE_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}"
 CHECKSUMS_URL="${RELEASE_BASE_URL}/hugo_${HUGO_VERSION}_checksums.txt"
 RELEASE_FILENAME="hugo_${HUGO_VERSION}_${DETECTED_OS}-${DETECTED_ARCH}.tar.gz"
 RELEASE_URL="${RELEASE_BASE_URL}/${RELEASE_FILENAME}"
 
 safe_curl() {
-    curl -sfSL --retry 3 --retry-connrefused --retry-delay 2 "$@"
+    curl -fSL --retry 3 --retry-connrefused --retry-delay 2 "$@"
+}
+
+run_hugo() {
+    if [ -x "$HUGO_PATH" ]; then
+        "$HUGO_PATH" "$@"
+    elif hash hugo 2>/dev/null; then
+        hugo "$@"
+    else
+        return 1
+    fi
 }
 
 check_hugo() {
-    if [ ! -x hugo ]; then
-        return 1
-    fi
-
-    ./hugo version | grep -q "v${HUGO_VERSION}"
+    run_hugo version | grep -q "v${HUGO_VERSION}"
 }
 
 check_hugo_download() {
-    safe_curl "$CHECKSUMS_URL" | grep "$RELEASE_FILENAME" | shasum -c
+    safe_curl "$CHECKSUMS_URL" \
+        | grep "$RELEASE_FILENAME" \
+        | shasum -c \
+        >&2
 }
 
 download_hugo() {
@@ -44,7 +54,7 @@ download_hugo() {
 }
 
 extract_hugo() {
-    tar xvfz "$RELEASE_FILENAME" hugo
+    tar xvfz "$RELEASE_FILENAME" -C "$SCRIPT_DIR" hugo >&2
 }
 
 delete_temp_files() {
@@ -56,13 +66,14 @@ delete_temp_files() {
 trap delete_temp_files EXIT
 
 main() {
-    if check_hugo; then
-        return 0
+    if ! check_hugo; then
+        echo "Hugo not found. Downloading..." >&2
+        download_hugo
+        check_hugo_download
+        extract_hugo
     fi
 
-    download_hugo
-    check_hugo_download
-    extract_hugo
+    run_hugo "$@"
 }
 
-main
+main "$@"
