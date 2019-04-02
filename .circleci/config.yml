@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+
+    steps:
+      - checkout
+
+      - run:
+          name: Setup
+          command: ./bin/ci_setup.sh
+
+      - run:
+          name: Generate
+          command: ./bin/generate.sh prod
