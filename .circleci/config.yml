@@ -2,15 +2,11 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: lepovirta/lepo-build:latest
 
     steps:
       - checkout
 
       - run:
-          name: Setup
-          command: ./bin/ci_setup.sh
-
-      - run:
           name: Generate
-          command: ./bin/generate.sh prod
+          command: ./bin/generate.sh --target prod
