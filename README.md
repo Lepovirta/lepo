@@ -11,10 +11,9 @@ There's a couple of helper scripts to help you get started:
 
 * `bin/serve.sh`: starts live server for Hugo
 * `bin/generate.sh`: generates the full site to the `public/` directory
+* `bin/hugo.sh`: Hugo CLI
 
 These scripts automatically download the correct version of Hugo to the `bin/` directory.
-You can also download Hugo manually using `bin/download_hugo.sh`,
-and then use `bin/hugo` directly.
 
 ## License
 

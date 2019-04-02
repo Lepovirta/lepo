@@ -38,17 +38,6 @@ parse_args() {
     done
 }
 
-hugo() {
-    ./bin/hugo "$@"
-}
-
-check_and_download_hugo() {
-    if [ ! -x bin/hugo ]; then
-        echo "Hugo not available. Downloading." >&2
-        ./bin/download_hugo.sh
-    fi
-}
-
 delete_old_files() {
     if [ -d public ]; then
         rm -r public
@@ -56,9 +45,8 @@ delete_old_files() {
 }
 
 build_site() {
-    hugo --baseURL "$1" --minify
+    ./bin/hugo.sh --baseURL "$1" --minify
 }
-
 
 publish_site() {
     local target_bucket target_dir
@@ -106,7 +94,6 @@ main() {
     *) echo "Invalid target: ${TARGET_ENV:-}" >&2; exit 1;
     esac
 
-    check_and_download_hugo
     delete_old_files
 
     case "${TARGET_ENV}" in
