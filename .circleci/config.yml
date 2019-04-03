@@ -1,12 +1,34 @@
-version: 2
+version: 2.1
 jobs:
-  build:
+  deploy-stg:
     docker:
       - image: lepovirta/lepo-build:latest
 
     steps:
       - checkout
-
       - run:
-          name: Generate
-          command: ./bin/generate.sh --target prod
+          name: Deploy
+          command: ./bin/generate.sh -t staging -p
+
+  deploy-prod:
+    docker:
+      - image: lepovirta/lepo-build:latest
+
+    steps:
+      - checkout
+      - run:
+          name: Deploy
+          command: ./bin/generate.sh -t production -p
+
+workflows:
+  version: 2
+  all:
+    jobs:
+      - deploy-prod:
+          filters:
+            branches:
+              only: master
+      - deploy-stg:
+          filters:
+            branches:
+              ignore: master
