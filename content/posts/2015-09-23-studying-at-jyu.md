@@ -1,5 +1,6 @@
 ---
 title: Studying at the University of Jyväskylä
+slug: studying-at-jyu
 publishdate: 2015-09-23
 ---
 
