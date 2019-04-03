@@ -82,6 +82,7 @@ EOF
 }
 
 main() {
+    local base_url
     parse_args "$@"
 
     if [ -n "${PRINT_HELP:-}" ]; then
@@ -90,19 +91,18 @@ main() {
     fi
 
     case "${TARGET_ENV:-}" in
-    prod|production|stg|staging) ;;
+    prod|production) base_url="$PROD_BASE_URL" ;;
+    stg|staging) base_url="$STAGING_BASE_URL" ;;
     *) echo "Invalid target: ${TARGET_ENV:-}" >&2; exit 1;
     esac
 
     delete_old_files
-
-    case "${TARGET_ENV}" in
-    prod|production) build_site "$PROD_BASE_URL" ;;
-    stg|staging) build_site "$STAGING_BASE_URL" ;;
-    esac
+    build_site "$base_url"
 
     if [ -n "${PUBLISH_ENABLED}" ]; then
         publish_site
+        echo "----------------------------" >&2
+        echo "Site available @ $base_url" >&2
     fi
 }
 
