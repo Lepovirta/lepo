@@ -41,5 +41,4 @@ your shell's initialization files:
 
 Sources:
 
--   <http://thread.gmane.org/gmane.comp.version-control.git/158981>
 -   <http://www.cons.org/cracauer/sigint.html>

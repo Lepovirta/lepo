@@ -38,11 +38,11 @@ but for the sake of convenience here's [one template that works](https://gist.gi
         password="$_PASSWORD"
     }
 
-\...and here's how you get it to work:
+...and here's how you get it to work:
 
-1.  Download the [template file](/files/eap-ttls-pap).
-2.  Copy the downloaded file to your wicd templates directory,
-    `/etc/wicd/encryption/templates/`.
+1.  Download the template file listed above.
+2.  Place the downloaded file to your wicd templates directory:
+    `/etc/wicd/encryption/templates/eap-ttls-pap`.
 3.  Open Wicd network manager.
 4.  Depending on whether you are part of the staff or a student, select
     either **jyu-staff** or **jyu-student** network, and open the
@@ -52,7 +52,4 @@ but for the sake of convenience here's [one template that works](https://gist.gi
 6.  Select **EAP-TTLS-PAP** as encryption profile for the network.
 7.  Type your JYU credentials (the ones you use in every JYU service) to
     "Indentity" and "Password" fields.
-8.  (Optional) Download the [JYU root certificate](https://www.jyu.fi/itp/ohjeet/tutoriaalit/varmenne-juurivarmenne/jyu_ca2.pem),
-    place it somewhere safe (eg. `/etc/ssl/certs/`), and copy the
-    certificate's full path to "Path to CA cert" field.
-9.  Save the changes, and connect.
+8.  Save the changes, and connect.

@@ -29,9 +29,6 @@ explaining the underlying concepts. Finally, I'll use the solution made
 for the heterogenous structures to create a solution for the standard
 Scala types.
 
-This article was first published in [Cake Solution's tech
-blog](http://www.cakesolutions.net/teamblogs/solving-problems-in-a-generic-way-using-shapeless).
-
 The problem
 -----------
 
