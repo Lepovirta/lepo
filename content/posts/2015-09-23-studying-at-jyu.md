@@ -16,7 +16,7 @@ Degrees and study lines
 -----------------------
 
 I completed both the bachelor degree and masters degree in IT
-([Mathematical Information Technology](https://www.jyu.fi/it/laitokset/mit/en/)), which is a
+([Mathematical Information Technology](https://www.jyu.fi/it/en)), which is a
 standard combo for all new IT students. New students apply to study both
 degrees automatically, and generally cannot choose to apply for just the
 bachelor degree. However, students that have completed studies
