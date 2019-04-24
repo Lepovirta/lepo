@@ -45,12 +45,11 @@ depth of a case class. For example, a value such as `Int` is one level
 deep, while a `case class Coordinate(x: Int, y: Int)` is two levels
 deep. Similarly, the maximum depth of a collection such as Scala's
 `Vector` would be the depth of its elements plus one. Depth calculation
-for type `Vector[(Int, String)]` is demonstrated in figure 1. The left
+for type `Vector[(Int, String)]` is demonstrated in the picture below. The left
 side of the image shows the type of each level in the tree shown in the
 middle, while the right side shows the depth of each level.
 
-![Figure 1: Depth progression for `Vector[(Int, String)]`](/img/sample_depth.png)
-Figure 1: Depth progression for `Vector[(Int, String)]`
+![Depth progression for `Vector[(Int, String)]`](images/sample_depth.png)
 
 One way to approach the problem is through type classes. We'll create a
 type class for calculating the depth of an object, and add an instance
@@ -352,10 +351,9 @@ Instead of attempting to express the solution to our problem for
 standard Scala types directly, we modeled the solution using
 Shapeless's product and coproduct types, and brought that solution back
 to Scala types using type class instance derivation. This process is
-demonstrated in figure 2.
+demonstrated in the picture below.
 
-![Figure 2: Graph demonstrating the generic solution using Shapeless types.](/img/type_universes.png)
-Figure 2: Graph demonstrating the generic solution using Shapeless types.
+![Graph demonstrating the generic solution using Shapeless types.](images/type_universes.png)
 
 Conclusions
 -----------
