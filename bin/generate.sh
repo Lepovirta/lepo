@@ -10,8 +10,9 @@ STAGING_BUCKET=${STAGING_BUCKET:-}
 
 # Facts
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+STAGING_DIR=${STAGING_DIR:-"$GIT_BRANCH"}
 PROD_BASE_URL="https://${PROD_HOST}"
-STAGING_BASE_URL="https://${STAGING_HOST}/${GIT_BRANCH}"
+STAGING_BASE_URL="https://${STAGING_HOST}/${STAGING_DIR}"
 PRINT_HELP=""
 TARGET_ENV=""
 PUBLISH_ENABLED=""
@@ -62,7 +63,7 @@ publish_site() {
         ;;
     stg|staging)
         target_bucket=$STAGING_BUCKET
-        target_dir="/$GIT_BRANCH"
+        target_dir="/$STAGING_DIR"
         ;;
     esac
 
