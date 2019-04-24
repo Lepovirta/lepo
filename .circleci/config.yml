@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: Deploy to staging
-          command: ./bin/generate.sh -t staging -p
+          command: STAGING_DIR=$CIRCLE_BRANCH ./bin/generate.sh -t staging -p
 
   deploy-prod:
     docker:
