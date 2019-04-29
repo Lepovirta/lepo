@@ -1,2 +1,5 @@
 public/
 resources/
+.netlify/
+staging_url.txt
+deploy_log.txt
