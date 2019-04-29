@@ -15,8 +15,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Deploy to staging
-          command: STAGING_DIR=$CIRCLE_BRANCH ./bin/generate.sh -t staging -p
+          name: Generate
+          command: ./bin/generate.sh staging
+      - run:
+          name: Publish
+          command: ./bin/publish.sh staging
 
   deploy-prod:
     docker:
@@ -24,8 +27,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Deploy to production
-          command: ./bin/generate.sh -t production -p
+          name: Generate
+          command: ./bin/generate.sh production
+      - run:
+          name: Publish
+          command: ./bin/publish.sh production
 
 workflows:
   version: 2
