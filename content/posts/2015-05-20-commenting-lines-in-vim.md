@@ -12,35 +12,36 @@ with just a few lines of Vimscript.
 
 <!--more-->
 
-    fu! CommentLines() range
-        let commentsymbol = exists('b:commentsymbol') ? b:commentsymbol : '//'
-        let beginsWithComment = getline(a:firstline) =~ ('\M^' . l:commentsymbol)
-        for linenum in range(a:firstline, a:lastline)
-            let line = getline(linenum)
-            let replacement = l:beginsWithComment
-                \ ? substitute(line, '\M^' . l:commentsymbol . '\s\?', '', '')
-                \ : l:commentsymbol . ' ' . line
-            if exists('b:commentsymbolend')
-                let l:replacement = l:beginsWithComment
-                    \ ? substitute(l:replacement, '\M\s\?' . b:commentsymbolend . '$', '', '')
-                    \ : l:replacement . ' ' . b:commentsymbolend
-            endif
-            call setline(linenum, replacement)
-        endfor
-        call cursor(a:lastline + 1, 1)
-    endfunction
-
-    fu! CommentSymbol(start, ...)
-        let b:commentsymbol = a:start
-        if a:0 >= 1
-            let b:commentsymbolend = a:1
-        elseif exists('b:commentsymbolend')
-            unlet b:commentsymbolend
+```
+fu! CommentLines() range
+    let commentsymbol = exists('b:commentsymbol') ? b:commentsymbol : '//'
+    let beginsWithComment = getline(a:firstline) =~ ('\M^' . l:commentsymbol)
+    for linenum in range(a:firstline, a:lastline)
+        let line = getline(linenum)
+        let replacement = l:beginsWithComment
+            \ ? substitute(line, '\M^' . l:commentsymbol . '\s\?', '', '')
+            \ : l:commentsymbol . ' ' . line
+        if exists('b:commentsymbolend')
+            let l:replacement = l:beginsWithComment
+                \ ? substitute(l:replacement, '\M\s\?' . b:commentsymbolend . '$', '', '')
+                \ : l:replacement . ' ' . b:commentsymbolend
         endif
-    endfunction
+        call setline(linenum, replacement)
+    endfor
+    call cursor(a:lastline + 1, 1)
+endfunction
 
-    command! -nargs=0 -range Comment <line1>,<line2>call CommentLines()
-    command! -nargs=+ CommentSymbol call CommentSymbol(<f-args>)
+fu! CommentSymbol(start, ...)
+    let b:commentsymbol = a:start
+    if a:0 >= 1
+        let b:commentsymbolend = a:1
+    elseif exists('b:commentsymbolend')
+        unlet b:commentsymbolend
+    endif
+endfunction
+command! -nargs=0 -range Comment <line1>,<line2>call CommentLines()
+command! -nargs=+ CommentSymbol call CommentSymbol(<f-args>)
+```
 
 In the code listing above, the function `CommentLines` is used for
 commenting the selected range. The command `Comment` is a short hand for
@@ -78,6 +79,6 @@ Alternatively, the command `CommentSymbol` can be used:
 If the comment function shown above isn't your cup of tea, check out
 these plugins instead:
 
--   [commentary.vim](https://github.com/tpope/vim-commentary)
--   [NERD Commenter](https://github.com/scrooloose/nerdcommenter)
--   [tComment](http://www.vim.org/scripts/script.php?script_id=1173)
+- [commentary.vim](https://github.com/tpope/vim-commentary)
+- [NERD Commenter](https://github.com/scrooloose/nerdcommenter)
+- [tComment](http://www.vim.org/scripts/script.php?script_id=1173)
