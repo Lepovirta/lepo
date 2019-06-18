@@ -15,13 +15,7 @@ I also presented the same talk at the Skills Matter conference
 
 <!--more-->
 
-<div class="video-container">
-  <iframe src="https://www.youtube.com/embed/lMlspFnfHM8" frameborder="0" allowfullscreen></iframe>
-</div>
-
-<figure>
-  <script async class="speakerdeck-embed" data-id="74cd458122be466986c5925bbc6489ac" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-</figure>
+[![Video on YouTube](images/reactive_seda.png)](https://www.youtube.com/watch?v=lMlspFnfHM8)
 
 Kafka has become the de facto platform for reliable and scalable
 distribution of high-volumes of data. However, as a developer, it can be
