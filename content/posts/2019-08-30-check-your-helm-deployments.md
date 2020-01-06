@@ -16,7 +16,7 @@ We’ll be using Helm version 2.14.2 for the demonstration.
 
 ## Example Helm chart
 
-In Helm, Kubernetes resources are distributed as [charts](https://helm.sh/docs/developing_charts/#charts):
+In Helm, Kubernetes resources are distributed as [charts](https://v2.helm.sh/docs/developing_charts/#charts):
 a collection of templated Kubernetes resources in YAML or JSON format.
 The charts can be deployed from an external Helm repository, a chart archive file, or a local chart directory.
 Each chart has their own set of variables that can be used for customizing the deployment.
@@ -36,7 +36,7 @@ Let’s parametrize the readiness probe, so that we can simulate a failing deplo
 ## Unchecked deployment
 
 There are two ways to install Helm charts using the Helm CLI:
-[`helm install`](https://helm.sh/docs/helm/#helm-install) and [`helm upgrade --install`](https://helm.sh/docs/helm/#helm-upgrade).
+[`helm install`](https://v2.helm.sh/docs/helm/#helm-install) and [`helm upgrade --install`](https://v2.helm.sh/docs/helm/#helm-upgrade).
 The install sub-command always installs a brand new chart, while the upgrade sub-command can upgrade an existing chart and install a new one, if the chart hasn’t been installed before.
 With the upgrade feature, we can use a single command for installs and upgrades, which is handy for automation.
 Let’s use it to install the demo Helm chart we created earlier.
@@ -93,7 +93,7 @@ We can verify that the deployment didn’t finish successfully by viewing the de
     $ kubectl rollout status deployment demo
     Waiting for deployment "demo" rollout to finish: 1 old replicas are pending termination...
 
-However, the chart deployment [history](https://helm.sh/docs/helm/#helm-history) will show that the first deployment was superseded by the second one.
+However, the chart deployment [history](https://v2.helm.sh/docs/helm/#helm-history) will show that the first deployment was superseded by the second one.
 
     $ helm history demo
     REVISION  STATUS      DESCRIPTION     
@@ -179,7 +179,7 @@ The only way I can think of getting out of this situation is to delete the chart
 
     $ helm delete --purge demo
 
-Instead of trying to use the upgrade command, we can use [`helm rollback`](https://helm.sh/docs/helm/#helm-rollback).
+Instead of trying to use the upgrade command, we can use [`helm rollback`](https://v2.helm.sh/docs/helm/#helm-rollback).
 It’s specifically designed for rolling out a version of a chart you’ve deployed before.
 To use the rollback sub-command, we need to provide it the revision to roll back to.
 It also accepts the same wait and timeout options as install and upgrade, which we can use to verify that the rollback itself is successful.
