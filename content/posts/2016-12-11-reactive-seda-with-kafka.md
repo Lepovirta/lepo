@@ -5,13 +5,9 @@ publishdate: 2016-12-11
 tags:  [kafka, scala]
 ---
 
-A while ago, I made a presentation on staging reactive data pipelines
-with [Kafka](https://kafka.apache.org/). Here's [the video](https://www.youtube.com/watch?v=lMlspFnfHM8)
-and [the slides](https://speakerdeck.com/jkpl/staging-reactive-data-pipelines-using-kafka-as-the-backbone)
-from the talk presented at
-[Reactive Summit 2016](https://www.reactivesummit.org/).
-I also presented the same talk at the Skills Matter conference
-[µCon 2016](https://skillsmatter.com/skillscasts/8749-staging-reactive-data-pipelines-using-kafka-as-the-backbone).
+A while ago, I made a presentation on staging reactive data pipelines with [Kafka](https://kafka.apache.org/).
+Here's [the video](https://www.youtube.com/watch?v=lMlspFnfHM8) and [the slides](https://speakerdeck.com/jkpl/staging-reactive-data-pipelines-using-kafka-as-the-backbone) from the talk presented at [Reactive Summit 2016](https://www.reactivesummit.org/).
+I also presented the same talk at the Skills Matter conference µCon 2016.
 
 <!--more-->
 
