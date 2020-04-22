@@ -114,7 +114,7 @@ Avoid matching on generic type parameters
 
 Sometimes you can't control what type of value gets passed to the
 function you're implementing. For example, the actors in
-[Akka](http://akka.io/) are forced to handle all types (type `Any`) of
+[Akka framework](https://github.com/akka/akka) are forced to handle all types (type `Any`) of
 messages. Since you can't add boundaries to the incoming values at
 compile time, you will again lose the ability to distinguish between a
 `List[String]` and `List[Int]`.
