@@ -2,7 +2,7 @@
 title: Staging Reactive Data Pipelines Using Kafka as the Backbone
 slug: reactive-seda-with-kafka
 publishdate: 2016-12-11
-tags:  [kafka, scala]
+tags:  [kafka, scala, distributed-systems]
 ---
 
 A while ago, I made a presentation on staging reactive data pipelines with [Kafka](https://kafka.apache.org/).
