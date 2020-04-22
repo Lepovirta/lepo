@@ -305,7 +305,7 @@ We can, of course, further combine this with [file
 reading](https://clojuredocs.org/clojure.core/slurp) and
 [writing](https://clojuredocs.org/clojure.core/spit) or an HTTP server
 library like [Ring](https://github.com/ring-clojure/ring) or
-[HTTP Kit](http://www.http-kit.org/).
+[HTTP Kit](http://http-kit.github.io/).
 
 Conclusions
 -----------
