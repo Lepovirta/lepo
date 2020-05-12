@@ -10,4 +10,7 @@ trap "kill 0" EXIT
 curl -sfSL -4 --retry 10 --retry-connrefused --retry-delay 2 "http://localhost:1313/" >/dev/null
 
 # Test the site
-echo '{"urls": ["http://localhost:1313/"]}' | lukki
+echo '{
+    "urls": ["http://localhost:1313/"],
+    "ignoreRobotsTxt": true
+}' | lukki
