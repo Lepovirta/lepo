@@ -2,6 +2,7 @@
 title: How should I answer a health check?
 publishdate: 2020-04-22
 tags: [distributed-systems]
+canonicalUrl: https://medium.com/polarsquad/how-should-i-answer-a-health-check-aa1fcf6e858e
 ---
 
 In my work, I often meet teams that are not confident with their health checks endpoints.
