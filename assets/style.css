@@ -6,13 +6,8 @@ body {
 }
 
 blockquote {
-  color: #7a7582;
-  font-size: 20px;
+  color: #68636e;
   font-style: italic;
-}
-
-blockquote:before {
-  content: "''";
 }
 
 code {
