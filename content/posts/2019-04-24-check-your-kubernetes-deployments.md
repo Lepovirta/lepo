@@ -2,6 +2,7 @@
 title: Check your Kubernetes deployments!
 publishdate: 2019-04-24
 tags: [kubernetes]
+canonicalUrl: https://medium.com/polarsquad/check-your-kubernetes-deployments-46dbfbc47a7c
 ---
 
 When writing and setting up software, it’s natural for us to focus on just the happy path.

@@ -19,6 +19,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ "/favicon-32x32.png" | relURL }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ "/favicon-16x16.png" | relURL }}">
     <link rel="manifest" href="{{ "/manifest.json" | relURL }}">
+    {{- if ne .Params.canonicalUrl "" }}
+    <link rel="canonical" href="{{ .Params.canonicalUrl }}">
+    {{- end }}
     <link href="{{ "/posts/index.xml" | relURL }}" rel="alternate" title="posts" type="application/rss+xml">
     <style>{{ readFile "assets/style.css" | safeCSS }}</style>
 </head>
@@ -26,8 +29,7 @@
 <body>
     <div id="top"><a href="{{ "/" | relURL }}">Lepo</a></div>
     <div class="wrapper">
-        {{ block "main" . }}
-        {{ end }}
+        {{- block "main" . -}}{{- end -}}
         <footer>
             <div class="left">
                 <a href="{{ "/about.html" | relURL }}">ABOUT</a>
