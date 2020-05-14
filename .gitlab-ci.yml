@@ -1,0 +1,40 @@
+image: registry.gitlab.com/lepovirta/lepo-build
+
+stages:
+  - test
+  - deploy
+
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_COMMIT_BRANCH == "master"
+
+test:
+  stage: test
+  before_script:
+    - ./bin/serve.sh 2>/dev/null >&2 &
+    - >
+      curl -sfSL -4 --retry 10
+      --retry-connrefused
+      --retry-delay 2
+      "http://localhost:1313/" >/dev/null
+  script:
+    - ./bin/test.sh
+  after_script:
+    - killall -q hugo || true
+
+deploy-staging:
+  stage: deploy
+  script:
+    - ./bin/generate.sh staging
+    - ./bin/publish.sh staging
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+
+deploy-production:
+  stage: deploy
+  script:
+    - ./bin/generate.sh production
+    - ./bin/publish.sh production
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
