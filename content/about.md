@@ -12,12 +12,9 @@ Avoid burnout, and allow yourself to have a break.
 *Relax*.
 
 This site is a space for sharing and collaborating on ideas, tools, and knowledge to help software developers of all skill levels.
+Check out the [code](/code.html) page for the projects maintained under Lepo.
 
 <!--more-->
-
-All Lepo related code is hosted on [GitHub](https://github.com/Lepovirta).
-None of the projects have any schedules,
-and they will be worked on whenever anyone feels like working on them.
 
 ## About the author
 
