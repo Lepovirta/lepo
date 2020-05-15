@@ -24,7 +24,7 @@ Links: [GitHub](https://github.com/Lepovirta/lukki)
 
 Keruu aggregates RSS/Atom feeds to a single HTML page.
 
-Links: [GitHub](https://github.com/Lepovirta/keruu)
+Links: [Gitlab](https://gitlab.com/lepovirta/keruu)
 
 ## Kuvia
 
@@ -37,7 +37,7 @@ Links: [GitHub](https://github.com/Lepovirta/kuvia)
 
 Static website generator for this site.
 
-Links: [GitHub](https://github.com/Lepovirta/lepo)
+Links: [Gitlab](https://gitlab.com/lepovirta/lepo)
 
 ## More projects
 
