@@ -2,22 +2,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-STAGING_URL_FILE=staging_url.txt
-DEPLOY_LOG=deploy_log.txt
-
-delete_logs() {
-    if [ -f "$DEPLOY_LOG" ]; then
-        rm "$DEPLOY_LOG"
-    fi
-}
-trap delete_logs EXIT
-
-extract_staging_link() {
-    awk -F ': ' '/Live Draft URL/ { printf $2; exit }' "$DEPLOY_LOG" > "$STAGING_URL_FILE"
-}
-
 deploy_message() {
-    local git_branch="${CIRCLE_BRANCH:-}"
+    local git_branch="${CI_COMMIT_REF_NAME:-}"
     if [ -z "$git_branch" ]; then
         git_branch=$(git rev-parse --abbrev-ref HEAD)
     fi
@@ -25,20 +11,22 @@ deploy_message() {
 }
 
 main() {
-    local env="${1:-stg}"
-    case "$env" in
-        prod|production)
-            netlify deploy --prod
-            ;;
-        stg|staging)
-            netlify deploy -m "$(deploy_message)" | tee "$DEPLOY_LOG"
-            extract_staging_link
-            ;;
-        *)
-            echo "Invalid environment $env. Expected prod/production/stg/staging." >&2
-            return 1
-            ;;
+    local draft="${NETLIFY_DRAFT:-"true"}"
+    local message=${NETLIFY_DEPLOYMESSAGE:-}
+    local dir=${NETLIFY_DIRECTORY:-"public"}
+
+    if [ -z "${message:-}" ]; then
+        message=$(deploy_message)
+    fi
+
+    case "${1:-}" in
+        prod|production) draft="false" ;;
     esac
+
+    NETLIFY_DEPLOYMESSAGE=${message} \
+    NETLIFY_DRAFT=${draft} \
+    NETLIFY_DIRECTORY=${dir} \
+    netlify-deployer
 }
 
 main "$@"
