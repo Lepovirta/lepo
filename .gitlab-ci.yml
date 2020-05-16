@@ -4,6 +4,9 @@ stages:
   - test
   - deploy
 
+variables:
+  NETLIFY_DIRECTORY: public
+
 workflow:
   rules:
     - if: $CI_MERGE_REQUEST_ID
@@ -27,7 +30,7 @@ deploy-staging:
   stage: deploy
   script:
     - ./bin/generate.sh staging
-    - ./bin/publish.sh staging
+    - gitlab-deploy-site
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -37,7 +40,7 @@ deploy-production:
   stage: deploy
   script:
     - ./bin/generate.sh production
-    - ./bin/publish.sh production
+    - gitlab-deploy-site
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
