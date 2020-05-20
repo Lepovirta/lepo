@@ -3,11 +3,12 @@
     <h1>{{ .Title }}</h1>
 </header>
 {{ .Content }}
-<ul class="no-bul">
+<ul style="list-style: none; padding: 0;">
     {{ range .Pages }}
     <li>
         {{ .PublishDate.Format "2006/01" }} &raquo; <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </li>
     {{ end }}
 </ul>
+{{ partial "footer.html" }}
 {{ end }}

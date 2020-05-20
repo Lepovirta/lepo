@@ -5,26 +5,26 @@
     </header>
     {{ .Content }}
 </article>
-<div class="post-meta">
+<nav>
     <div><b>Posted:</b> {{ .PublishDate.Format "2006-01-02" }}</div>
     {{- if .Params.tags }}
     <div>
         <b>Tags:</b>
-        <ul class="inline-list">
-            {{- range .Params.tags }}
-                {{- $name := . }}
-                {{- with $.Site.GetPage (printf "/tags/%s" ($name | urlize))}}
-                <li><a href="{{ .RelPermalink }}">{{ $name }}</a></li>
-                {{- end }}
+        {{- range $index, $name := .Params.tags }}
+            {{- if $index -}},{{- end -}}
+            {{- with $.Site.GetPage (printf "/tags/%s" ($name | urlize))}}
+            <a href="{{ .RelPermalink }}">{{ $name }}</a>
             {{- end }}
-        </ul>
+        {{- end }}
     </div>
     {{- end }}
-    {{- if .Params.canonicalUrl }}
     <div>
-        <a href="{{ .Params.canonicalUrl }}">original post</a>
+        {{- if .Params.canonicalUrl }}
+        <a href="{{ .Params.canonicalUrl }}">Original post</a>
+        &mdash;
+        {{- end }}
+        <a href="{{ "/posts.html" | relURL }}">More posts &hellip;</a>
     </div>
-    {{- end }}
-    <div><a href="{{ "/posts.html" | relURL }}">more posts &hellip;</a></div>
-</div>
+</nav>
+{{ partial "footer.html" }}
 {{ end }}

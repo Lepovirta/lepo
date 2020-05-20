@@ -2,11 +2,12 @@
 <header>
     <h1>{{ .Title }}</h1>
 </header>
-<ul class="no-bul">
+<ul style="list-style: none; padding: 0;">
     {{ range .Pages }}
     <li>
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </li>
     {{ end }}        
 </ul>
+{{ partial "footer.html" }}
 {{ end }}
