@@ -10,7 +10,11 @@ None of the projects have any schedules, and they will be worked on whenever any
 
 Yet Another Hints Extension (YAHE) is a browser extension that allows you to click elements without using your mouse.
 
-Links: [GitHub](https://github.com/Lepovirta/yahe)
+* Download:
+  [Firefox](https://addons.mozilla.org/en-US/firefox/addon/yet-another-hints-extension/),
+  [Chrome](https://chrome.google.com/webstore/detail/yet-another-hints-extensi/eimkmfhfckmajkednnnhkacajflcjinm)
+* Releases: [GitHub](https://github.com/Lepovirta/yahe/releases)
+* Source: [GitHub](https://github.com/Lepovirta/yahe)
 
 ## Lukki
 
@@ -18,30 +22,32 @@ Static website testing through crawling.
 Point Lukki to a website and it'll find broken pages for you.
 It's used for testing this website for broken links.
 
-Links: [GitHub](https://github.com/Lepovirta/lukki)
+* Releases: [GitHub](https://github.com/Lepovirta/lukki/releases)
+* Source: [GitHub](https://github.com/Lepovirta/lukki)
 
 ## Keruu
 
 Keruu aggregates RSS/Atom feeds to a single HTML page.
 
-Links: [Gitlab](https://gitlab.com/lepovirta/keruu)
+* Source: [Gitlab](https://gitlab.com/lepovirta/keruu)
 
 ## Kuvia
 
 Kuvia is an image gallery generator for static web sites.
 Give it a list of image files, and you've got an image gallery that can be hosted in any web host.
 
-Links: [GitHub](https://github.com/Lepovirta/kuvia)
+* Download: [NPM](https://www.npmjs.com/package/kuvia)
+* Source: [GitHub](https://github.com/Lepovirta/kuvia)
 
 ## Lepo
 
 Static website generator for this site.
 
-Links: [Gitlab](https://gitlab.com/lepovirta/lepo)
+* Source: [Gitlab](https://gitlab.com/lepovirta/lepo)
 
 ## More projects
 
 For more projects, check out these pages:
 
-* [GitHub](https://github.com/Lepovirta)
 * [Gitlab](https://gitlab.com/lepovirta)
+* [GitHub](https://github.com/Lepovirta)
