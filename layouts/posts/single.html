@@ -1,3 +1,21 @@
+{{ define "css" }}
+.post-meta {
+  display: table;
+  border-top: 1px solid #ccc;
+  padding: 20px 0;
+}
+.post-meta > div {
+  display: table-row;
+}
+.post-meta > div > div {
+  display: table-cell;
+  padding: 4px 20px 0 0;
+}
+.post-meta > div > div:first-child {
+  font-weight: bold;
+}
+{{ end }}
+
 {{ define "main" }}
 <article>
     <header>
@@ -5,26 +23,40 @@
     </header>
     {{ .Content }}
 </article>
-<nav>
-    <div><b>Posted:</b> {{ .PublishDate.Format "2006-01-02" }}</div>
+<div class="post-meta">
+    <div>
+        <div>posted</div>
+        <div>
+            <time datetime="{{ .PublishDate.Format "2006-01-02" }}" pubdate>
+                {{ .PublishDate.Format "2006-01-02" }}
+            </time>
+        </div>
+    </div>
     {{- if .Params.tags }}
     <div>
-        <b>Tags:</b>
+        <div>tags</div>
+        <div>
         {{- range $index, $name := .Params.tags }}
             {{- if $index -}},{{- end -}}
             {{- with $.Site.GetPage (printf "/tags/%s" ($name | urlize))}}
             <a href="{{ .RelPermalink }}">{{ $name }}</a>
             {{- end }}
         {{- end }}
+        </div>
+    </div>
+    <div>
+        <div>more</div>
+        <div>
+            {{ with .Prev -}}
+            <a title="{{ .Title }}" href="{{ .RelPermalink }}">previous</a>,
+            {{ end -}}
+            {{ with .Next -}}
+            <a title="{{ .Title }}" href="{{ .RelPermalink }}">next</a>,
+            {{ end -}}
+            <a title="all posts" href="{{ "/posts.html" | relURL }}">all</a>
+        </div>
     </div>
     {{- end }}
-    <div>
-        {{- if .Params.canonicalUrl }}
-        <a href="{{ .Params.canonicalUrl }}">Original post</a>
-        &mdash;
-        {{- end }}
-        <a href="{{ "/posts.html" | relURL }}">More posts &hellip;</a>
-    </div>
-</nav>
+</div>
 {{ partial "footer.html" }}
 {{ end }}

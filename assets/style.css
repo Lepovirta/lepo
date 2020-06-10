@@ -1,8 +1,10 @@
 body {
   background-color: #fefefe;
-  color: #444;
+  color: #333;
   line-height: 1.618;
   margin: 0;
+  font-family: sans-serif;
+  font-size: 1.125em;
 }
 
 main {
@@ -15,14 +17,9 @@ blockquote {
   font-style: italic;
 }
 
-code {
-  background-color: #f7f1ff;
-}
-
 pre {
   padding: 0.2em 1em;
-  border-left: 0.25em solid #44118d;
-  background-color: #f7f1ff;
+  background-color: #f7f7f7;
   overflow-x: auto;
 }
 
@@ -43,26 +40,11 @@ header h1 {
 
 footer {
   text-align: center;
+  color: #555;
 }
 
 footer a {
   color: #666;
-}
-
-nav {
-  border-top: 1px solid #ccc;
-  padding: 20px 0;
-}
-
-.logo {
-  margin: 1em auto;
-  width: 40%;
-}
-
-.slogan {
-  text-align: center;
-  font-size: 300%;
-  color: lightgray;
 }
 
 #top {
@@ -70,8 +52,7 @@ nav {
   text-align: center;
   font-size: 36px;
   text-transform: uppercase;
-  letter-spacing: 5px;
-  font-family: sans-serif;
+  letter-spacing: 12px;
 }
 
 #top a {
@@ -79,23 +60,12 @@ nav {
   text-decoration: none;
 }
 
-#top a:hover:before {
-  content: "{"
-}
-
-#top a:hover:after {
-  content: "}"
-}
-
 @media screen and (max-width: 700px) {
+  body {
+    font-size: 1em;
+  }
   main {
     width: auto;
     padding: 0 10px;
-  }
-  .logo {
-    width: 70%;
-  }
-  .slogan {
-    font-size: 200%;
   }
 }

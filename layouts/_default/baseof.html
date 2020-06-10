@@ -22,7 +22,12 @@
     <link rel="canonical" href="{{ .Params.canonicalUrl }}">
     {{- end }}
     <link href="{{ "/posts/index.xml" | relURL }}" rel="alternate" title="posts" type="application/rss+xml">
-    <style>{{ readFile "assets/style.css" | safeCSS }}</style>
+    <style>
+        {{- readFile "assets/style.css" | safeCSS -}}
+    </style>
+    <style>
+        {{- block "css" . | safeCSS -}}{{- end -}}
+    </style>
 </head>
 <body>
     <div id="top"><a href="{{ "/" | relURL }}">Lepo</a></div>
