@@ -13,6 +13,14 @@ uglyurls = true
 [markup]
   [markup.goldmark.renderer]
     unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    lineNos = false
+    noClasses = true
+    hl_Lines = ""
+    tabWidth = 4
+    style = "tango"
 
 [privacy]
   [privacy.disqus]
