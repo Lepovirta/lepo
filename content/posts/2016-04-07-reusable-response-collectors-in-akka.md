@@ -4,7 +4,7 @@ publishdate: 2016-04-07
 tags: [scala, akka]
 ---
 
-One of the recommended practices in Akka is to use the [response collector pattern](http://techblog.net-a-porter.com/2013/12/ask-tell-and-per-request-actors/) instead of the [ask pattern](http://doc.akka.io/docs/akka/snapshot/scala/actors.html#Ask__Send-And-Receive-Future) for request-response style actor communication. It simplifies actor communication by placing most of the response management under one specialised actor. Instead of adding timeout and error handling logic to several places in the actor system, the actors simply respond to any queries using the standard tell mechanism while the response collector actor decides when it has received enough responses.
+One of the recommended practices in Akka is to use the [response collector pattern](https://web.archive.org/web/20200920103417/http://techblog.net-a-porter.com/2013/12/ask-tell-and-per-request-actors/) instead of the [ask pattern](https://doc.akka.io/docs/akka/2.5/actors.html?language=scala#ask-send-and-receive-future) for request-response style actor communication. It simplifies actor communication by placing most of the response management under one specialised actor. Instead of adding timeout and error handling logic to several places in the actor system, the actors simply respond to any queries using the standard tell mechanism while the response collector actor decides when it has received enough responses.
 
 It’s easy to create an ad hoc response collector, but in many cases it would be nice to be able to reuse existing actor code.
 

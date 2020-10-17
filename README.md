@@ -1,6 +1,6 @@
 # lepo
 
-Static website generator for [Lepo](https://lepo.group/).
+Static website generator for [Lepo](https://lepovirta.org/).
 
 ## Developing
 
