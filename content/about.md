@@ -19,7 +19,7 @@ Check out the [code](/code.html) page for the projects maintained under Lepo.
 ## About the author
 
 I'm Jaakko Pallari, a Finnish software developer focused on making software service development and maintenance smooth and reliable.
-I work as the Lead SRE consultant at [Polar Squad](https://www.polarsquad.com/).
+I work as the Chief Technology Officer at [Polar Squad](https://www.polarsquad.com/).
 I'm interested in all things related to Site Reliability Engineering, DevOps, and Functional Programming.
 
 To contact me, send me an email to jkpl **ät** lepovirta **döt** org.
