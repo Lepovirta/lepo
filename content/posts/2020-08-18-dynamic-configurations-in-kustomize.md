@@ -56,7 +56,7 @@ spec:
     app: myapp
 ```
 
-The Deployment manifest uses `myapp` as the Docker image, which we can later point to the actual Docker image using the [`images`](https://kubectl.docs.kubernetes.io/pages/reference/kustomize.html#images) field.
+The Deployment manifest uses `myapp` as the Docker image, which we can later point to the actual Docker image using the [`images`](https://kubectl.docs.kubernetes.io/references/kustomize/images/) field.
 
 ```yaml
 # path: k8s-base/deployment.yaml
@@ -197,7 +197,7 @@ Again, if you look at the `kustomization.yaml` file, you should see the Git comm
 
 ## A temporary Kustomize project
 
-Kustomize provides a mechanism to [use an existing Kustomize project as a base project to extend on](https://kubectl.docs.kubernetes.io/pages/app_customization/bases_and_variants.html). It’s generally intended for customising deployments per target environment.
+Kustomize provides a mechanism to [use an existing Kustomize project as a base project to extend on](https://kubectl.docs.kubernetes.io/guides/config_management/bespoke/). It’s generally intended for customising deployments per target environment.
 
 By using the bases feature, we can host our dynamic configurations in a temporary project that extends the manifests in the Git repository. We can automate this using a shell script.
 
