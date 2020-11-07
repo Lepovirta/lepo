@@ -1,47 +1,62 @@
 image: registry.gitlab.com/lepovirta/lepo-build
 
 stages:
-  - test
-  - deploy
+- test
+- build
+- deploy
 
 variables:
   NETLIFY_DIRECTORY: public
 
 workflow:
   rules:
-    - if: $CI_MERGE_REQUEST_ID
-    - if: $CI_COMMIT_BRANCH == "master"
+  - if: $CI_MERGE_REQUEST_ID
+  - if: $CI_COMMIT_BRANCH == "master"
 
 test:
   stage: test
   before_script:
-    - ./bin/serve.sh 2>/dev/null >&2 &
-    - >
-      curl -sfSL -4 --retry 10
-      --retry-connrefused
-      --retry-delay 2
-      "http://localhost:1313/" >/dev/null
+  - ./bin/serve.sh 2>/dev/null >&2 &
+  - >
+    curl -sfSL -4 --retry 10
+    --retry-connrefused
+    --retry-delay 2
+    "http://localhost:1313/" >/dev/null
   script:
-    - ./bin/test.sh
+  - ./bin/test.sh
   after_script:
-    - killall -q hugo || true
+  - killall -q hugo || true
 
-deploy-staging:
-  stage: deploy
+.build:
+  stage: build
   script:
-    - ./bin/generate.sh staging
-    - gitlab-deploy-site
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: never
-    - if: $CI_MERGE_REQUEST_ID
+  - ./bin/generate.sh "$TARGET_ENV"
+  artifacts:
+    paths:
+    - $NETLIFY_DIRECTORY
+    expire_in: 1 days
 
-deploy-production:
-  stage: deploy
-  script:
-    - ./bin/generate.sh production
-    - gitlab-deploy-site
+build-staging:
+  extends: .build
+  variables:
+    TARGET_ENV: staging
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: never
-    - if: $CI_COMMIT_BRANCH == "master"
+  - if: $CI_MERGE_REQUEST_ID
+
+build-production:
+  extends: .build
+  variables:
+    TARGET_ENV: production
+  rules:
+  - if: $CI_COMMIT_BRANCH == "master"
+
+deploy:
+  stage: deploy
+  image: registry.gitlab.com/lepovirta/netlify-deployer:ci
+  script:
+  - gitlab-deploy-site
+  rules:
+  - if: $CI_PIPELINE_SOURCE == "schedule"
+    when: never
+  - if: $CI_COMMIT_BRANCH == "master"
+  - if: $CI_MERGE_REQUEST_ID
