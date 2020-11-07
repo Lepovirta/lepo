@@ -14,7 +14,7 @@ arm) DETECTED_ARCH="arm64" ;;
 *) echo "usupported arch: $(uname -m)" >&2; exit 1 ;;
 esac
 
-HUGO_VERSION="${HUGO_VERSION:-0.70.0}"
+HUGO_VERSION="${HUGO_VERSION:-0.78.1}"
 SCRIPT_DIR="$(dirname "$0")"
 HUGO_PATH="$SCRIPT_DIR/hugo"
 RELEASE_BASE_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}"
