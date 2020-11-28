@@ -2,7 +2,7 @@
 <header>
     <h1>{{ .Title }}</h1>
 </header>
-<ul style="list-style: none; padding: 0;">
+<ul class="plain-list">
     {{ range .Pages }}
     <li>
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>

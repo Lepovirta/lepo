@@ -3,7 +3,7 @@
     <h1>{{ .Title }}</h1>
 </header>
 {{ .Content }}
-<ul style="list-style: none; padding: 0;">
+<ul class="plain-list">
     {{ range .Pages }}
     <li>
         {{ .PublishDate.Format "2006/01" }} &raquo; <a href="{{ .RelPermalink }}">{{ .Title }}</a>

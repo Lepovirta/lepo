@@ -18,16 +18,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ "/favicon-32x32.png" | relURL }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ "/favicon-16x16.png" | relURL }}">
     <link rel="manifest" href="{{ "/manifest.json" | relURL }}">
+    {{ $mainCss := resources.Get "style.css" | resources.Minify }}
+    <link rel="stylesheet" href="{{ $mainCss.Permalink | relURL }}" >
     {{- if .Params.canonicalUrl }}
     <link rel="canonical" href="{{ .Params.canonicalUrl }}">
     {{- end }}
     <link href="{{ "/posts/index.xml" | relURL }}" rel="alternate" title="posts" type="application/rss+xml">
-    <style>
-        {{- readFile "assets/style.css" | safeCSS -}}
-    </style>
-    <style>
-        {{- block "css" . | safeCSS -}}{{- end -}}
-    </style>
 </head>
 <body>
     <div id="top"><a href="{{ "/" | relURL }}">Lepo</a></div>
