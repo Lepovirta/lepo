@@ -37,7 +37,7 @@ Kuvia is an image gallery generator for static web sites.
 Give it a list of image files, and you've got an image gallery that can be hosted in any web host.
 
 * Download: [NPM](https://www.npmjs.com/package/kuvia)
-* Source: [GitHub](https://github.com/Lepovirta/kuvia)
+* Source: [Gitlab](https://gitlab.com/lepovirta/kuvia)
 
 ## Lepo
 
