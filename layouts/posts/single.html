@@ -9,9 +9,15 @@
     <div>
         <div>posted</div>
         <div>
+            {{- if .Params.canonicalUrl }}
+            <a href="{{ .Params.canonicalUrl }}">
+            {{- end }}
             <time datetime="{{ .PublishDate.Format "2006-01-02" }}" pubdate>
                 {{ .PublishDate.Format "2006-01-02" }}
             </time>
+            {{- if .Params.canonicalUrl }}
+            </a>
+            {{- end }}
         </div>
     </div>
     {{- if .Params.tags }}
