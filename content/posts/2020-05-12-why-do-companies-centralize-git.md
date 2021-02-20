@@ -11,7 +11,7 @@ Every now and then, popular Git hosting services such as GitHub, Gitlab, and Bit
 
 At face value, it’s happening because of the centralization of Git repositories in a handful of providers, but that just raises more questions: Given that Git is distributed, why do we centralize Git repositories?
 
-Last month, [Yair](https://medium.com/@yair.etziony) talked about [how Git is an important part of our toolset](https://medium.com/polarsquad/devops-whats-it-all-about-part-2-tooling-git-the-master-of-version-control-systems-59e976c1881e), so I thought I’d expand on it by taking a look into what it means for Git to be distributed, why companies keep centralising Git, and why it’s generally not thought out to be that big of a deal.
+Last month, Yair talked about [how Git is an important part of our toolset](https://medium.com/polarsquad/devops-whats-it-all-about-part-2-tooling-git-the-master-of-version-control-systems-59e976c1881e), so I thought I’d expand on it by taking a look into what it means for Git to be distributed, why companies keep centralising Git, and why it’s generally not thought out to be that big of a deal.
 
 ## What does it mean for Git to be distributed?
 
