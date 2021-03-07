@@ -65,6 +65,10 @@ footer a {
   padding: 0;
 }
 
+.footnotes hr {
+  border: 0;
+}
+
 @media screen and (max-width: 700px) {
   body {
     font-size: 1em;
