@@ -85,7 +85,7 @@ object Name {
 }
 ```
 
-Here the name is encapsulated in a single value class. By making the datatype a value class (i.e. it extends `AnyVal`), we can in some cases avoid the overhead of allocating the object around the string, but at the same time enjoy the type-safety it provides compared to plain strings. As a value class, the class will also automatically have `equals` and `hashCode` methods based on the type it wraps.
+Here the name is encapsulated in a single value class. By making the datatype a value class (i.e. it extends `AnyVal`), we can in some cases avoid the overhead of allocating the object around the string, but at the same time enjoy the type-safety it provides compared to plain strings. As a value class, the class will also automatically have `equals` and `hashCode` methods based on the type it wraps.
 
 With the `Name` type in place, we can make the `Conference` type use it without having to repeat the validation process.
 

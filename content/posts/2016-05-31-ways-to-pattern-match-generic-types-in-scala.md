@@ -257,7 +257,7 @@ The type class instance is parametrized with `Typeable` instances for the `Funky
 
 With the help of the instance parameters, we can create a cast method that attempts to cast the given value to a `Funky[A, B]` when it can also cast the values inside `Funky`.
 
-As we can see from the example, even with two type parameters and two fields, the casting process is already complex. Adding more fields and type parameters requires even more casting steps. Moreover, the casting is not enforced by the compiler (e.g. you can easily miss a casting step for a field), which means that it’s exposed to casting failures.
+As we can see from the example, even with two type parameters and two fields, the casting process is already complex. Adding more fields and type parameters requires even more casting steps. Moreover, the casting is not enforced by the compiler (e.g. you can easily miss a casting step for a field), which means that it’s exposed to casting failures.
 
 ## Type tags
 

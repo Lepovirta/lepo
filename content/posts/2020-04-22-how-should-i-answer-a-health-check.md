@@ -19,7 +19,7 @@ One of the fundamental problems in distributed computing is that it’s really h
 
 To detect these problems, we can use health checks: Continuously checking whether the remote component is available or not by asking it, and automating actions based on the perceived availability.
 
-There’s many ways to implement health checks: e.g. executing a command successfully on the host, checking that a TCP socket can be opened to the server, checking that we get the right HTTP response from a web server. Probably the most common way to do health checking is by using a HTTP GET check where the response codes between 200-399 indicate a successful check and everything else is interpreted as a failed check.
+There’s many ways to implement health checks: e.g. executing a command successfully on the host, checking that a TCP socket can be opened to the server, checking that we get the right HTTP response from a web server. Probably the most common way to do health checking is by using a HTTP GET check where the response codes between 200-399 indicate a successful check and everything else is interpreted as a failed check.
 
 ## How do services use health checks?
 
@@ -74,7 +74,7 @@ Different types of health checks perform different actions, so ideally your app 
 The liveness check should be very, very simple. It should only respond with a failure when the only way to recover the application is to reboot it. Here’s a few examples of those situations:
 
   - **The resources were exhausted:** Application has ran out of resources such as memory, and can’t continue further.
-  - **The underlying system failed:** The platform (e.g. JVM or Ruby VM) that the app runs on has failed.
+  - **The underlying system failed:** The platform (e.g. JVM or Ruby VM) that the app runs on has failed.
 
 In these situations, it’s usually enough to just respond with a healthy response always. If one of the above failure scenarios occurs, it will most likely automatically take out the application and the health check with it. This is especially the case when the liveness health endpoint is integrated as part of the application as an API.
 
@@ -86,7 +86,7 @@ The readiness check is more complicated compared to the liveness check. It shoul
 
 **Dependency availability:** If your application has dependencies to external resources such as databases, your application may need to first ensure those are available before it can consider itself ready. For example, if your application requires access to a database to do anything useful, your application should check that it can connect to the database as part of the readiness check.
 
-**Resource saturation:** If your application uses internal resources that can get saturated (e.g. queues, network sockets), your application may need to keep track of those. When one of the resources has run out, the app can signal that it’s no longer ready to receive more traffic. This allows the application to cool down before accepting more traffic.
+**Resource saturation:** If your application uses internal resources that can get saturated (e.g. queues, network sockets), your application may need to keep track of those. When one of the resources has run out, the app can signal that it’s no longer ready to receive more traffic. This allows the application to cool down before accepting more traffic.
 
 **Down for maintenance:** If you need to set your application to a maintenance mode, you can signal it through the health check. An example of this could be a scheduled resource garbage collection cycle which may disturb the application’s ability to serve incoming requests.
 
@@ -115,7 +115,7 @@ There are many common ways to implement health checks, but there’s no one true
 
 When a service polls your application’s health endpoint, the response should be fast. This can be difficult to guarantee when you need to check external dependencies.
 
-Instead of checking each dependency when the readiness health endpoint is called, you could instead have the dependencies continuously checked in the background (e.g. in another thread) and stored in memory. Your app can then respond to the readiness check based on the last known dependency statuses. This way, your application health checks remain fast and reasonably accurate.
+Instead of checking each dependency when the readiness health endpoint is called, you could instead have the dependencies continuously checked in the background (e.g. in another thread) and stored in memory. Your app can then respond to the readiness check based on the last known dependency statuses. This way, your application health checks remain fast and reasonably accurate.
 
 ## Improving reliability
 
@@ -123,9 +123,9 @@ Once you have a really elaborate readiness health check in place, you might feel
 
 ### Only track dependencies that are essential
 
-If your application uses multiple dependencies (e.g. databases, other services), you should review which of those are essential for the application to function.
+If your application uses multiple dependencies (e.g. databases, other services), you should review which of those are essential for the application to function.
 
-You might find that your app can work around some of the dependencies. For example, your app could serve cached or placeholder data when a dependency is down (i.e. perform [circuit breaking](https://www.martinfowler.com/bliki/CircuitBreaker.html)). This means that you don’t need to check those dependencies in your app. Alternatively, you could serve the data from another service, which means you only need to check that either the original or alternative service is available.
+You might find that your app can work around some of the dependencies. For example, your app could serve cached or placeholder data when a dependency is down (i.e. perform [circuit breaking](https://www.martinfowler.com/bliki/CircuitBreaker.html)). This means that you don’t need to check those dependencies in your app. Alternatively, you could serve the data from another service, which means you only need to check that either the original or alternative service is available.
 
 ### Split the app, if needed
 

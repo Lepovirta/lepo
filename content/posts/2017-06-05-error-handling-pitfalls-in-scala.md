@@ -55,7 +55,7 @@ There are a couple of differences how these examples work at runtime. In example
 
 Another property of example \#2 is that we’ve made multiple calls of `foo`, but we’ll only capture at most one of the errors that might occur when we run the program. This is because the composition will always end when it meets the first error. For example, if both `xf` and `yf` contain an error, then the result of `bar` will be the same as `xf`.
 
-In many cases, capturing these error cases is vital. If `foo` has no side effects (e.g. `foo` is for computing the square root of a number), the function call simply wastes some computing resources for the duration of the function call. However, if `foo` does have side effects (e.g. `foo` writes the input to the database), we most likely want to at least capture the error it might have produced rather than let it silently fail in the background.
+In many cases, capturing these error cases is vital. If `foo` has no side effects (e.g. `foo` is for computing the square root of a number), the function call simply wastes some computing resources for the duration of the function call. However, if `foo` does have side effects (e.g. `foo` writes the input to the database), we most likely want to at least capture the error it might have produced rather than let it silently fail in the background.
 
 What makes these properties problematic is how easy it is to get yourself in trouble. Slightly altering the placement in which these function calls are made creates subtle differences in how (or whether) the error cases are handled. Often we’d like both of the styles presented in these examples to work the same at runtime.
 

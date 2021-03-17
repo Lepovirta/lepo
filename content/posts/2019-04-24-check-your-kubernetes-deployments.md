@@ -103,7 +103,7 @@ readinessProbe:
     port: 3000
 ```
 
-A more sophisticated implementation of the health check might perform some background checks to verify that everything is ready for the application to serve requests, and serve that information through a dedicated health endpoint (e.g. /health or /ready). It’s up to the application developers to figure out when the application is ready, and how to respond back to probes.
+A more sophisticated implementation of the health check might perform some background checks to verify that everything is ready for the application to serve requests, and serve that information through a dedicated health endpoint (e.g. /health or /ready). It’s up to the application developers to figure out when the application is ready, and how to respond back to probes.
 
 Readiness probes tell Kubernetes when an application is ready, but not if the application will ever become ready. If the application keeps failing, it may never respond with a positive response to Kubernetes. How does Kubernetes then know when the deployment is going nowhere? In our Deployment manifest, we can specify how long Kubernetes should [wait for deployment to progress until it considers the deployment to have failed](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#progress-deadline-seconds). If the deployment doesn’t proceed until the deadline is met, Kubernetes marks the deployment status as failed, which the rollout status command will be able to pick up.
 

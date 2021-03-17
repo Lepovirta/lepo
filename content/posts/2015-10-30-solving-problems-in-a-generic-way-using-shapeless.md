@@ -212,7 +212,7 @@ The depth type class instances are provided by the object `typeClass`. All of th
 
 Additionally, we also need to specify an implementation for the method `project`. It defines how we can derive a type class instance for a type in the cases where we have a type class instance for another type and a way to transform the values between the two types (an isomorphism between the types). The implementation for the method is quite simple in our case: we simply create another instance of the depth type class to take advantage of the isomorphic property.
 
-We now have a way to calculate the depth of any case class and sealed trait. For the cases that are outside of that category (e.g. value types, traditional classes, collection types) we can specify specific type class instances for calculating the depth.
+We now have a way to calculate the depth of any case class and sealed trait. For the cases that are outside of that category (e.g. value types, traditional classes, collection types) we can specify specific type class instances for calculating the depth.
 
 Instead of attempting to express the solution to our problem for standard Scala types directly, we modeled the solution using Shapeless’s product and coproduct types, and brought that solution back to Scala types using type class instance derivation. This process is demonstrated in the picture below.
 

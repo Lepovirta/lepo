@@ -104,7 +104,7 @@ HTML documents can be thought of as trees where HTML elements are either nodes o
     html))
 ```
 
-In the code listing above, we’ve defined a function for updating the root path to all URI attributes recursively. The function unpacks the given the HTML tag (a vector), updates its attributes with the previously defined attribute transformer, applies the same function the child nodes, and finally rebuilds the node with the updates from the two previous steps. If the given HTML node is not a tag (i.e. it’s text instead), no transformation is necessary. This, in combination with the empty node body, acts as the termination mechanism for the recursion.
+In the code listing above, we’ve defined a function for updating the root path to all URI attributes recursively. The function unpacks the given the HTML tag (a vector), updates its attributes with the previously defined attribute transformer, applies the same function the child nodes, and finally rebuilds the node with the updates from the two previous steps. If the given HTML node is not a tag (i.e. it’s text instead), no transformation is necessary. This, in combination with the empty node body, acts as the termination mechanism for the recursion.
 
 ## Getting rid of the recursion
 
@@ -142,7 +142,7 @@ See about
 [:p {} [:a {:href about.html, :title About} See about]]
 ```
 
-As we can see from the output, `postwalk` hits the `href` key-value among other items in the tree. Since we’re now using a more generic traversal method, the transformation passed to `postwalk` is applied to all substructures rather than just the attributes map. Therefore, we need to use a filter to select which structures to apply our transformation on. We can easily achieve this using a predicate that checks if the structure is an attribute, i.e. a key-value pair. Each key-value pair is a vector of two elements, and in this case the first element (the key) is always a keyword.
+As we can see from the output, `postwalk` hits the `href` key-value among other items in the tree. Since we’re now using a more generic traversal method, the transformation passed to `postwalk` is applied to all substructures rather than just the attributes map. Therefore, we need to use a filter to select which structures to apply our transformation on. We can easily achieve this using a predicate that checks if the structure is an attribute, i.e. a key-value pair. Each key-value pair is a vector of two elements, and in this case the first element (the key) is always a keyword.
 
 ``` clojure
 (defn key-value?
