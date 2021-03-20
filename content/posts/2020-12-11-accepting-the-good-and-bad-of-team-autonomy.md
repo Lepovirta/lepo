@@ -11,6 +11,8 @@ In practice, when DevOps is adopted in an organisation, the responsibilities in 
 
 Like any large change, the shift to DevOps can cause a lot of headaches. In this article, I’ll present what I’ve found to usually go wrong when teams become more autonomous. I’ll also talk about what can be done to remedy the situation.
 
+<!-- more -->
+
 ## Changing the mindset
 
 > "The problem isn’t change, per se, because change is going to happen; the problem, rather, is the inability to cope with change when it comes."
@@ -34,7 +36,7 @@ In information security, it’s commonly agreed that you should follow the [prin
 While I agree that the principle of least privilege is generally a great idea, I’ve usually seen it applied in a way that is counter-productive to autonomous teams. A lot of times when a team needs to add a new component or a feature to their product, they also need to grant new access to it as well. However, with the central authority still around, this means that the team is blocked until a new access is granted. In other words, the team can’t act autonomously.
 
 > "Faced with the pressure to move fast and compete on one side, and the weight of old processes on the other, it’s not surprising that respondents from operationally mature companies report it’s common to evade change management procedures. Many changes get rubber-stamped, and teams regularly bypass their change management procedures without consequences."
-> 
+>
 > — State of DevOps report 2020, Puppet Labs
 
 For organisations where the teams rarely need new access, having a central authority for permissions might not be that bad of a blocker for teams, but it can escalate into a problem when the number of teams and services scale up. If more permission change requests are made than what the central authority can handle, the requests start to queue up. It’s also typical for a permission request to be immediately be followed up another request because the team has not figured out all the permission requirements for the first request. This means that it takes longer for teams to deliver changes, which will create frustration between the team and the central authority.

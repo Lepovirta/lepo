@@ -1,10 +1,11 @@
 ---
 title: How I learn programming
 publishdate: 2021-03-07
-tags: []
 ---
 
 I've been asked a couple of times how to learn a new programming language or to just generally learn how to program. I haven't had a good answer for this because I've thought my way of learning has been pretty messy. However, after talking to a few people about it, I've realized that there are many ways you can learn programming, and it depends a lot on the person learning programming what works the best for them. Therefore, I might as well share my notes just in case someone finds them useful.
+
+<!-- more -->
 
 ## Learning programming from scratch
 

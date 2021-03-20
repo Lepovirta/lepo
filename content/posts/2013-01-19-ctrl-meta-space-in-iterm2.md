@@ -1,7 +1,7 @@
 ---
 title: Ctrl-Meta-Space in iTerm2
 publishdate: 2013-01-19
-tags:  [emacs, macos]
+tags: [emacs, macos]
 ---
 
 In Emacs, there’s a handy command called `mark-sexp`. It marks the rest of the current s-expression from the cursor’s position. It’s mapped to `C-M-SPC` (ctrl + meta + space) by default, which is compatible with terminal applications.

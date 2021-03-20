@@ -11,6 +11,8 @@ While learning Kustomize, I was surprised how [committed Kustomize was to loadin
 
 However, there are times when it’s useful to be able to load configurations dynamically in Kustomize. In this article, I’ll present a use-case for dynamic configurations and methods for loading them.
 
+<!-- more -->
+
 ## A use-case for dynamic configurations
 
 A lot of times, I work with projects that use push-based Continuous Deployment with Kubernetes. Once a pull request is accepted, it’s merged to master, and a pipeline job is triggered for it automatically. Here’s what typically happens in the pipeline:
