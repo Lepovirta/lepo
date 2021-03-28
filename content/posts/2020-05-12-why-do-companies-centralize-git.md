@@ -5,7 +5,7 @@ tags: [git]
 canonicalUrl: https://medium.com/polarsquad/why-do-companies-centralize-git-a068e6c666a3
 ---
 
-Every now and then, popular Git hosting services such as GitHub, Gitlab, and Bitbucket have outages. Since many organisations, both private and public, rely on these services, a single outage can cause a world wide drop in productivity and a familiar question to pop up.
+Every now and then, popular Git hosting services such as GitHub, GitLab, and Bitbucket have outages. Since many organisations, both private and public, rely on these services, a single outage can cause a world wide drop in productivity and a familiar question to pop up.
 
 > If Git is distributed, why do we keep having these outages?
 
@@ -23,8 +23,8 @@ Git is classified as a [distributed version control](https://en.wikipedia.org/wi
 
 In Git, you can create changes to the repository offline, and publish them in various ways:
 
-  - Use a popular provider like GitHub, Gitlab, or Bitbucket.
-  - Host your own Git service using a tool like Gogs, gitea, gitlist, GitWeb, or Gitlab.
+  - Use a popular provider like GitHub, GitLab, or Bitbucket.
+  - Host your own Git service using a tool like Gogs, gitea, gitlist, GitWeb, or GitLab.
   - Share the repo as a directory sitting on a computer via SSH or HTTPS.
   - Copy the Git directory to a USB drive and throw it around between your pals.
 
@@ -36,13 +36,13 @@ With so many hosting options available, surely we shouldn’t have any problems 
 
 ## Beyond source code hosting
 
-You’d be wrong to assume that services like GitHub and Gitlab offer only code hosting and a pretty user interface to browse the code. They also include features such as bug trackers, project management tools, and repositories for software releases.
+You’d be wrong to assume that services like GitHub and GitLab offer only code hosting and a pretty user interface to browse the code. They also include features such as bug trackers, project management tools, and repositories for software releases.
 
 These features are of course something you can always host elsewhere, but there’s one feature most teams want when they go for a Git host: a process to facilitate contributions. GitHub provides their almighty [pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) for this purpose: a workflow where users can share their changes using the platform, request feedback, and integrate the changes. This same workflow is available in other Git hosting platforms as well, and it has become a de facto standard.
 
 The pull request feature is not only useful as a way to collaborate between team mates, but also automation. Bots such as [Dependabot](https://dependabot.com/) automatically create pull requests to keep your source dependencies in sync.
 
-When it comes to building your workflow around Git, you have to pick between convenience and improved availability. The limitation of the pull request model is that it works only within the service. For example, it’s not possible to create a pull request from a GitHub repository to a Gitlab repository or vice versa. This means that, if you were to distribute changes between Git repositories in a decentralized way, you’d have to pick between the pull request model or hosting everything under the same centralised service.
+When it comes to building your workflow around Git, you have to pick between convenience and improved availability. The limitation of the pull request model is that it works only within the service. For example, it’s not possible to create a pull request from a GitHub repository to a GitLab repository or vice versa. This means that, if you were to distribute changes between Git repositories in a decentralized way, you’d have to pick between the pull request model or hosting everything under the same centralised service.
 
 ## Building on a single source of truth
 

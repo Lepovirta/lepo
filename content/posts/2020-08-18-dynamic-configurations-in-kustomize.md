@@ -27,7 +27,7 @@ Most importantly, the Git commit hash is something we can derive from the source
 
 The trade-off for using the hashes as versions is that they lack semantics for ordering and compatibility. In other words, you can’t tell which version comes after which just by looking at the version strings, and you can’t tell whether the changes between two versions broke compatibility or not. However, I’ve found these qualities to be something I can work without in practice when working with service-based software development.
 
-From Kustomize’s perspective, the hashes from Git repositories work like dynamic configurations. While they’re read from the Git repository, they’re not stored in a format that Kustomize can use directly. Typically, we read the hash either from environment variables provided by the CI platform (e.g. `CI_COMMIT_SHA` in Gitlab) or using the Git CLI tool (e.g. `git rev-parse HEAD`). Therefore, we need to build a custom solution for feeding the Git commit hash to the Kustomize via files.
+From Kustomize’s perspective, the hashes from Git repositories work like dynamic configurations. While they’re read from the Git repository, they’re not stored in a format that Kustomize can use directly. Typically, we read the hash either from environment variables provided by the CI platform (e.g. `CI_COMMIT_SHA` in GitLab) or using the Git CLI tool (e.g. `git rev-parse HEAD`). Therefore, we need to build a custom solution for feeding the Git commit hash to the Kustomize via files.
 
 ## Example project
 
@@ -36,7 +36,7 @@ Before we can try loading dynamic configurations in Kustomize, we need a project
 * a “Hello world” HTTP service written in Go
 * a Dockerfile for building a Docker image for the service
 * a Kustomize project for deploying the service
-* a Gitlab CI pipeline for building the Docker image and publishing it
+* a GitLab CI pipeline for building the Docker image and publishing it
 
 Additionally, there’s a step in the pipeline to generate the final Kubernetes manifests that can be deployed to Kubernetes using `kubectl`. However, since this is only a demo, the actual deployment part is left out as an exercise for the reader.
 
@@ -310,4 +310,4 @@ Like earlier, we create a new temporary directory to host the temporary project.
 
 In this article, I presented a use-case for when dynamic configurations can be really useful, and how we can load them in Kustomize via templating, temporary projects, and the Kustomize CLI tool.
 
-As mentioned in the article, [the code for the demo is available in Gitlab](https://gitlab.com/jkpl/kustomize-demo/). Thanks for reading!
+As mentioned in the article, [the code for the demo is available in GitLab](https://gitlab.com/jkpl/kustomize-demo/). Thanks for reading!

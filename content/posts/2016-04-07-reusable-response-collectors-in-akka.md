@@ -174,7 +174,7 @@ In addition to the actor, we can also provide helpful functions for creating ins
 
 ```scala
     import akka.util.Timeout
-    
+
     object ResponseCollector {
       def props[T](
         tracker: ResponseTracker[T],
@@ -182,7 +182,7 @@ In addition to the actor, we can also provide helpful functions for creating ins
         matcher: PartialFunction[Any, T])
         (implicit timeout: Timeout): Props =
           Props(new ResponseCollector(timeout.duration, tracker, result, matcher))
-    
+
       def apply[T](tracker: ResponseTracker[T], matcher: PartialFunction[Any, T])
                   (implicit timeout: Timeout, factory: ActorRefFactory) = {
         val result = Promise[Result[T]]()
@@ -300,6 +300,6 @@ In this article, I’ve demonstrated how to implement a reusable response collec
 
 There’s still room for customisation and improvements to the actor. For example, the timeout mechanism could be customised to reset after each collected response, error handling could be added, and the responses could be delivered as a stream instead of a batch.
 
-I’ve made the code available in a [Github Gist](https://gist.github.com/jkpl/0c1a70e642be0b2422e3). Feel free to extend the code as you wish.
+I’ve made the code available in a [GitHub Gist](https://gist.github.com/jkpl/0c1a70e642be0b2422e3). Feel free to extend the code as you wish.
 
-Thanks for reading, and happy hAkking\!
+Thanks for reading, and happy hAkking!

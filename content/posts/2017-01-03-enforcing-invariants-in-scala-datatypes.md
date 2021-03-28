@@ -206,4 +206,4 @@ In the example above, we’ve annotated the `Conference` class with the `@data` 
 
 In this article, I’ve demonstrated a type-safe way for enforcing invariants in Scala datatypes. I’ve shown common techniques for invariant validation that are not type-safe and the issues commonly encountered with them. I’ve also shown the pitfalls of using case classes in combination with the type-safe invariant validation, and how those problems can be avoided using class inheritance and ScalaMeta macros.
 
-As usual, I’ve made examples for the different invariant validation techniques available in a [Github Gist](https://gist.github.com/jkpl/4932e8730c1810261381851b13dfd29d) to play around with. Thanks for reading\!
+As usual, I’ve made examples for the different invariant validation techniques available in a [GitHub Gist](https://gist.github.com/jkpl/4932e8730c1810261381851b13dfd29d) to play around with. Thanks for reading!

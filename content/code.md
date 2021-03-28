@@ -30,7 +30,7 @@ It's used for testing this website for broken links.
 
 Keruu aggregates RSS/Atom feeds to a single HTML page.
 
-* Source: [Gitlab](https://gitlab.com/lepovirta/keruu)
+* Source: [GitLab](https://gitlab.com/lepovirta/keruu)
 
 ## Kuvia
 
@@ -38,17 +38,17 @@ Kuvia is an image gallery generator for static web sites.
 Give it a list of image files, and you've got an image gallery that can be hosted in any web host.
 
 * Download: [NPM](https://www.npmjs.com/package/kuvia)
-* Source: [Gitlab](https://gitlab.com/lepovirta/kuvia)
+* Source: [GitLab](https://gitlab.com/lepovirta/kuvia)
 
 ## Lepo
 
 Static website generator for this site.
 
-* Source: [Gitlab](https://gitlab.com/lepovirta/lepo)
+* Source: [GitLab](https://gitlab.com/lepovirta/lepo)
 
 ## More projects
 
 For more projects, check out these pages:
 
-* [Gitlab](https://gitlab.com/lepovirta)
+* [GitLab](https://gitlab.com/lepovirta)
 * [GitHub](https://github.com/Lepovirta)
