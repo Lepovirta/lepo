@@ -11,10 +11,11 @@ None of the projects have any schedules, and they will be worked on whenever any
 Yet Another Hints Extension (YAHE) is a browser extension that allows you to click elements without using your mouse.
 
 * Download:
-  [Firefox](https://addons.mozilla.org/en-US/firefox/addon/yet-another-hints-extension/),
-  [Chrome](https://chrome.google.com/webstore/detail/yet-another-hints-extensi/eimkmfhfckmajkednnnhkacajflcjinm)
-* Releases: [GitHub](https://github.com/Lepovirta/yahe/releases)
-* Source: [GitHub](https://github.com/Lepovirta/yahe)
+  [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/yet-another-hints-extension/),
+  [Google Chrome](https://chrome.google.com/webstore/detail/yet-another-hints-extensi/eimkmfhfckmajkednnnhkacajflcjinm),
+  [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/yet-another-hints-extensi/oblcogekcgnkimamhnekiohhikomblod)
+* Releases: [GitHub](https://gitlab.com/lepovirta/yahe/-/releases)
+* Source: [GitLab](https://gitlab.com/lepovirta/yahe)
 
 ## Lukki
 
