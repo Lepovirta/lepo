@@ -36,7 +36,7 @@ The setup has the following actors involved:
 
 The components, the actors, and their relationships are visible in the architecture diagram below.
 
-![Architecture diagram](images/netlify-gitlab.svg)
+![Architecture diagram](images/netlify-gitlab.png)
 
 From the website development perspective, there are three main flows: The creation of the draft website when a developer uploads changes, the approval process the reviewer goes through, and the publishing of the changes. Here's how they work in this setup.
 
@@ -48,7 +48,7 @@ Once the merge request has been merged, the GitLab CI pipeline will again build 
 
 All of these flows are visualized in the flow diagram below.
 
-![Architecture sequence diagram](images/netlify-gitlab-seq.svg)
+![Architecture sequence diagram](images/netlify-gitlab-seq.png)
 
 In this guide, we'll be using a very simplified setup for building the website. Normally, you would use a full-blown [static website generator](https://jamstack.org/generators/) to build the website. The test phase could check that the content is laid out in proper format, the client-side JavaScript does what it's supposed to, and that the links point to proper locations. Instead of using these, we'll be using a single Markdown file that we convert to one HTML page, and we will not have any tests at all.
 
