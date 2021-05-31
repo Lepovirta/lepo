@@ -2,7 +2,7 @@
 title: Check your Helm deployments!
 publishdate: 2019-08-30
 tags: [kubernetes, helm]
-canonicalUrl: https://medium.com/polarsquad/check-your-helm-deployments-ffe26014804
+canonicalUrl: https://polarsquad.com/blog/check-your-helm-deployments
 ---
 
 The Deployment resource is the de-facto way to handle application deployments in Kubernetes, but there are many tools to manage them. One way to manage them safely is to use kubectl directly as demonstrated in [my previous article](2019-04-24-check-your-kubernetes-deployments.html).
