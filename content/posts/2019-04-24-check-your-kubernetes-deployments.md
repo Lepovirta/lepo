@@ -2,7 +2,7 @@
 title: Check your Kubernetes deployments!
 publishdate: 2019-04-24
 tags: [kubernetes]
-canonicalUrl: http://polarsquad.com/blog/check-your-kubernetes-deployments
+canonicalUrl: https://polarsquad.com/blog/check-your-kubernetes-deployments
 ---
 
 When writing and setting up software, it’s natural for us to focus on just the happy path. After all, that’s the path that everyone wants. Unfortunately, software can fail quite often, so we need to give the unhappy paths some attention as well.
