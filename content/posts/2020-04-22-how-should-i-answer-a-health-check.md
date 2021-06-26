@@ -58,8 +58,8 @@ Most services only include one or the other type of health checks, but [Kubernet
 In Kubernetes, the terminology is slightly different:
 
   - Health checks are called **probes**.
-  - The health check for reboots is called a **liveness probe**: “Check if the container is alive”.
-  - The health check for cutting traffic is called a **readiness probe**: “Check if the container is ready to receive traffic”.
+  - The health check for reboots is called a **liveness probe**: "Check if the container is alive".
+  - The health check for cutting traffic is called a **readiness probe**: "Check if the container is ready to receive traffic".
 
 Readiness checks are also used during application upgrades to track the upgrade progress. When an app is upgraded, Kubernetes will wait until the readiness check passes for new containers before shutting down old containers. In order to guarantee zero-downtime upgrades for your app in Kubernetes, the readiness endpoint in your app should respond with a healthy status only when it knows it can handle traffic.
 

@@ -94,7 +94,7 @@ Since the search buffer is an ephemeral view instead of a real file, so all of i
 au FileType findbuf setl buftype=nofile bufhidden=wipe nobuflisted noswapfile
 ```
 
-Additionally, the UI can be further tweaked to appear more “menu-like” by turning off the line wrapping and turning on the line cursor. When the line wrapping is disabled, only one file is shown per line. The line cursor highlights the whole line under the cursor.
+Additionally, the UI can be further tweaked to appear more "menu-like" by turning off the line wrapping and turning on the line cursor. When the line wrapping is disabled, only one file is shown per line. The line cursor highlights the whole line under the cursor.
 
 ```vim
 au FileType findbuf setl nowrap cursorline
@@ -110,7 +110,7 @@ function! CursorFileInPreviousWindow()
 endfunction
 
 au FileType findbuf
-    \ nnoremap <buffer> <Return> :call CursorFileInPreviousWindow()<CR> 
+    \ nnoremap <buffer> <Return> :call CursorFileInPreviousWindow()<CR>
 ```
 
 ## Alternatives

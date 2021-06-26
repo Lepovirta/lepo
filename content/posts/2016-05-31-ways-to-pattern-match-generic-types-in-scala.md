@@ -151,7 +151,7 @@ handle(ints)                   // output: "strings: 0" wait... what? We'll get b
 
 Instead of boxing the list values, the `TypeCase` instances can be used for pattern matching on the input. TypeCase will automatically use any `Typeable` instance it can find for the the given type to perform the casting operation. If the casting operation fails (produces `None`), the pattern isn’t matched, and the next pattern is tried.
 
-### Keeping the generic type “generic”
+### Keeping the generic type "generic"
 
 While Typeable can be used for pattern matching on specific types, its true power is the ability to pattern match on types where the type parameter of the extracted type is kept generic. Here is an example use of this ability:
 

@@ -24,7 +24,7 @@ This creates a simple chart in the directory `demo/`, which contains a deploymen
 ``` yaml
 readinessProbe:
   httpGet:
-    path: {{ .Values.readinessPath | default “/” }}
+    path: {{ .Values.readinessPath | default "/" }}
     port: http
 ```
 
@@ -80,7 +80,7 @@ NAME  TYPE        CLUSTER-IP    EXTERNAL-IP  PORT(S)  AGE
 demo  ClusterIP   10.96.196.73  <none>       80/TCP   5m
 ```
 
-The output shows that the chart was “deployed”, but the updated Pod wasn’t launched successfully. We can verify that the deployment didn’t finish successfully by viewing the deployment rollout status.
+The output shows that the chart was "deployed", but the updated Pod wasn’t launched successfully. We can verify that the deployment didn’t finish successfully by viewing the deployment rollout status.
 
 ```
 $ kubectl rollout status deployment demo
@@ -91,7 +91,7 @@ However, the chart deployment [history](https://v2.helm.sh/docs/helm/#helm-histo
 
 ```
 $ helm history demo
-REVISION  STATUS      DESCRIPTION     
+REVISION  STATUS      DESCRIPTION
 1         SUPERSEDED  Install complete
 2         DEPLOYED    Upgrade complete
 ```

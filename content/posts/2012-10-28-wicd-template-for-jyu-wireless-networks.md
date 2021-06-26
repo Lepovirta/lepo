@@ -40,7 +40,7 @@ network={
 2.  Place the downloaded file to your wicd templates directory: `/etc/wicd/encryption/templates/eap-ttls-pap`.
 3.  Open Wicd network manager.
 4.  Depending on whether you are part of the staff or a student, select either **jyu-staff** or **jyu-student** network, and open the properties for that network.
-5.  Make sure you check the option “Use these settings for all networks sharing this essid”.
+5.  Make sure you check the option "Use these settings for all networks sharing this essid".
 6.  Select **EAP-TTLS-PAP** as encryption profile for the network.
-7.  Type your JYU credentials (the ones you use in every JYU service) to “Indentity” and “Password” fields.
+7.  Type your JYU credentials (the ones you use in every JYU service) to "Indentity" and "Password" fields.
 8.  Save the changes, and connect.

@@ -33,7 +33,7 @@ From Kustomize’s perspective, the hashes from Git repositories work like dynam
 
 Before we can try loading dynamic configurations in Kustomize, we need a project to try it out on. For this purpose, I’ve created a [Git repository](https://gitlab.com/jkpl/kustomize-demo) that contains the following components:
 
-* a “Hello world” HTTP service written in Go
+* a "Hello world" HTTP service written in Go
 * a Dockerfile for building a Docker image for the service
 * a Kustomize project for deploying the service
 * a GitLab CI pipeline for building the Docker image and publishing it

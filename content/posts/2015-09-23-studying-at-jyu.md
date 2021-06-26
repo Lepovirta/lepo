@@ -26,7 +26,7 @@ Students are pretty much free to choose which ever minors they like, but they ar
 
 There are two ways to complete minor studies in mathematics. Either follow the same path as the math majors (choice A) or follow a path designed for those who study math as a minor (choice B). The choice B involves mostly calculus based math, while choice A goes directly into mathematical analysis. The choice A studies feel like they require a lot of devotion in order to pass them, while the choice B studies can be completed quite nicely on the side of all of the IT studies.
 
-Most students also choose B over A, and even less choose to study math at all as more alternatives have become available. I suspect that the trend wont change either since the IT and math studies are not integrated well to begin with. I started math studies in the choice A, but I later switched to choice B. I switched mostly because I felt the math courses were too intensive to study at the same time with IT courses, and because I lacked the devotion necessary to study “real” math.
+Most students also choose B over A, and even less choose to study math at all as more alternatives have become available. I suspect that the trend wont change either since the IT and math studies are not integrated well to begin with. I started math studies in the choice A, but I later switched to choice B. I switched mostly because I felt the math courses were too intensive to study at the same time with IT courses, and because I lacked the devotion necessary to study "real" math.
 
 ## Flexibility
 
@@ -38,7 +38,7 @@ The downside of customisability is that it makes it impossible for the faculty t
 
 Fortunately, it’s not mandatory to attend to most of the IT course lectures, and a lot of the course material in the IT courses is available in the web. Most of the lectures are recorded, reading and exercise material are made available in HTML/PDF formats, and the lecturer, teacher’s assistants, and other students can be reached via course mailing lists. With the help of the course material, students can easily keep track of courses they cannot always participate in physically. In some courses, I relied on the course material alone while I was working at a job simultaneously.
 
-The customisability of courses also mean that the progress of studies is mostly measured in courses passed instead of years studied. There is not really a way to “repeat a year” because of failed studies. Instead, you simply repeat the courses that you were not able to finish.
+The customisability of courses also mean that the progress of studies is mostly measured in courses passed instead of years studied. There is not really a way to "repeat a year" because of failed studies. Instead, you simply repeat the courses that you were not able to finish.
 
 ## Theory vs practice
 

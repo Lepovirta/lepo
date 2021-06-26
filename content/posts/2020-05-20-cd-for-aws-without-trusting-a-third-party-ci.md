@@ -93,7 +93,7 @@ For example, `/iwomp-in-aws/demo` could contain the following JSON document:
 }
 ```
 
-The project uses “demo” as the project identifier, the code is pulled from the cdk-demo repository, and the ./deploy.sh command is executed every time the deployer is triggered.
+The project uses "demo" as the project identifier, the code is pulled from the cdk-demo repository, and the ./deploy.sh command is executed every time the deployer is triggered.
 
 The project information can be managed manually or in an automated way. Whatever way works the best for you. [The Git repo contains an example of how to manage the projects using CDK](https://github.com/jkpl/iwomp-in-aws/blob/9f41681b6f2db037b5e45f897932d6069d0e2485/infra/lib/iwomp-projects-stack.ts).
 
@@ -277,7 +277,7 @@ func mainWithErr() error {
 }
 ```
 
-The project configuration includes all of the parameters listed in the “Project info in SSM parameters” section. As mentioned earlier, we’ll load a single SSM parameter, and parse its content as JSON. Some of the parameters have sensible defaults, so we’ll just go ahead and fill in the gaps if there’s any. We’ll also validate that at least the Git URL and the deployment command have been specified, and fail fast if they’re not.
+The project configuration includes all of the parameters listed in the "Project info in SSM parameters" section. As mentioned earlier, we’ll load a single SSM parameter, and parse its content as JSON. Some of the parameters have sensible defaults, so we’ll just go ahead and fill in the gaps if there’s any. We’ll also validate that at least the Git URL and the deployment command have been specified, and fail fast if they’re not.
 
 With all the project information fetched, we can go ahead and clone the Git repository using [this handy Go library](https://github.com/go-git/go-git).
 

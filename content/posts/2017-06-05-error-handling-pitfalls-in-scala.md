@@ -166,7 +166,7 @@ In this system, all the effects would be represented as values as opposed to sid
 
 One way to implement this kind of a system is to use [Free monads](http://typelevel.org/cats/datatypes/freemonad.html). The topic of Free monads is large enough to require an article of its own. For more in-depth information, I recommend reading [Pere Villega’s overview on Free monads](http://perevillega.com/understanding-free-monads).
 
-## “I’m stuck with Either/Try/Future\! What do I do?”
+## "I’m stuck with Either/Try/Future\! What do I do?"
 
 Not every project can switch to alternative computation types such as `Task`. Even fewer projects can start using Free monads. The project might either be heavily tied to existing Scala types or it simply cannot afford to include another dependency.
 
