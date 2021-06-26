@@ -7,3 +7,5 @@
   Content-Security-Policy: default-src 'self'; frame-ancestors 'none'; script-src 'none';
 /site.webmanifest
   Content-Type: application/manifest+json
+/*.svg
+  Content-Type: image/svg+xml; charset=UTF-8
