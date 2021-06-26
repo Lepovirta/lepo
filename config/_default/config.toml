@@ -2,6 +2,7 @@ baseURL = "https://lepovirta.org/"
 languageCode = "en-us"
 title = "Lepo"
 uglyurls = true
+disableHugoGeneratorInject = true
 
 [permalinks]
   posts = "posts/:year-:month-:day-:slug"
