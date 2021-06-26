@@ -14,7 +14,7 @@ Yet Another Hints Extension (YAHE) is a browser extension that allows you to cli
   [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/yet-another-hints-extension/),
   [Google Chrome](https://chrome.google.com/webstore/detail/yet-another-hints-extensi/eimkmfhfckmajkednnnhkacajflcjinm),
   [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/yet-another-hints-extensi/oblcogekcgnkimamhnekiohhikomblod)
-* Releases: [GitHub](https://gitlab.com/lepovirta/yahe/-/releases)
+* Releases: [GitLab](https://gitlab.com/lepovirta/yahe/-/releases)
 * Source: [GitLab](https://gitlab.com/lepovirta/yahe)
 
 ## Lukki
