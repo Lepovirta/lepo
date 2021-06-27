@@ -12,9 +12,6 @@ wait_test_server() {
         "http://localhost:1313/" >/dev/null
 }
 
-echo "Lint checks shell scripts" >&2
-shellcheck bin/*.sh
-
 echo "Check if test server is available..." >&2
 if ! wait_test_server 0; then
     trap "exit" INT TERM

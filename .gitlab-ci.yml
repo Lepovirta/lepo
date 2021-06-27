@@ -19,6 +19,11 @@ workflow:
   - if: $CI_MERGE_REQUEST_ID
   - if: $CI_COMMIT_BRANCH == "master"
 
+lint:
+  stage: test
+  script:
+  - ./bin/lint.sh
+
 test:
   stage: test
   before_script:
