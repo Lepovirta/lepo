@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -euox pipefail
+#!/usr/bin/env sh
+set -eux
 cd "$(dirname "$0")/.."
 
 wait_test_server() {
@@ -17,7 +17,7 @@ shellcheck bin/*.sh
 
 echo "Check if test server is available..." >&2
 if ! wait_test_server 0; then
-    trap "exit" INT TERM ERR
+    trap "exit" INT TERM
     trap "kill 0" EXIT
     echo "Starting test server" >&2
     ./bin/serve.sh 2>/dev/null >&2 &

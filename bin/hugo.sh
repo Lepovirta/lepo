@@ -1,10 +1,11 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env sh
+set -eu
 
-case "$OSTYPE" in
-linux*) DETECTED_OS="Linux" ;;
-darwin*) DETECTED_OS="macOS" ;;
-*) echo "unsupported OS: $OSTYPE" >&2; exit 1 ;;
+case "$(uname -s)" in
+Linux*) DETECTED_OS="Linux" ;;
+Darwin*) DETECTED_OS="macOS" ;;
+FreeBSD*) DETECTED_OS="FreeBSD" ;;
+*) echo "unsupported OS: $(uname -s)" >&2; exit 1 ;;
 esac
 
 case "$(uname -m)" in
@@ -14,7 +15,7 @@ arm) DETECTED_ARCH="arm64" ;;
 *) echo "usupported arch: $(uname -m)" >&2; exit 1 ;;
 esac
 
-HUGO_VERSION="${HUGO_VERSION:-0.81.0}"
+HUGO_VERSION="${HUGO_VERSION:-0.84.1}"
 SCRIPT_DIR="$(dirname "$0")"
 HUGO_PATH="$SCRIPT_DIR/hugo"
 RELEASE_BASE_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}"
@@ -63,7 +64,7 @@ delete_temp_files() {
     fi
 }
 
-trap delete_temp_files EXIT
+trap delete_temp_files EXIT INT TERM
 
 main() {
     if ! check_hugo; then

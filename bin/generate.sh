@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env sh
+set -eu
 cd "$(dirname "$0")/.."
 
 hugo() {
@@ -7,11 +7,11 @@ hugo() {
 }
 
 main() {
-    local env="${1:-stg}"
-    case "$env" in
+    _env="${1:-stg}"
+    case "$_env" in
         prod|production) hugo --gc --minify ;;
         stg|staging) hugo --gc --minify --buildFuture ;;
-        *) echo "Invalid environment $env. Expected prod/production/stg/staging." >&2; return 1 ;;
+        *) echo "Invalid environment $_env. Expected prod/production/stg/staging." >&2; return 1 ;;
     esac
 }
 
